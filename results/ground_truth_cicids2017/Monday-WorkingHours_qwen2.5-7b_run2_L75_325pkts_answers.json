@@ -1,0 +1,25 @@
+{
+    "Filename": "Monday-WorkingHours_qwen2.5-7b_run2_L75_325pkts.pcapng",
+    "Answer_Method": "Pyshark",
+    "Questions": {
+        "List the unique MAC addresses of the hosts involved in ARP exchanges": "Unique MAC addresses of hosts involved in ARP exchanges:\nNone",
+        "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address": "ARP flows:\nNone",
+        "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it": "Completed exchanges:\nNone",
+        "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": "Unique IPv4 addresses:\n192.168.10.3\n192.168.10.9\n192.168.10.14\n206.126.112.141",
+        "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)": "IPv4 protocols:\n6 - TCP\n17 - UDP",
+        "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": "Private IPs:\n192.168.10.3 (as src: 8 packets, as dst: 10 packets)\n192.168.10.9 (as src: 177 packets, as dst: 130 packets)\n192.168.10.14 (as src: 10 packets, as dst: 8 packets)",
+        "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": "Public IPs:\n206.126.112.141 (as src: 130 packets, as dst: 177 packets)",
+        "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": "Top 5 source ports (ties included): 1118 - 177 packets, 443 - 130 packets, 49413 - 6 packets, 445 - 4 packets\nTop 5 destination ports (ties included): 443 - 177 packets, 1118 - 130 packets, 445 - 6 packets, 49413 - 4 packets",
+        "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.": "Well-known TCP destination ports:\n443\n445",
+        "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port": "No FIN sessions found",
+        "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port": "No RST sessions found",
+        "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.": "No explicitly refused TCP connection attempts found",
+        "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port": "Completed handshakes (port pairs):\n49413 -> 445",
+        "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.": "Source ports with more than one SYN attempt:\n49413",
+        "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.": "No failed TCP handshakes found",
+        "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port": "No port pairs with repeated SYNs and no SYN-ACK found",
+        "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": "Top 5 source ports (ties included): 53 - 2 packets, 389 - 2 packets, 49943 - 2 packets, 49944 - 2 packets\nTop 5 destination ports (ties included): 53 - 2 packets, 389 - 2 packets, 49943 - 2 packets, 49944 - 2 packets",
+        "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.": "Well-known UDP destination ports:\n53\n389",
+        "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.": "No UDP destination ports found that received more than one packet and never appear as a source port"
+    }
+}
