@@ -1,16 +1,21 @@
 [project]
 name = "llms-understand-network-traces"
 version = "0.1.0"
-description = "Add your description here"
+description = "Reproducible benchmark for evaluating LLMs on question answering over network traffic traces."
 readme = "README.md"
 authors = [
-    { name = "Carlota de la Vega", email = "carlotadlavega@gmail.com" }
+    { name = "Carlota de la Vega", email = "carlotadelavega@ugr.es" },
+    { name = "Irene Gosálvez White", email = "irenegwh@ugr.es" }
 ]
 requires-python = ">=3.12"
-dependencies = []
-
-[project.scripts]
-llms-understand-network-traces = "llms_understand_network_traces:main"
+dependencies = [
+    "httpx>=0.28.1",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "ollama>=0.6.3",
+    "pyshark>=0.6",
+    "tqdm>=4.70.1",
+]
 
 [build-system]
 requires = ["uv_build>=0.12.22,<0.13.0"]
