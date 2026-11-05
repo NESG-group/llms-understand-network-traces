@@ -221,7 +221,14 @@ __marimo__/
 
 # Data
 data/cicids2017/*
-!data/cicids2017/download_cicids2017.sh
 !data/cicids2017/staging/
 data/cicids2017/staging/*/*
 !data/cicids2017/staging/*/manifest.json
+
+# Results
+results/models/
+results/snapshots/
+results/final/*/figures/por_run/
+results/final/*/models/
+results/final/*/basic/
+results/models_backup*/
