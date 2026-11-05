@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 import hashlib
 import argparse
@@ -8,10 +7,9 @@ from functools import lru_cache
 import httpx
 import ollama
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
-import utils.constants as constants
-from utils.utils import saveJsonToFile
+from llms_understand_network_traces.utils import constants
+from llms_understand_network_traces.utils.utils import save_json_to_file
 
 # ==============================================================================
 # PROMPT
@@ -376,7 +374,7 @@ def run_full_view(view: str, model_name: str, csv_folder: str, output_folder: st
         output["Questions"] = questions_results
 
         out_path = os.path.join(out_dir, f"{trace_stem}_answers.json")
-        saveJsonToFile(output, out_path)
+        save_json_to_file(output, out_path)
         print(f"  ✅ Saved: {out_path}")
 
 # ==============================================================================
@@ -483,7 +481,7 @@ def run_filtered(model_name: str, csv_folder: str, output_folder: str,
         output["Questions"] = questions_results
 
         out_path = os.path.join(out_dir, f"{trace_stem}_answers.json")
-        saveJsonToFile(output, out_path)
+        save_json_to_file(output, out_path)
         print(f"  ✅ Saved: {out_path}")
 
 # ==============================================================================
@@ -554,7 +552,7 @@ if __name__ == "__main__":
     parser.add_argument("--num-predict", type=int, default=1024, help="Maximum output tokens (default: 1024)")
     parser.add_argument("--run",         default="run1", help="Run identifier (default: run1)")
     parser.add_argument("--trace",       default=None, help="Run only this trace stem (e.g. Monday-WorkingHours_300pkts). Default: all traces.")
-    parser.add_argument("--csv-folder",  default="data/networkTracesSamples/processed_csv", help="Base folder with per-view CSV subfolders")
+    parser.add_argument("--csv-folder",  default="data/traces/processed_csv", help="Base folder with per-view CSV subfolders")
     parser.add_argument("--mode",        default="all", choices=["general", "wide", "filtered", "all"], help="Which view(s) to run (default: all = general + filtered; 'wide' only when requested)")
     parser.add_argument("--temperature", type=float, default=0, help="Sampling temperature (default: 0)")
     parser.add_argument("--timeout",     type=int, default=600, help="Timeout in seconds of the first attempt of each question; retries use 2x, 3x... (default: 600)")

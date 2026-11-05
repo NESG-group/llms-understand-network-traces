@@ -1,52 +1,50 @@
-#!/usr/bin/env python3
 """
 metrics.py
 ================================================================================
-Métricas unificadas de las etiquetas del juez (solo lectura), para las trazas básicas
-y para CICIDS, con una sola línea de comandos. Reemplaza a cicids_aggregate_rounds.py y a
-basic_rounds_summary.py, y cubre lo esencial de metrics_per_model.py (a propósito, NO incluye
-el kappa entre vistas, la confianza de la moda ni la consistencia entre trazas).
-NO incluye el acuerdo del juez con lo manual: eso sigue en compare_manual.py.
+Unified metrics of the judge labels (read-only), for the basic traces and for
+CIC-IDS2017, with a single command line. It replaces cicids_aggregate_rounds.py and
+covers the essentials of metrics_per_model.py (on purpose it does NOT include the kappa
+between views, the confidence of the mode or the consistency across traces).
+It does NOT include the agreement of the judge with the manual labels: that remains in
+compare_manual.py.
 
-Qué calcula (todo sale como tablas Markdown, listas para pegar, y como CSV):
-  1. Corrección: %C, %P e %I por modelo, vista y grupo, con media ± sd entre rondas.
-       - basic : un grupo ("all traces").
-       - cicids: dos grupos, L25-L75 (los niveles que caben) y L100 (125 %, recortado en general).
-  2. Por capa (ARP, IP, TCP/UDP): %C por modelo, vista y grupo.
-  3. Por tipo de referencia: capa ausente / referencia vacía con capa presente / con contenido.
-  4. Efecto del filtrado: diferencia de %C, %P e %I (filtrada - general), transiciones por
-     pregunta (mejora / igual / empeora), puntuación de mejora normalizada (+2 de I a C,
-     +1 de I a P o de P a C, signo contrario si empeora, escalada a +-100 %) y prueba de
-     signos; en total y por tipo de referencia.
-  5. Recursos: tokens de entrada medios, % de prompts recortados por el servidor, % de salidas
-     cortadas por el tope, latencia por respuesta y % de desempates del juez.
-  6. Reducción de tokens de la vista filtrada respecto a la general, por pregunta.
-  7. Estabilidad entre ejecuciones (solo basic: las mismas trazas se repiten en cada ronda).
+What it computes (everything is printed as Markdown tables, ready to paste, and as CSV):
+  1. Correctness: %C, %P and %I per model, view and group, with mean ± sd across runs.
+       - basic : one group ("all traces").
+       - cicids: two groups, L25-L75 (the levels that fit) and L100 (125 %, trimmed in general).
+  2. By layer (ARP, IP, TCP/UDP): %C per model, view and group.
+  3. By reference type: layer absent / empty reference with layer present / with content.
+  4. Filtering effect: difference in %C, %P and %I (filtered - general), per-question
+     transitions (better / same / worse), normalised improvement score (+2 from I to C,
+     +1 from I to P or P to C, opposite sign if worse, scaled to +-100 %) and sign test;
+     overall and by reference type.
+  5. Resources: mean input tokens, % of prompts trimmed by the server, % of outputs cut by
+     the cap, latency per answer and % of judge tie-breaks.
+  6. Token reduction of the filtered view relative to the general one, per question.
+  7. Stability across runs (basic only: the same traces are repeated in every run).
 
-Cómo se emparejan general y filtrada para el efecto del filtrado (--pairing):
-  - basic  (auto = mode): sobre la etiqueta modal de cada traza entre rondas, para no repetir
-    la misma respuesta cinco veces a temperatura 0.
-  - cicids (auto = runs): cada ronda y nivel es una ventana distinta; se emparejan todas.
+How general and filtered are paired for the filtering effect (--pairing):
+  - basic  (auto = mode): on the modal label of each trace across runs, so that the same
+    answer is not repeated five times at temperature 0.
+  - cicids (auto = runs): every run and level is a different window; all are paired.
 
-Ojo con la lectura:
-  - La sd entre rondas es descriptiva. Los niveles son prefijos de la misma ventana, así que
-    las preguntas de un mismo nivel no son muestras independientes; el p-valor de la prueba de
-    signos es orientativo.
-  - El %C absoluto depende de cuántas preguntas tienen la capa vacía (mira la tabla 3).
-  - Los tokens dependen del tokenizador: no se comparan entre familias. L100 de la vista general
-    está recortado por el servidor (Ollama 0.33.3): no es "más contexto".
-  - Las etiquetas E (error del juez), N (sin respuesta) y las preguntas ausentes se excluyen.
+Reading caveats:
+  - The sd across runs is descriptive. Levels are prefixes of the same window, so the
+    questions of a level are not independent samples; the sign-test p-value is indicative.
+  - The absolute %C depends on how many questions have an empty layer (see table 3).
+  - Tokens depend on the tokenizer: do not compare them across families. L100 of the
+    general view is trimmed by the server (Ollama 0.33.3): it is not "more context".
+  - Labels E (judge error), N (no answer) and absent questions are excluded.
 
-Lee, por modelo y ronda:
-  <models-dir>/<modelo>/run<N>/comparison/judge/<vista>/judge_<traza>_answers.json
-  <models-dir>/<modelo>/run<N>/llm_answers/<vista>/<traza>_answers.json   (si existe)
+Reads, per model and run:
+  <models-dir>/<model>/run<N>/comparison/judge/<view>/judge_<trace>_answers.json
+  <models-dir>/<model>/run<N>/llm_answers/<view>/<trace>_answers.json   (if present)
 
-Uso (desde la raíz del proyecto):
-  python3 src/analysis/metrics.py --dataset cicids
-  python3 src/analysis/metrics.py --dataset cicids --runs 1 2 3 4 5 --tag _5rondas
-  python3 src/analysis/metrics.py --dataset basic \
-        --models-dir results/snapshots/06-10-2026/basic/temp_0.0/models --tag _basic_t0
-  python3 src/analysis/metrics.py --dataset basic --models-dir <...> --constants utils.constants_old
+Usage (from the repository root):
+  uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids
+  uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids --runs 1 2 3 4 5 --tag _5runs
+  uv run python -m llms_understand_network_traces.analysis.metrics --dataset basic \
+        --models-dir results/models --tag _basic_t0
 ================================================================================
 """
 import argparse
@@ -58,11 +56,10 @@ import math
 import os
 import re
 import statistics
-import sys
 from collections import Counter
 
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+from llms_understand_network_traces.utils.text import gt_empty, norm
+
 
 VIEWS = ("general", "filtered")
 VALID = ("C", "P", "I")
@@ -70,16 +67,6 @@ SCORE = {("I", "C"): 2, ("I", "P"): 1, ("P", "C"): 1, ("C", "P"): -1, ("P", "I")
 PCT = {25: 50, 50: 75, 75: 100, 100: 125}
 PRIO = {"CPI": {"C": 0, "P": 1, "I": 2}, "IPC": {"I": 0, "P": 1, "C": 2}}
 CATS = ("layer absent", "empty reference, layer present", "with content")
-
-
-# ------------------------------------------------------------------ utilidades
-def norm(q):
-    return re.sub(r"\s+", " ", str(q).strip())
-
-
-def gt_empty(gt):
-    ls = [l.strip() for l in str(gt).splitlines() if l.strip()]
-    return bool(ls) and (ls[-1].lower().endswith("none") or ls[0].lower().startswith("no "))
 
 
 def ms(vals, dec=1):
@@ -115,7 +102,6 @@ def md_table(headers, rows):
     return "\n".join(out)
 
 
-# ------------------------------------------------------------------ carga
 def load_layout(module_name):
     mod = importlib.import_module(module_name)
     qs = [norm(q) for q in mod.ALL_QUESTIONS]
@@ -129,7 +115,7 @@ def load_record(jf, lf, qs):
         with open(jf, encoding="utf-8") as fh:
             jd = json.load(fh)
     except (json.JSONDecodeError, OSError) as e:
-        print(f"[WARN] no se puede leer {jf}: {e}")
+        print(f"[WARN] cannot read {jf}: {e}")
         return None
     jmap = {norm(k): v for k, v in jd.get("questions", {}).items()}
     lmap, met = {}, {}
@@ -140,11 +126,10 @@ def load_record(jf, lf, qs):
             lq = ld.get("Questions", {})
             lmap = {norm(k): v for k, v in lq.items()}
             met = ld.get("Metrics", {}) or {}
-            # si las preguntas no coinciden por texto pero hay el mismo número, se emparejan por posición
             if jmap and lmap and not (set(jmap) & set(lmap)) and len(jmap) == len(lmap):
                 lmap = {norm(jk): lv for jk, lv in zip(jd.get("questions", {}).keys(), lq.values())}
         except (json.JSONDecodeError, OSError) as e:
-            print(f"[WARN] no se puede leer {lf}: {e}")
+            print(f"[WARN] cannot read {lf}: {e}")
     rec = dict(lab=[], tok=[], trunc=[], cut=[], cempty=[], gempty=[], tie=[], layer=[], absent=0,
                lat=met.get("total_latency_s"), answered=met.get("questions_answered"))
     for q in qs:
@@ -195,7 +180,6 @@ def load_all(models_dir, models, runs, dataset, qs):
     return recs
 
 
-# ------------------------------------------------------------------ agregación
 def category(recs, m, run, unit, qi):
     f = recs.get((m, run, "filtered", unit))
     if f is None:
@@ -216,7 +200,7 @@ def runs_of(recs, m):
 
 
 def run_counts(recs, m, view, gunits, qsel=None, dataset="basic"):
-    """{ronda: Counter de etiquetas} sobre los registros del grupo; qsel(run, unit, qi) -> bool."""
+    """{run: Counter of labels} over the records of the group; qsel(run, unit, qi) -> bool."""
     out = {}
     for r in runs_of(recs, m):
         units = [k[3] for k in recs if k[0] == m and k[1] == r and k[2] == view and in_group(k[3], gunits)]
@@ -283,13 +267,10 @@ def trans(pairs):
                 p=sign_test(imp, wor), d=d)
 
 
-# ------------------------------------------------------------------ informe
 def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_label):
     out, csv_pairs = [], []
     out.append(f"# Metrics — dataset: {dataset}\n\nRuns: {runs_label}. Pairing: {pairing}. "
                f"Tie-break for modal labels: {'/'.join(sorted(prio, key=prio.get))}.\n")
-
-    # 0. inventario
     rows = []
     for m in models:
         rs = runs_of(recs, m)
@@ -298,8 +279,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
         ab = sum(r["absent"] for k, r in recs.items() if k[0] == m)
         rows.append([m, rs, ng, nf, ab])
     out.append("## 0. Files read\n\n" + md_table(["Model", "Runs", "General files", "Filtered files", "Questions absent"], rows) + "\n")
-
-    # 1. corrección
     rows = []
     for m in models:
         for view in VIEWS:
@@ -311,8 +290,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                 rows.append([m, view, gname] + [ms(pcts[l]) for l in VALID] + [len(rc), sum(sum(c.values()) for c in rc.values())])
     out.append("## 1. Answer correctness (% of answers, mean ± sd across runs)\n\n"
                + md_table(["Model", "View", "Group", "%C", "%P", "%I", "Runs", "Valid answers"], rows) + "\n")
-
-    # 2. por capa
     rows = []
     for m in models:
         for view in VIEWS:
@@ -325,8 +302,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                     rows.append([m, view, gname, lname] + [ms(pcts[l]) for l in VALID])
     out.append("## 2. Answer correctness by protocol layer of the question (mean ± sd across runs)\n\n"
                + md_table(["Model", "View", "Group", "Layer", "%C", "%P", "%I"], rows) + "\n")
-    
-    # 3. por tipo de referencia
     rows = []
     for m in models:
         for view in VIEWS:
@@ -340,8 +315,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                         rows.append([m, view, gname, cat, n] + [fnum(pc(c[l], n)) for l in VALID])
     out.append("## 3. Correctness by type of reference answer (pooled over runs)\n\n"
                + md_table(["Model", "View", "Group", "Reference type", "n", "%C", "%P", "%I"], rows) + "\n")
-
-    # 4. efecto del filtrado
     rows, rows_cat = [], []
     for m in models:
         for gname, gu in groups:
@@ -364,8 +337,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                + md_table(["Model", "Group", "Pairs", "Δ%C", "Δ%P", "Δ%I", "Improved", "Same", "Worsened", "Score %", "p"], rows) + "\n")
     out.append("### 4b. By type of reference answer\n\n"
                + md_table(["Model", "Group", "Reference type", "Pairs", "Improved", "Same", "Worsened", "Score %"], rows_cat) + "\n")
-
-    # 5. recursos
     rows = []
     for m in models:
         for view in VIEWS:
@@ -386,8 +357,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
     out.append("## 5. Resource use (pooled over runs)\n\n"
                "Tokens: mean `tokens_input` of non-truncated prompts (as counted by the inference server; not comparable across model families).\n\n"
                + md_table(["Model", "View", "Group", "Mean input tokens", "% prompts truncated", "% outputs cut at token cap", "Latency per answer (s)", "% judge ties"], rows) + "\n")
-
-    # 6. reducción de tokens por pregunta
     rows = []
     for m in models:
         for gname, gu in groups:
@@ -415,8 +384,6 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                "Excludes truncated prompts and questions whose layer is empty. Each filtered prompt is compared with the mean "
                "general prompt of the same trace/window. Negative reduction = filtered prompt larger.\n\n"
                + md_table(["Model", "Group", "Questions", "Mean %", "Median %", "Min %", "Max %", "Filtered ≥ general"], rows) + "\n")
-
-    # 7. estabilidad (solo basic)
     if dataset == "basic":
         rows = []
         for m in models:
@@ -481,27 +448,27 @@ def write_csvs(recs, csv_pairs, prefix):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--dataset", choices=("basic", "cicids"), required=True, help="basic = trazas básicas; cicids = ventanas de CICIDS")
-    ap.add_argument("--models-dir", default="results/models", help="carpeta con una subcarpeta por modelo (p. ej. un snapshot)")
-    ap.add_argument("--models", nargs="*", default=None, help="restringe a estos modelos (por defecto, todas las subcarpetas)")
-    ap.add_argument("--runs", type=int, nargs="*", default=None, help="rondas a incluir (por defecto, todas)")
-    ap.add_argument("--constants", default="utils.constants", help="módulo con ALL_QUESTIONS, ARP_QUESTIONS e IP_QUESTIONS")
+    ap.add_argument("--dataset", choices=("basic", "cicids"), required=True, help="basic = basic traces; cicids = CIC-IDS2017 windows")
+    ap.add_argument("--models-dir", default="results/models", help="folder with one subfolder per model (e.g. a snapshot)")
+    ap.add_argument("--models", nargs="*", default=None, help="restrict to these models (default: all subfolders)")
+    ap.add_argument("--runs", type=int, nargs="*", default=None, help="runs to include (default: all)")
+    ap.add_argument("--constants", default="llms_understand_network_traces.utils.constants", help="module with ALL_QUESTIONS, ARP_QUESTIONS and IP_QUESTIONS")
     ap.add_argument("--pairing", choices=("auto", "mode", "runs"), default="auto",
-                    help="cómo emparejar general y filtrada: auto = mode en basic, runs en cicids")
+                    help="how to pair general and filtered: auto = mode for basic, runs for cicids")
     ap.add_argument("--tie-break", choices=("CPI", "IPC"), default="CPI",
-                    help="empates de la moda: CPI = gana la mejor etiqueta (como dotplot_model.py); IPC = la peor")
+                    help="mode ties: CPI = the best label wins (as in dotplot_model.py); IPC = the worst")
     ap.add_argument("--out-dir", default="results/summary")
-    ap.add_argument("--tag", default="", help="sufijo para los ficheros de salida (p. ej. _basic_t0)")
-    ap.add_argument("--no-files", action="store_true", help="solo imprime, sin escribir ficheros")
+    ap.add_argument("--tag", default="", help="suffix for the output files (e.g. _basic_t0)")
+    ap.add_argument("--no-files", action="store_true", help="only print, do not write files")
     a = ap.parse_args()
 
     qs, layers = load_layout(a.constants)
     if not os.path.isdir(a.models_dir):
-        raise SystemExit(f"No existe --models-dir: {a.models_dir}")
+        raise SystemExit(f"--models-dir does not exist: {a.models_dir}")
     models = a.models or sorted(d for d in os.listdir(a.models_dir) if os.path.isdir(os.path.join(a.models_dir, d)))
     recs = load_all(a.models_dir, models, a.runs, a.dataset, qs)
     if not recs:
-        raise SystemExit(f"No hay juicios en {a.models_dir} para el dataset '{a.dataset}' (¿dataset o --models-dir equivocados?).")
+        raise SystemExit(f"No judgements in {a.models_dir} for dataset '{a.dataset}' (wrong dataset or --models-dir?).")
     models = [m for m in models if any(k[0] == m for k in recs)]
     groups = [("L25–L75", {25, 50, 75}), ("L100 (125 %)", {100})] if a.dataset == "cicids" else [("all traces", None)]
     pairing = a.pairing if a.pairing != "auto" else ("runs" if a.dataset == "cicids" else "mode")

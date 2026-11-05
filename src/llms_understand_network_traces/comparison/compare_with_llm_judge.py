@@ -38,9 +38,7 @@ import argparse
 import ollama
 import httpx
 
-import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-from utils.utils import saveJsonToFile
+from llms_understand_network_traces.utils.utils import save_json_to_file
 
 # ==============================================================================
 # JUDGE CONFIG
@@ -386,7 +384,6 @@ def sanitize_answer(text: str) -> str:
     """Remove non-printable control characters that break JSON parsing."""
     if not text:
         return text
-    # Solo elimina caracteres de control no imprimibles (excepto \n y \t que son válidos)
     text = ''.join(
         c for c in text
         if c.isprintable() or c in ('\n', '\t')
@@ -546,7 +543,7 @@ def run_judge_evaluation(
 
         print(f"\n[Judge: {judge_model}] {filename}")
         result = compare_trace(gt_path, llm_path, judge_model)
-        saveJsonToFile(result, out_path)
+        save_json_to_file(result, out_path)
 
         s = result["summary"]
         print(f"  C: {s['C']} ({s['C_pct']}%)  "
@@ -564,7 +561,7 @@ def run_judge_evaluation(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="LLM-as-a-Judge evaluation of LLM answers vs pyshark ground truth.")
-    parser.add_argument("--judge-model",   default="qwen3.5:4b", help="Ollama model to use as judge")
+    parser.add_argument("--judge-model",   default="llama3.3:70b", help="Ollama model to use as judge")
     parser.add_argument("--gt-folder",     required=True,         help="Folder with ground truth JSONs")
     parser.add_argument("--llm-folder",    required=True,         help="Folder with LLM answer JSONs")
     parser.add_argument("--output-folder", required=True,         help="Folder to save judge evaluation results")

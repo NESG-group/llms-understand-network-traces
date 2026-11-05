@@ -1,6 +1,6 @@
 {
-    "gt_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/ground_truth/nmap22-23-53-80-443_answers.json",
-    "llm_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/models/llama3.1:8b/run1/llm_answers/general/nmap22-23-53-80-443_answers.json",
+    "gt_file": "results/ground_truth/nmap22-23-53-80-443_answers.json",
+    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/general/nmap22-23-53-80-443_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "general",
     "temperature": 0.0,

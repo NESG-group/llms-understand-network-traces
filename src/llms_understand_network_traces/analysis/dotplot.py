@@ -33,8 +33,7 @@ import argparse
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-import utils.constants as constants
+from llms_understand_network_traces.utils import constants
 
 # ==============================================================================
 # QUESTION LAYOUT — read from constants

@@ -1,41 +1,38 @@
-#!/usr/bin/env python3
 """
 cicids_aggregate_rounds.py
 ================================================================================
-Resumen de varias rondas de CICIDS a la vez (solo lectura): % de C e I por modelo,
-vista y nivel, con la media y la desviación típica entre rondas, y los tokens de
-entrada y los prompts truncados de cada ronda.
+Summary of several CIC-IDS2017 runs at once (read-only): %C and %I per model,
+view and level, with the mean and standard deviation across runs, plus the input
+tokens and truncated prompts of every run.
 
-Lee, para cada modelo y ronda:
-  results/models/<modelo>/run<N>/comparison/judge/<vista>/judge_Monday*_answers.json
-      (campo "summary": C, P, I, judge_errors, prompt_truncated_suspected,
+Reads, for each model and run:
+  results/models/<model>/run<N>/comparison/judge/<view>/judge_Monday*_answers.json
+      ("summary" field: C, P, I, judge_errors, prompt_truncated_suspected,
        output_truncated, inconsistent_swaps)
-  results/models/<modelo>/run<N>/llm_answers/<vista>/Monday*_answers.json
-      (campo "Questions": tokens_input, data_tokens, truncation_suspected, csv_source)
+  results/models/<model>/run<N>/llm_answers/<view>/Monday*_answers.json
+      ("Questions" field: tokens_input, data_tokens, truncation_suspected, csv_source)
 
-Bloques:
-  A. Por modelo y vista, niveles L25-L75 juntos (sin L100): % de C e I por ronda y
-     media ± sd entre rondas.
-  B. Por modelo, vista y nivel: % de C por ronda y media ± sd.
-  C. Tokens: tokens de entrada por ronda y nivel (vista general: los de la primera
-     pregunta; vista filtered: el máximo de cualquier capa) y cuántas preguntas
-     tuvieron el prompt truncado.
+Blocks:
+  A. Per model and view, levels L25-L75 together (no L100): %C and %I per run and
+     mean ± sd across runs.
+  B. Per model, view and level: %C per run and mean ± sd.
+  C. Tokens: input tokens per run and level (general view: first question; filtered
+     view: the maximum over any layer) and how many questions had a truncated prompt.
 
-Ojo con la lectura:
-  - Los niveles son prefijos de la misma ventana, así que sus 19 preguntas no son
-    muestras independientes. La sd entre rondas es descriptiva: no la conviertas en
-    un intervalo de confianza con 2 o 3 rondas.
-  - Cada ronda usa otra ventana del pcap (otros paquetes), así que las diferencias
-    entre rondas mezclan azar del modelo (a temperatura 0, casi ninguno) y tráfico
-    distinto.
-  - El % de C absoluto depende de cuántas preguntas tienen la capa vacía en la
-    ventana. Para comparar rondas, mira también los bloques "con contenido" de
+Reading caveats:
+  - Levels are prefixes of the same window, so their 19 questions are not
+    independent samples. The sd across runs is descriptive: do not turn it into a
+    confidence interval with 2 or 3 runs.
+  - Each run uses another window of the pcap (different packets), so differences
+    between runs mix model randomness (almost none at temperature 0) with different
+    traffic.
+  - The absolute %C depends on how many questions have an empty layer in the
+    window. To compare runs, also look at the "with content" blocks of
     cicids_round_analysis.py.
 
-Uso (desde la raíz del proyecto):
-  python3 cicids_aggregate_rounds.py                       # todas las rondas que haya
-  python3 cicids_aggregate_rounds.py --runs 1 2 3
-  python3 cicids_aggregate_rounds.py --csv results/summary/cicids_rounds_long.csv
+Usage (from the repository root):
+  uv run python -m llms_understand_network_traces.cicids.cicids_aggregate_rounds --runs 1 2 3
+  uv run python -m llms_understand_network_traces.cicids.cicids_aggregate_rounds --csv results/summary/cicids_rounds_long.csv
 ================================================================================
 """
 import argparse
@@ -44,133 +41,161 @@ import glob
 import json
 import re
 import statistics
+from typing import Any
 
 MODELS = ["llama3.1:8b", "llama3.1:70b", "qwen2.5:7b", "qwen2.5:72b"]
 MODES = ("general", "filtered")
 PCT = {25: 50, 50: 75, 75: 100, 100: 125}
 
-
-def runs_found(models_dir):
-    rs = set()
-    for p in glob.glob(f"{models_dir}/*/run*"):
-        m = re.search(r"run(\d+)$", p)
-        if m:
-            rs.add(int(m.group(1)))
-    return sorted(rs)
+Key = tuple[str, int, str, int]
 
 
-def collect(models_dir, runs, models):
-    """J[(modelo, ronda, vista, nivel)] = dict(pk, C, P, I, ...);  T[...] = dict(tok, trunc, layer)."""
-    J, T = {}, {}
-    for M in models:
-        for R in runs:
+def runs_found(models_dir: str) -> list[int]:
+    found: set[int] = set()
+    for path in glob.glob(f"{models_dir}/*/run*"):
+        match = re.search(r"run(\d+)$", path)
+        if match:
+            found.add(int(match.group(1)))
+    return sorted(found)
+
+
+def collect(
+    models_dir: str, runs: list[int], models: list[str]
+) -> tuple[dict[Key, dict[str, int]], dict[Key, dict[str, Any]]]:
+    judged: dict[Key, dict[str, int]] = {}
+    tokens: dict[Key, dict[str, Any]] = {}
+    for model in models:
+        for run in runs:
             for mode in MODES:
-                for f in glob.glob(f"{models_dir}/{M}/run{R}/comparison/judge/{mode}/judge_Monday*_answers.json"):
-                    m = re.search(r"_L(\d+)_(\d+)pkts", f)
-                    if not m:
+                pattern = f"{models_dir}/{model}/run{run}/comparison/judge/{mode}/judge_Monday*_answers.json"
+                for path in glob.glob(pattern):
+                    match = re.search(r"_L(\d+)_(\d+)pkts", path)
+                    if not match:
                         continue
-                    s = json.load(open(f, encoding="utf-8")).get("summary", {})
-                    J[(M, R, mode, int(m.group(1)))] = dict(
-                        pk=int(m.group(2)), C=s.get("C", 0), P=s.get("P", 0), I=s.get("I", 0),
-                        err=s.get("judge_errors", 0), ptrunc=s.get("prompt_truncated_suspected", 0),
-                        otrunc=s.get("output_truncated", 0), ties=s.get("inconsistent_swaps", 0))
-                for f in glob.glob(f"{models_dir}/{M}/run{R}/llm_answers/{mode}/Monday*_answers.json"):
-                    m = re.search(r"_L(\d+)_(\d+)pkts", f)
-                    if not m:
+                    with open(path, encoding="utf-8") as handle:
+                        summary = json.load(handle).get("summary", {})
+                    judged[(model, run, mode, int(match.group(1)))] = {
+                        "pk": int(match.group(2)),
+                        "C": summary.get("C", 0),
+                        "P": summary.get("P", 0),
+                        "I": summary.get("I", 0),
+                        "err": summary.get("judge_errors", 0),
+                        "ptrunc": summary.get("prompt_truncated_suspected", 0),
+                        "otrunc": summary.get("output_truncated", 0),
+                        "ties": summary.get("inconsistent_swaps", 0),
+                    }
+                pattern = f"{models_dir}/{model}/run{run}/llm_answers/{mode}/Monday*_answers.json"
+                for path in glob.glob(pattern):
+                    match = re.search(r"_L(\d+)_(\d+)pkts", path)
+                    if not match:
                         continue
-                    qs = list(json.load(open(f, encoding="utf-8")).get("Questions", {}).values())
-                    if not qs:
+                    with open(path, encoding="utf-8") as handle:
+                        questions = list(json.load(handle).get("Questions", {}).values())
+                    if not questions:
                         continue
                     if mode == "general":
-                        tok, layer = qs[0].get("tokens_input", 0), "general"
+                        tok, layer = questions[0].get("tokens_input", 0), "general"
                     else:
-                        best = max(qs, key=lambda q: q.get("tokens_input", 0))
+                        best = max(questions, key=lambda q: q.get("tokens_input", 0))
                         tok, layer = best.get("tokens_input", 0), best.get("csv_source", "?")
-                    T[(M, R, mode, int(m.group(1)))] = dict(
-                        tok=tok, layer=layer, trunc=sum(1 for q in qs if q.get("truncation_suspected")))
-    return J, T
+                    tokens[(model, run, mode, int(match.group(1)))] = {
+                        "tok": tok,
+                        "layer": layer,
+                        "trunc": sum(1 for q in questions if q.get("truncation_suspected")),
+                    }
+    return judged, tokens
 
 
-def pct(num, den):
+def pct(num: float, den: float) -> float | None:
     return 100.0 * num / den if den else None
 
 
-def ms(vals):
-    v = [x for x in vals if x is not None]
-    if not v:
+def ms(values: list[float | None]) -> str:
+    valid = [x for x in values if x is not None]
+    if not valid:
         return "   n/a"
-    if len(v) == 1:
-        return f"{v[0]:5.1f}      "
-    return f"{statistics.mean(v):5.1f} ± {statistics.stdev(v):4.1f}"
+    if len(valid) == 1:
+        return f"{valid[0]:5.1f}      "
+    return f"{statistics.mean(valid):5.1f} ± {statistics.stdev(valid):4.1f}"
 
 
-def fmt(x):
+def fmt(x: float | None) -> str:
     return "   - " if x is None else f"{x:5.1f}"
 
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--models-dir", default="results/models")
-    ap.add_argument("--runs", type=int, nargs="*", default=None, help="rondas a incluir (por defecto, todas las que haya)")
-    ap.add_argument("--csv", default=None, help="guarda además una tabla larga (una fila por modelo, ronda, vista y nivel)")
-    a = ap.parse_args()
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--models-dir", default="results/models")
+    parser.add_argument("--runs", type=int, nargs="*", default=None, help="runs to include (default: all found)")
+    parser.add_argument("--csv", default=None, help="also save a long table (one row per model, run, view and level)")
+    args = parser.parse_args()
 
-    runs = a.runs or runs_found(a.models_dir)
-    J, T = collect(a.models_dir, runs, MODELS)
-    if not J:
-        raise SystemExit(f"No hay juicios en {a.models_dir} para las rondas {runs}.")
-    print(f"Rondas: {runs}\n")
+    runs = args.runs or runs_found(args.models_dir)
+    judged, tokens = collect(args.models_dir, runs, MODELS)
+    if not judged:
+        raise SystemExit(f"No judgements in {args.models_dir} for runs {runs}.")
+    print(f"Runs: {runs}\n")
 
-    print("A. %C y %I por modelo y vista, niveles L25-L75 (sin L100), por ronda y media ± sd entre rondas")
+    print("A. %C and %I per model and view, levels L25-L75 (no L100), per run and mean ± sd across runs")
     head = "".join(f"{'r' + str(r):>7}" for r in runs)
-    for lab in ("C", "I"):
-        print(f"\n  %{lab}{'':<22}{head}   media ± sd")
-        for M in MODELS:
+    for label in ("C", "I"):
+        print(f"\n  %{label}{'':<22}{head}   mean ± sd")
+        for model in MODELS:
             for mode in MODES:
-                vals = []
-                for R in runs:
-                    ks = [(M, R, mode, l) for l in (25, 50, 75) if (M, R, mode, l) in J]
-                    n = sum(J[k]["C"] + J[k]["P"] + J[k]["I"] for k in ks)
-                    vals.append(pct(sum(J[k][lab] for k in ks), n) if len(ks) == 3 else None)
-                if any(v is not None for v in vals):
-                    print(f"  {M + ' ' + mode:<24}" + "".join(f"{fmt(v):>7}" for v in vals) + f"   {ms(vals)}")
+                values: list[float | None] = []
+                for run in runs:
+                    keys = [(model, run, mode, lvl) for lvl in (25, 50, 75) if (model, run, mode, lvl) in judged]
+                    total = sum(judged[k]["C"] + judged[k]["P"] + judged[k]["I"] for k in keys)
+                    values.append(pct(sum(judged[k][label] for k in keys), total) if len(keys) == 3 else None)
+                if any(v is not None for v in values):
+                    print(f"  {model + ' ' + mode:<24}" + "".join(f"{fmt(v):>7}" for v in values) + f"   {ms(values)}")
 
-    print("\nB. %C por modelo, vista y nivel, por ronda y media ± sd entre rondas")
-    print(f"  {'':<24}{'nivel':>6}{head}   media ± sd")
-    for M in MODELS:
+    print("\nB. %C per model, view and level, per run and mean ± sd across runs")
+    print(f"  {'':<24}{'level':>6}{head}   mean ± sd")
+    for model in MODELS:
         for mode in MODES:
             for lvl in PCT:
-                vals = []
-                for R in runs:
-                    j = J.get((M, R, mode, lvl))
-                    vals.append(pct(j["C"], j["C"] + j["P"] + j["I"]) if j else None)
-                if any(v is not None for v in vals):
-                    print(f"  {M + ' ' + mode:<24}{'L' + str(lvl):>6}" + "".join(f"{fmt(v):>7}" for v in vals) + f"   {ms(vals)}")
+                values = []
+                for run in runs:
+                    j = judged.get((model, run, mode, lvl))
+                    values.append(pct(j["C"], j["C"] + j["P"] + j["I"]) if j else None)
+                if any(v is not None for v in values):
+                    print(f"  {model + ' ' + mode:<24}{'L' + str(lvl):>6}"
+                          + "".join(f"{fmt(v):>7}" for v in values) + f"   {ms(values)}")
 
-    print("\nC. Tokens de entrada por ronda y nivel (general: primera pregunta; filtered: máximo y su capa) y preguntas con prompt truncado")
-    for M in MODELS:
+    print("\nC. Input tokens per run and level (general: first question; filtered: maximum and its layer) "
+          "and questions with a truncated prompt")
+    for model in MODELS:
         for mode in MODES:
             for lvl in PCT:
                 cells = []
-                for R in runs:
-                    t = T.get((M, R, mode, lvl))
-                    cells.append("-" if not t else f"{t['tok']:,}" + ("" if mode == "general" else f" ({t['layer']})")
-                                 + (f" TRUNC×{t['trunc']}" if t["trunc"] else ""))
+                for run in runs:
+                    t = tokens.get((model, run, mode, lvl))
+                    if not t:
+                        cells.append("-")
+                        continue
+                    cell = f"{t['tok']:,}" + ("" if mode == "general" else f" ({t['layer']})")
+                    cells.append(cell + (f" TRUNC×{t['trunc']}" if t["trunc"] else ""))
                 if any(c != "-" for c in cells):
-                    print(f"  {M + ' ' + mode:<24}{'L' + str(lvl):>6}  " + " | ".join(f"r{r}: {c}" for r, c in zip(runs, cells)))
+                    print(f"  {model + ' ' + mode:<24}{'L' + str(lvl):>6}  "
+                          + " | ".join(f"r{r}: {c}" for r, c in zip(runs, cells)))
 
-    if a.csv:
-        with open(a.csv, "w", newline="", encoding="utf-8") as g:
-            w = csv.writer(g)
-            w.writerow(["modelo", "ronda", "vista", "nivel", "paquetes", "C", "P", "I", "pctC", "pctI",
-                        "errores_juez", "prompts_truncados", "salidas_cortadas", "desempates", "tokens_input", "capa_max_tokens"])
-            for (M, R, mode, lvl), j in sorted(J.items()):
+    if args.csv:
+        with open(args.csv, "w", newline="", encoding="utf-8") as out:
+            writer = csv.writer(out)
+            writer.writerow(["model", "run", "view", "level", "packets", "C", "P", "I", "pctC", "pctI",
+                             "judge_errors", "truncated_prompts", "cut_outputs", "tie_breaks",
+                             "tokens_input", "max_token_layer"])
+            for (model, run, mode, lvl), j in sorted(judged.items()):
                 n = j["C"] + j["P"] + j["I"]
-                t = T.get((M, R, mode, lvl), {})
-                w.writerow([M, R, mode, lvl, j["pk"], j["C"], j["P"], j["I"],
-                            f"{pct(j['C'], n):.1f}" if n else "", f"{pct(j['I'], n):.1f}" if n else "",
-                            j["err"], j["ptrunc"], j["otrunc"], j["ties"], t.get("tok", ""), t.get("layer", "")])
-        print(f"\nTabla larga guardada en {a.csv}")
+                t = tokens.get((model, run, mode, lvl), {})
+                pc_c, pc_i = pct(j["C"], n), pct(j["I"], n)
+                writer.writerow([model, run, mode, lvl, j["pk"], j["C"], j["P"], j["I"],
+                                 f"{pc_c:.1f}" if pc_c is not None else "",
+                                 f"{pc_i:.1f}" if pc_i is not None else "",
+                                 j["err"], j["ptrunc"], j["otrunc"], j["ties"],
+                                 t.get("tok", ""), t.get("layer", "")])
+        print(f"\nLong table saved to {args.csv}")
 
 
 if __name__ == "__main__":

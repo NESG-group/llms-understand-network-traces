@@ -1,15 +1,12 @@
-import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 import pyshark
-import os
 import ipaddress
-from collections import Counter, defaultdict
+from collections import Counter
 from tqdm import tqdm
 
-import utils.constants as constants 
-from utils.utils import saveJsonToFile
+from llms_understand_network_traces.utils import constants
+from llms_understand_network_traces.utils.utils import save_json_to_file
 
 # ==============================================================================
 # CONFIG
@@ -523,8 +520,8 @@ def udp_no_response_ports(pcap_file):
 # ==============================================================================
 
 def pyshark_answers(
-    pcapng_folder="data/networkTracesSamples/raw",
-    answers_folder="results/ground_truth",
+    pcapng_folder="data/traces/raw",
+    answers_folder="data/qa",
 ):
     pcapng_path = os.path.abspath(pcapng_folder)
     out_path    = os.path.abspath(answers_folder)
@@ -581,15 +578,15 @@ def pyshark_answers(
             "Answer_Method": "Pyshark",
             "Questions":     current_answers,
         }
-        saveJsonToFile(output_data, output_file)
+        save_json_to_file(output_data, output_file)
         print(f"✅ Answers saved: {output_file}")
 
 
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Generate ground-truth answers from PCAPNG files using pyshark.")
-    parser.add_argument("--input",  default="data/networkTracesSamples/raw", help="Folder with .pcapng input files")
-    parser.add_argument("--output", default="results/ground_truth",          help="Folder to save the answers JSON files")
+    parser.add_argument("--input",  default="data/traces/raw", help="Folder with .pcapng input files")
+    parser.add_argument("--output", default="data/qa",          help="Folder to save the answers JSON files")
     args = parser.parse_args()
 
     pyshark_answers(pcapng_folder=args.input, answers_folder=args.output)

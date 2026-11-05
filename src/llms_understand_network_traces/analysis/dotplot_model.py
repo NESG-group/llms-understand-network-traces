@@ -3,18 +3,15 @@ dotplot_model.py
 ================================================================================
 For each model under <models-dir>/<model>/, aggregates labels across all runs
 (run1..runN) by majority vote (mode), then generates one dotplot per model
-comparing general vs filtered evaluation.
+comparing the general and filtered views.
 
-Changes vs previous version:
-  - Fixes the import alias bug (the module was imported as `constants` but used as
-    `constants_old`, which raised NameError).
-  - The question list comes from --constants (default: utils.constants, the one the
-    pipeline uses now). Use --constants utils.constants_old for results generated
-    with the old question set. A warning is printed whenever a judge file does not
-    contain the questions of the selected module.
-  - Labels other than C/P/I (E = judge error, N = the LLM gave no answer) and
-    questions missing from a file are NOT drawn as I: no dot is plotted for them.
-  - Unreadable / half-written JSON files are skipped with a warning.
+Notes:
+  - The question list comes from --constants (default:
+    llms_understand_network_traces.utils.constants). A warning is printed whenever a
+    judge file does not contain the questions of the selected module.
+  - Labels other than C/P/I (E = judge error, N = the LLM gave no answer) and questions
+    missing from a file are NOT drawn as I: no dot is plotted for them.
+  - Unreadable or half-written JSON files are skipped with a warning.
   - Traces are discovered across all runs (not only run1).
   - Headless-safe backend (Agg).
 
@@ -26,9 +23,8 @@ Output:
     <output_dir>/<model_slug>/dotplot_<model_slug>.png
 
 Usage:
-    python src/analysis/dotplot_model.py --models-dir results/models
-    python src/analysis/dotplot_model.py --models-dir <snapshot>/models --output-dir output_graphs/provisional/dotplots
-    python src/analysis/dotplot_model.py --constants utils.constants_old
+    uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/models
+    uv run python -m llms_understand_network_traces.analysis.dotplot_model --output-dir output_graphs/dotplots
 """
 
 import os
@@ -44,7 +40,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from llms_understand_network_traces.utils.text import norm
+
 
 VALID_LABELS = ("C", "P", "I")
 TIE_PRIORITY = {"C": 0, "P": 1, "I": 2}
@@ -71,9 +68,6 @@ def set_layout(module_name: str):
     }
     LAYER_SEPARATORS = [n_arp, n_arp + n_ip]
 
-
-def norm(q: str) -> str:
-    return re.sub(r'\s+', ' ', q.strip())
 
 # ==============================================================================
 # LABEL EXTRACTION
@@ -304,9 +298,9 @@ if __name__ == "__main__":
                         help="Filename prefix of evaluation JSONs (default: judge_)")
     parser.add_argument("--models", nargs="*", default=None,
                         help="Restrict to these model names (default: all subdirs of --models-dir)")
-    parser.add_argument("--constants", default="utils.constants",
+    parser.add_argument("--constants", default="llms_understand_network_traces.utils.constants",
                         help="Module with ALL_QUESTIONS, ARP_QUESTIONS and IP_QUESTIONS "
-                             "(default: utils.constants; use utils.constants_old for old results)")
+                             "(default: llms_understand_network_traces.utils.constants)")
     args = parser.parse_args()
 
     set_layout(args.constants)

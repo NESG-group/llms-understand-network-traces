@@ -1,6 +1,6 @@
 {
-    "gt_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/ground_truth/ip-networktrace2_answers.json",
-    "llm_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/models/llama3.1:8b/run1/llm_answers/filtered/ip-networktrace2_answers.json",
+    "gt_file": "results/ground_truth/ip-networktrace2_answers.json",
+    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/filtered/ip-networktrace2_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "filtered",
     "temperature": 0.0,

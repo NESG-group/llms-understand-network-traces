@@ -5,22 +5,21 @@ Computes evaluation metrics per model from judge results across multiple runs.
 
 Metrics:
   1. % C / P / I per model x layer x mode (general & filtered)
-  2. Improvement score general -> filtered  (custom: I->P=+1, P->C=+1, I->C=+2)
+  2. Improvement score general -> filtered  (I->P=+1, P->C=+1, I->C=+2)
   3. Cohen's kappa general vs filtered
   4. Inter-run agreement (% questions where all runs agree)
   5. Mode confidence distribution (e.g. 5/5, 4/5, 3/5 majority)
   6. Cross-trace consistency (std dev of %C across traces per model x layer)
 
-Changes vs previous version:
-  - The question list comes from --constants (default: utils.constants, the one
-    the pipeline uses now). Use --constants utils.constants_old for results that
-    were generated with the old question set. A warning is printed whenever a
+Notes:
+  - The question list comes from --constants (default:
+    llms_understand_network_traces.utils.constants). A warning is printed whenever a
     judge file does not contain the questions of the selected module.
-  - Labels other than C/P/I (E = judge error, N = the LLM gave no answer) and
-    questions missing from a file are EXCLUDED, not counted as I. Percentages,
-    kappa, score and votes are computed over the valid labels only, and the number
-    of excluded items is reported per layer and mode.
-  - Unreadable / half-written JSON files are skipped with a warning.
+  - Labels other than C/P/I (E = judge error, N = the LLM gave no answer) and questions
+    missing from a file are EXCLUDED, not counted as I. Percentages, kappa, score and
+    votes are computed over the valid labels only, and the number of excluded items is
+    reported per layer and mode.
+  - Unreadable or half-written JSON files are skipped with a warning.
   - Traces are discovered across all runs (not only run1).
   - Traces are shown as T1, T2... with a key, so long trace names do not collide.
 
@@ -29,10 +28,9 @@ Expected structure:
     <models-dir>/<model>/run{N}/comparison/judge/filtered/judge_<trace>_answers.json
 
 Usage:
-    python src/analysis/metrics_per_model.py
-    python src/analysis/metrics_per_model.py --models-dir results/models --output metrics.txt
-    python src/analysis/metrics_per_model.py --models llama3.1:8b qwen2.5:72b
-    python src/analysis/metrics_per_model.py --constants utils.constants_old
+    uv run python -m llms_understand_network_traces.analysis.metrics_per_model
+    uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models-dir results/models --output metrics.txt
+    uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models llama3.1:8b qwen2.5:72b
 """
 
 import os
@@ -44,7 +42,8 @@ import argparse
 import importlib
 from collections import Counter
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from llms_understand_network_traces.utils.text import norm
+
 
 VALID_LABELS = ("C", "P", "I")
 TIE_PRIORITY = {"C": 0, "P": 1, "I": 2}
@@ -69,9 +68,6 @@ def set_layout(module_name: str):
         "L4-TCP/UDP": (n_arp + n_ip, NUM_QUESTIONS),
     }
 
-
-def norm(q: str) -> str:
-    return re.sub(r'\s+', ' ', q.strip())
 
 # ==============================================================================
 # IMPROVEMENT SCORE TABLE
@@ -514,9 +510,9 @@ if __name__ == "__main__":
                         help="Filename prefix of evaluation JSONs (default: judge_)")
     parser.add_argument("--models", nargs="*", default=None,
                         help="Restrict to these model names (default: all subdirs of --models-dir)")
-    parser.add_argument("--constants", default="utils.constants",
+    parser.add_argument("--constants", default="llms_understand_network_traces.utils.constants",
                         help="Module with ALL_QUESTIONS, ARP_QUESTIONS and IP_QUESTIONS "
-                             "(default: utils.constants; use utils.constants_old for old results)")
+                             "(default: llms_understand_network_traces.utils.constants)")
     args = parser.parse_args()
 
     set_layout(args.constants)

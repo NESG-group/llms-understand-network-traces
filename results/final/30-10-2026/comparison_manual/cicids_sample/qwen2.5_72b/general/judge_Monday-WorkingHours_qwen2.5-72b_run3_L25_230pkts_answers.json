@@ -1,6 +1,6 @@
 {
-    "gt_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/ground_truth_cicids2017/Monday-WorkingHours_qwen2.5-72b_run3_L25_230pkts_answers.json",
-    "llm_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/models/qwen2.5:72b/run3/llm_answers/general/Monday-WorkingHours_qwen2.5-72b_run3_L25_230pkts_answers.json",
+    "gt_file": "results/ground_truth_cicids2017/Monday-WorkingHours_qwen2.5-72b_run3_L25_230pkts_answers.json",
+    "llm_file": "results/models/qwen2.5:72b/run3/llm_answers/general/Monday-WorkingHours_qwen2.5-72b_run3_L25_230pkts_answers.json",
     "llm_model": "qwen2.5:72b",
     "mode": "general",
     "temperature": 0.0,

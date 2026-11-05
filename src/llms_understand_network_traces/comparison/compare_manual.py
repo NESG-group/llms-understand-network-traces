@@ -1,54 +1,53 @@
-#!/usr/bin/env python3
 """
 compare_manual.py
 ================================================================================
-Compara tus etiquetas manuales (C/P/I) con las del juez LLM y mide el acuerdo.
-Solo lee ficheros: no modifica nada.
+Compares your manual labels (C/P/I) with those of the LLM judge and measures the
+agreement. It only reads files: it does not modify anything.
 
-Entrada:
-  --manual-dir  carpeta con los JSON etiquetados a mano (los que salen de
-                reducir_juicios.py y has rellenado con manual_label), con la
-                estructura <modelo>/<vista>/judge_<traza>_answers.json
-  --judge-dir   carpeta con los JSON originales del juez, con la estructura
-                <modelo>/<run>/comparison/judge/<vista>/judge_<traza>_answers.json
-  --run         ronda del juez a comparar (por defecto run1)
+Input:
+  --manual-dir  folder with the manually labelled JSON files (the ones produced by
+                preprocesses_manual.py and filled in with manual_label), with the
+                structure <model>/<view>/judge_<trace>_answers.json
+  --judge-dir   folder with the original judge JSON files, with the structure
+                <model>/<run>/comparison/judge/<view>/judge_<trace>_answers.json
+  --run         judge run to compare (default run1)
 
-Qué calcula (solo con las preguntas ya etiquetadas por ti):
-  A. acuerdo exacto con su intervalo de Wilson al 95 %, kappa de Cohen y kappa
-     ponderado (pesos lineales: C > P > I son ordinales), y el kappa C frente a no-C.
-     En las líneas marcadas con "por preguntas": intervalos bootstrap al 95 %
-     remuestreando preguntas enteras (traza + número), porque las respuestas de
-     varios modelos y vistas a la misma pregunta comparten referencia y no son
-     independientes. Wilson supone independencia, así que es optimista.
-  B. matriz de confusión y, por etiqueta, cobertura (fila) y precisión (columna)
-  C. dirección de los desacuerdos (juez más estricto o más laxo), con una prueba
-     de signos, y cuántos son desempates del juez
-  D. los mismos números por: desempate o unánime, GT vacío o con contenido,
-     capa, modelo y vista; y D2: tasa de desempates por modelo, vista y capa
-  E. sensibilidad: sin los ficheros que viste con el juez delante, por vista, y
-     con otras reglas de desempate (la más laxa, o sin desempates)
-  F. consistencia de las conclusiones: % de C e I por modelo y vista según tú y
-     según el juez, orden de los modelos y efecto del filtrado
+What it computes (only with the questions you already labelled):
+  A. exact agreement with its 95 % Wilson interval, Cohen's kappa and weighted kappa
+     (linear weights: C > P > I are ordinal), and the C vs not-C kappa. Lines marked
+     "per question" give 95 % bootstrap intervals resampling whole questions (trace +
+     number), because answers of several models and views to the same question share a
+     reference and are not independent. Wilson assumes independence, so it is optimistic.
+  B. confusion matrix and, per label, coverage (row) and precision (column)
+  C. direction of the disagreements (judge stricter or laxer), with a sign test, and how
+     many are judge tie-breaks
+  D. the same numbers by: tie-break or unanimous, empty or non-empty reference, layer,
+     model and view; and D2: tie-break rate by model, view and layer
+  E. sensitivity: without the files you saw with the judge at hand, per view, and with
+     other tie-break rules (the laxest one, or no tie-breaks)
+  F. consistency of the conclusions: %C and %I per model and view according to you and
+     to the judge, model ranking and filtering effect
 
-Muestras de CICIDS (preprocesses_manual.py --sample): las preguntas con manual_label = "SKIP" no se
-etiquetan y se ignoran; la ronda de cada fichero se lee de su nombre (_runN_), así que el mismo
-directorio puede mezclar rondas; y, para el bootstrap, las respuestas de modelos distintos a la misma
-ventana y pregunta se agrupan (se quita el nombre del modelo del nombre de la traza).
+CIC-IDS2017 samples (preprocesses_manual.py --sample): questions with manual_label =
+"SKIP" are not labelled and are ignored; the run of each file is read from its name
+(_runN_), so the same directory can mix runs; and, for the bootstrap, answers of
+different models to the same window and question are grouped (the model name is removed
+from the trace name).
 
-Ficheros "vistos": --seen vistos_juez.txt, una línea por fichero con un trozo de su
-ruta (por ejemplo "llama3.1_8b/general/judge_arp-icmp"). Las preguntas con la
-etiqueta [vio_juez] en la nota también se consideran vistas.
+"Seen" files: --seen seen_by_judge.txt, one line per file with a piece of its path (for
+example "llama3.1_8b/general/judge_arp-icmp"). Questions tagged [vio_juez] in the note
+are also considered seen.
 
-Cuidado con la lectura: las preguntas con GT vacío se acuerdan casi siempre
-(es la regla 4 de la rúbrica), así que el acuerdo global las infla. Mira el
-bloque "GT con contenido". Y con pocas preguntas, el kappa es inestable.
+Reading caveat: questions with an empty reference are almost always agreed on (rule 4 of
+the rubric), so the global agreement is inflated by them. Look at the "reference with
+content" block. And with few questions, kappa is unstable.
 
-Uso (desde la raíz del proyecto):
-  python3 src/comparison/compare_manual.py \\
-    --manual-dir results/snapshots/06-10-2026/comparison_manual/basic_run1 \\
-    --judge-dir results/snapshots/06-10-2026/basic/temp_0.0/models \\
-    --seen vistos_juez.txt \\
-    --out-dir results/snapshots/06-10-2026/comparison_manual
+Usage (from the repository root):
+  uv run python -m llms_understand_network_traces.comparison.compare_manual \
+    --manual-dir results/final/06-10-2026/comparison_manual/basic_run1 \
+    --judge-dir results/models \
+    --seen seen_by_judge.txt \
+    --out-dir results/final/06-10-2026/comparison_manual
 ================================================================================
 """
 import argparse
@@ -61,27 +60,18 @@ import random
 import re
 import sys
 from collections import Counter
+from typing import Any, Callable
+
+from llms_understand_network_traces.utils.text import gt_empty, norm
 
 LABELS = ("C", "P", "I")
-IDX = {l: i for i, l in enumerate(LABELS)}
+IDX = {label: i for i, label in enumerate(LABELS)}
 NAN = float("nan")
 
-
-def norm(q):
-    return re.sub(r"\s+", " ", q.strip())
+Pairs = list[tuple[str, str]]
 
 
-def lines(s):
-    return [l.strip() for l in str(s).splitlines() if l.strip()]
-
-
-def gt_empty(gt):
-    ls = lines(gt)
-    return bool(ls) and (ls[-1].lower().endswith("none") or ls[0].lower().startswith("no "))
-
-
-# ------------------------------------------------------------------ estadística
-def wilson(k, n, z=1.96):
+def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     if n == 0:
         return NAN, NAN
     p = k / n
@@ -91,41 +81,48 @@ def wilson(k, n, z=1.96):
     return c - h, c + h
 
 
-def kappa(pairs, weighted=False):
+def kappa(pairs: Pairs, weighted: bool = False) -> float:
     n = len(pairs)
     if n == 0:
         return NAN
     k = len(LABELS)
-    m = [[0] * k for _ in range(k)]
+    matrix = [[0] * k for _ in range(k)]
     for a, b in pairs:
-        m[IDX[a]][IDX[b]] += 1
-    row = [sum(m[i]) for i in range(k)]
-    col = [sum(m[i][j] for i in range(k)) for j in range(k)]
-    w = (lambda i, j: 1 - abs(i - j) / (k - 1)) if weighted else (lambda i, j: 1.0 if i == j else 0.0)
-    po = sum(w(i, j) * m[i][j] for i in range(k) for j in range(k)) / n
-    pe = sum(w(i, j) * row[i] * col[j] for i in range(k) for j in range(k)) / (n * n)
+        matrix[IDX[a]][IDX[b]] += 1
+    row = [sum(matrix[i]) for i in range(k)]
+    col = [sum(matrix[i][j] for i in range(k)) for j in range(k)]
+    if weighted:
+        def weight(i: int, j: int) -> float:
+            return 1 - abs(i - j) / (k - 1)
+    else:
+        def weight(i: int, j: int) -> float:
+            return 1.0 if i == j else 0.0
+    po = sum(weight(i, j) * matrix[i][j] for i in range(k) for j in range(k)) / n
+    pe = sum(weight(i, j) * row[i] * col[j] for i in range(k) for j in range(k)) / (n * n)
     return NAN if pe == 1 else (po - pe) / (1 - pe)
 
 
-def boot_ci(groups, stat, iters=1000, seed=42):
-    """Bootstrap por grupos (cada grupo = todas las respuestas a una misma pregunta)."""
+def boot_ci(
+    groups: list[Pairs], stat: Callable[[Pairs], float], iters: int = 1000, seed: int = 42
+) -> tuple[float, float]:
+    """Bootstrap by groups (each group = all answers to the same question)."""
     if len(groups) < 8:
         return NAN, NAN
     rng = random.Random(seed)
-    vals = []
+    values: list[float] = []
     for _ in range(iters):
         pairs = [p for _ in groups for p in groups[rng.randrange(len(groups))]]
-        v = stat(pairs)
-        if not math.isnan(v):
-            vals.append(v)
-    if len(vals) < iters / 2:
+        value = stat(pairs)
+        if not math.isnan(value):
+            values.append(value)
+    if len(values) < iters / 2:
         return NAN, NAN
-    vals.sort()
-    return vals[int(0.025 * len(vals))], vals[min(len(vals) - 1, int(0.975 * len(vals)))]
+    values.sort()
+    return values[int(0.025 * len(values))], values[min(len(values) - 1, int(0.975 * len(values)))]
 
 
-def sign_test_p(a, b):
-    """p bilateral exacto de la binomial(n, 0.5) para a frente a b desacuerdos (orientativo: no son independientes)."""
+def sign_test_p(a: int, b: int) -> float:
+    """Exact two-sided binomial(n, 0.5) p for a versus b disagreements (indicative: not independent)."""
     n = a + b
     if n == 0:
         return NAN
@@ -133,17 +130,17 @@ def sign_test_p(a, b):
     return min(1.0, 2 * sum(math.comb(n, i) for i in range(k, n + 1)) / 2 ** n)
 
 
-def lenient(r):
-    """Etiqueta del juez si en los desempates se tomara la pasada más laxa."""
-    v = [x for x in r["votes"].split("/") if x in IDX]
-    return min(v, key=lambda x: IDX[x]) if r["tie"] and v else r["judge"]
+def lenient(r: dict[str, Any]) -> str:
+    """Judge label if ties were resolved to the laxest pass."""
+    votes = [x for x in r["votes"].split("/") if x in IDX]
+    return min(votes, key=lambda x: IDX[x]) if r["tie"] and votes else r["judge"]
 
 
-def f2(x):
+def f2(x: float) -> str:
     return "  n/a" if math.isnan(x) else f"{x:5.2f}"
 
 
-def line(name, rows, boot=False):
+def line(name: str, rows: list[dict[str, Any]], boot: bool = False) -> None:
     if not rows:
         print(f"  {name:<34} n=  0")
         return
@@ -151,230 +148,253 @@ def line(name, rows, boot=False):
     n = len(pairs)
     k = sum(a == b for a, b in pairs)
     lo, hi = wilson(k, n)
-    kw = kappa(pairs, True)
-    txt = f"  {name:<34} n={n:>4}  acuerdo {k / n:5.1%} [{lo:5.1%}-{hi:5.1%}]  kappa {f2(kappa(pairs))}  kappa pond. {f2(kw)}"
+    text = (f"  {name:<34} n={n:>4}  agreement {k / n:5.1%} [{lo:5.1%}-{hi:5.1%}]  "
+            f"kappa {f2(kappa(pairs))}  weighted kappa {f2(kappa(pairs, True))}")
     if boot:
-        g = {}
+        grouped: dict[tuple[str, int], Pairs] = {}
         for r in rows:
-            g.setdefault((r["group"], r["qn"]), []).append((r["manual"], r["judge"]))
-        groups = list(g.values())
+            grouped.setdefault((r["group"], r["qn"]), []).append((r["manual"], r["judge"]))
+        groups = list(grouped.values())
         alo, ahi = boot_ci(groups, lambda p: sum(a == b for a, b in p) / len(p))
         klo, khi = boot_ci(groups, lambda p: kappa(p, True))
-        txt += f"\n  {'':<34} por preguntas ({len(groups)}): acuerdo [{alo:5.1%}-{ahi:5.1%}]  kappa pond. [{f2(klo)}, {f2(khi)}]"
-    print(txt)
+        text += (f"\n  {'':<34} per question ({len(groups)}): agreement [{alo:5.1%}-{ahi:5.1%}]  "
+                 f"weighted kappa [{f2(klo)}, {f2(khi)}]")
+    print(text)
 
 
-def pct(rs, who, lab):
-    return sum(r[who] == lab for r in rs) / len(rs) if rs else NAN
+def pct(rows: list[dict[str, Any]], who: str, label: str) -> float:
+    return sum(r[who] == label for r in rows) / len(rows) if rows else NAN
 
 
-# ------------------------------------------------------------------ carga
-def layer_of(i, n_arp, n_ip):
+def layer_of(i: int, n_arp: int, n_ip: int) -> str:
     return "ARP" if i <= n_arp else "IP" if i <= n_arp + n_ip else "TCP/UDP"
 
 
-def load(manual_dir, judge_dir, run, seen, n_arp, n_ip):
-    rows, pend, err, missing = [], 0, 0, 0
+def load(
+    manual_dir: str, judge_dir: str, run: str, seen: list[str], n_arp: int, n_ip: int
+) -> tuple[list[dict[str, Any]], int, int, int]:
+    rows: list[dict[str, Any]] = []
+    pending = errors = missing = 0
     pattern = os.path.join(manual_dir, "**", "judge_*_answers.json")
-    for f in sorted(glob.glob(pattern, recursive=True)):
-        man = json.load(open(f, encoding="utf-8"))
-        model, mode = man.get("llm_model"), man.get("mode")
+    for path in sorted(glob.glob(pattern, recursive=True)):
+        with open(path, encoding="utf-8") as handle:
+            manual = json.load(handle)
+        model, mode = manual.get("llm_model"), manual.get("mode")
         if not model or not mode:
-            print(f"  [AVISO] {f}: sin llm_model/mode, se salta")
+            print(f"  [WARN] {path}: no llm_model/mode, skipped")
             continue
-        trace = os.path.basename(f)[len("judge_"):-len("_answers.json")]
-        mrun = re.search(r"_(run\d+)_L\d+_", trace)
-        run_f = mrun.group(1) if mrun else run
+        trace = os.path.basename(path)[len("judge_"):-len("_answers.json")]
+        run_match = re.search(r"_(run\d+)_L\d+_", trace)
+        file_run = run_match.group(1) if run_match else run
         group = re.sub(r"_[^_]+_(run\d+_L\d+_\d+pkts)$", r"_\1", trace)
-        jf = os.path.join(judge_dir, model, run_f, "comparison", "judge", mode, os.path.basename(f))
-        if not os.path.exists(jf):
-            print(f"  [AVISO] no existe el juicio del juez: {jf}")
+        judge_path = os.path.join(judge_dir, model, file_run, "comparison", "judge", mode, os.path.basename(path))
+        if not os.path.exists(judge_path):
+            print(f"  [WARN] judge file does not exist: {judge_path}")
             missing += 1
             continue
-        jud = {norm(q): v for q, v in json.load(open(jf, encoding="utf-8"))["questions"].items()}
-        seen_file = any(p in f for p in seen)
-        for i, (q, v) in enumerate(man["questions"].items(), 1):
-            ml = v.get("manual_label", "")
-            if ml == "SKIP":
+        with open(judge_path, encoding="utf-8") as handle:
+            judged = {norm(q): v for q, v in json.load(handle)["questions"].items()}
+        seen_file = any(p in path for p in seen)
+        for i, (question, entry) in enumerate(manual["questions"].items(), 1):
+            label = entry.get("manual_label", "")
+            if label == "SKIP":
                 continue
-            if ml not in LABELS:
-                pend += 1
+            if label not in LABELS:
+                pending += 1
                 continue
-            jv = jud.get(norm(q))
-            if jv is None or jv.get("final_label") not in LABELS:
-                err += 1
+            verdict = judged.get(norm(question))
+            if verdict is None or verdict.get("final_label") not in LABELS:
+                errors += 1
                 continue
-            note = v.get("notes") or ""
+            note = entry.get("notes") or ""
             tags = {t.lower() for t in re.findall(r"\[([^\]]+)\]", note)}
-            votes = jv.get("votes", {})
-            rows.append(dict(
-                model=model, mode=mode, trace=trace, group=group, qn=i, manual=ml, judge=jv["final_label"],
-                tie=not jv.get("consistent", True), votes=f'{votes.get("pass1")}/{votes.get("pass2")}',
-                gt_empty=gt_empty(jv.get("gt_answer", "")), layer=layer_of(i, n_arp, n_ip),
-                seen=seen_file or "vio_juez" in tags, note=note, question=q))
-    return rows, pend, err, missing
+            votes = verdict.get("votes", {})
+            rows.append({
+                "model": model,
+                "mode": mode,
+                "trace": trace,
+                "group": group,
+                "qn": i,
+                "manual": label,
+                "judge": verdict["final_label"],
+                "tie": not verdict.get("consistent", True),
+                "votes": f'{votes.get("pass1")}/{votes.get("pass2")}',
+                "gt_empty": gt_empty(verdict.get("gt_answer", "")),
+                "layer": layer_of(i, n_arp, n_ip),
+                "seen": seen_file or "vio_juez" in tags,
+                "note": note,
+                "question": question,
+            })
+    return rows, pending, errors, missing
 
 
-# ------------------------------------------------------------------ informe
 class Tee:
-    """Escribe a la vez en la terminal y en un fichero."""
-    def __init__(self, *streams):
+    """Write to the terminal and to a file at the same time."""
+
+    def __init__(self, *streams: Any) -> None:
         self.streams = streams
 
-    def write(self, x):
-        for st in self.streams:
-            st.write(x)
+    def write(self, text: str) -> None:
+        for stream in self.streams:
+            stream.write(text)
 
-    def flush(self):
-        for st in self.streams:
-            st.flush()
+    def flush(self) -> None:
+        for stream in self.streams:
+            stream.flush()
 
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--manual-dir", required=True)
-    ap.add_argument("--judge-dir", required=True)
-    ap.add_argument("--run", default="run1")
-    ap.add_argument("--seen", default=None, help="fichero con trozos de ruta de los ficheros vistos con el juez")
-    ap.add_argument("--layers", default="3,4", help="preguntas de ARP e IP (por defecto 3,4; el resto TCP/UDP)")
-    ap.add_argument("--out-dir", default=None,
-                    help="carpeta donde guardar el informe (agreement_manual_vs_judge.txt) y el CSV de desacuerdos")
-    ap.add_argument("--out-csv", default=None, help="ruta del CSV de desacuerdos (por defecto, dentro de --out-dir)")
-    a = ap.parse_args()
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--manual-dir", required=True)
+    parser.add_argument("--judge-dir", required=True)
+    parser.add_argument("--run", default="run1")
+    parser.add_argument("--seen", default=None, help="file with path fragments of the files seen with the judge")
+    parser.add_argument("--layers", default="3,4", help="number of ARP and IP questions (default 3,4; the rest TCP/UDP)")
+    parser.add_argument("--out-dir", default=None,
+                        help="folder for the report (agreement_manual_vs_judge.txt) and the disagreements CSV")
+    parser.add_argument("--out-csv", default=None, help="path of the disagreements CSV (default: inside --out-dir)")
+    args = parser.parse_args()
 
     report = None
-    if a.out_dir:
-        os.makedirs(a.out_dir, exist_ok=True)
-        report = open(os.path.join(a.out_dir, "agreement_manual_vs_judge.txt"), "w", encoding="utf-8")
+    if args.out_dir:
+        os.makedirs(args.out_dir, exist_ok=True)
+        report = open(os.path.join(args.out_dir, "agreement_manual_vs_judge.txt"), "w", encoding="utf-8")
         sys.stdout = Tee(sys.__stdout__, report)
-    out_csv = a.out_csv or (os.path.join(a.out_dir, "desacuerdos_juez.csv") if a.out_dir
-                            else "validacion/desacuerdos_juez.csv")
+    out_csv = args.out_csv or (
+        os.path.join(args.out_dir, "judge_disagreements.csv") if args.out_dir else "validation/judge_disagreements.csv"
+    )
 
-    seen = []
-    if a.seen and os.path.exists(a.seen):
-        seen = [l.strip() for l in open(a.seen, encoding="utf-8") if l.strip() and not l.startswith("#")]
-    elif a.seen:
-        print(f"[AVISO] no existe {a.seen}: las líneas 'vistos' del bloque E no excluyen nada")
-    n_arp, n_ip = (int(x) for x in a.layers.split(","))
+    seen: list[str] = []
+    if args.seen and os.path.exists(args.seen):
+        with open(args.seen, encoding="utf-8") as handle:
+            seen = [x.strip() for x in handle if x.strip() and not x.startswith("#")]
+    elif args.seen:
+        print(f"[WARN] {args.seen} does not exist: the 'seen' lines of block E exclude nothing")
+    n_arp, n_ip = (int(x) for x in args.layers.split(","))
 
-    rows, pend, err, missing = load(a.manual_dir, a.judge_dir, a.run, seen, n_arp, n_ip)
+    rows, pending, errors, missing = load(args.manual_dir, args.judge_dir, args.run, seen, n_arp, n_ip)
     if not rows:
-        raise SystemExit("No hay ninguna pregunta etiquetada y emparejada. ¿Rellenaste manual_label? ¿Rutas correctas?")
+        raise SystemExit("No labelled and matched question. Did you fill in manual_label? Are the paths right?")
 
-    print(f"Pares comparados: {len(rows)}  |  sin etiquetar por ti: {pend}  |  juez E/N o sin emparejar: {err}"
-          f"  |  ficheros sin juicio: {missing}\n")
+    print(f"Compared pairs: {len(rows)}  |  not labelled by you: {pending}  |  judge E/N or unmatched: {errors}"
+          f"  |  files without judgement: {missing}\n")
 
     print("A. Global")
-    line("todas", rows, boot=True)
-    pb = [("C" if r["manual"] == "C" else "I", "C" if r["judge"] == "C" else "I") for r in rows]
-    print(f"  {'C frente a no-C (binario)':<34} kappa {f2(kappa(pb))}")
+    line("all", rows, boot=True)
+    binary = [("C" if r["manual"] == "C" else "I", "C" if r["judge"] == "C" else "I") for r in rows]
+    print(f"  {'C vs not-C (binary)':<34} kappa {f2(kappa(binary))}")
 
-    print("\nB. Matriz de confusión (filas: tu etiqueta; columnas: juez)")
-    cm = Counter((r["manual"], r["judge"]) for r in rows)
-    print("        " + "".join(f"{'juez ' + l:>9}" for l in LABELS))
+    print("\nB. Confusion matrix (rows: your label; columns: judge)")
+    confusion = Counter((r["manual"], r["judge"]) for r in rows)
+    print("        " + "".join(f"{'judge ' + label:>9}" for label in LABELS))
     for m in LABELS:
-        print(f"  tú {m}  " + "".join(f"{cm[(m, j)]:>9}" for j in LABELS))
-    print("   Por etiqueta (cobertura = fila: si tú pones X, el juez también; precisión = columna: si el juez pone X, tú también)")
-    for l in LABELS:
-        tu = sum(cm[(l, j)] for j in LABELS)
-        jz = sum(cm[(m, l)] for m in LABELS)
-        ok = cm[(l, l)]
-        cov = f"{ok}/{tu} ({ok / tu:.1%})" if tu else "n/a"
-        prec = f"{ok}/{jz} ({ok / jz:.1%})" if jz else "n/a"
-        print(f"   {l}:  cobertura {cov:<16} precisión {prec}")
+        print(f"  you {m}  " + "".join(f"{confusion[(m, j)]:>9}" for j in LABELS))
+    print("   Per label (coverage = row: if you say X, so does the judge; "
+          "precision = column: if the judge says X, so do you)")
+    for label in LABELS:
+        yours = sum(confusion[(label, j)] for j in LABELS)
+        judges = sum(confusion[(m, label)] for m in LABELS)
+        ok = confusion[(label, label)]
+        cov = f"{ok}/{yours} ({ok / yours:.1%})" if yours else "n/a"
+        prec = f"{ok}/{judges} ({ok / judges:.1%})" if judges else "n/a"
+        print(f"   {label}:  coverage {cov:<16} precision {prec}")
 
     stricter = sum(IDX[r["judge"]] > IDX[r["manual"]] for r in rows)
     laxer = sum(IDX[r["judge"]] < IDX[r["manual"]] for r in rows)
-    dis = [r for r in rows if r["manual"] != r["judge"]]
-    print(f"\nC. Desacuerdos: {stricter + laxer} ({(stricter + laxer) / len(rows):.1%})  "
-          f"juez más estricto que tú {stricter}  |  juez más laxo que tú {laxer}")
+    disagreements = [r for r in rows if r["manual"] != r["judge"]]
+    print(f"\nC. Disagreements: {stricter + laxer} ({(stricter + laxer) / len(rows):.1%})  "
+          f"judge stricter than you {stricter}  |  judge laxer than you {laxer}")
     if stricter + laxer:
-        print(f"   Prueba de signos (binomial exacta, orientativa: las respuestas no son independientes): "
+        print(f"   Sign test (exact binomial, indicative: answers are not independent): "
               f"p = {sign_test_p(stricter, laxer):.2g}")
-        ties_dis = sum(r["tie"] for r in dis)
-        print(f"   Desacuerdos que son desempates del juez: {ties_dis} de {len(dis)} ({ties_dis / len(dis):.1%}); "
-              f"con las dos pasadas unánimes: {len(dis) - ties_dis}")
-        by = Counter((r["manual"], r["judge"], "desempate" if r["tie"] else "unánime") for r in dis)
-        for (m, j, t), n in sorted(by.items(), key=lambda kv: (-kv[1], kv[0])):
-            print(f"     tú {m} -> juez {j} ({t}): {n}")
-    jc = [r for r in rows if r["judge"] == "C"]
-    mc = [r for r in rows if r["manual"] == "C"]
-    if jc:
-        print(f"   De las {len(jc)} C del juez, son C tuyas {sum(r['manual'] == 'C' for r in jc)} "
-              f"({sum(r['manual'] == 'C' for r in jc) / len(jc):.1%})  <- el juez da por correcta una respuesta que tú no")
-    if mc:
-        print(f"   De tus {len(mc)} C, el juez da C a {sum(r['judge'] == 'C' for r in mc)} "
-              f"({sum(r['judge'] == 'C' for r in mc) / len(mc):.1%})")
+        ties_dis = sum(r["tie"] for r in disagreements)
+        print(f"   Disagreements that are judge tie-breaks: {ties_dis} of {len(disagreements)} "
+              f"({ties_dis / len(disagreements):.1%}); with both passes unanimous: {len(disagreements) - ties_dis}")
+        by_kind = Counter((r["manual"], r["judge"], "tie-break" if r["tie"] else "unanimous") for r in disagreements)
+        for (m, j, kind), n in sorted(by_kind.items(), key=lambda kv: (-kv[1], kv[0])):
+            print(f"     you {m} -> judge {j} ({kind}): {n}")
+    judge_c = [r for r in rows if r["judge"] == "C"]
+    manual_c = [r for r in rows if r["manual"] == "C"]
+    if judge_c:
+        agree = sum(r["manual"] == "C" for r in judge_c)
+        print(f"   Of the judge's {len(judge_c)} C, {agree} are also C for you ({agree / len(judge_c):.1%})"
+              f"  <- the judge accepts an answer that you do not")
+    if manual_c:
+        agree = sum(r["judge"] == "C" for r in manual_c)
+        print(f"   Of your {len(manual_c)} C, the judge gives C to {agree} ({agree / len(manual_c):.1%})")
 
-    print("\nD. Por tipo de caso")
-    line("desempate del juez", [r for r in rows if r["tie"]])
-    line("unánime", [r for r in rows if not r["tie"]])
-    line("GT vacío (regla 4)", [r for r in rows if r["gt_empty"]])
-    line("GT con contenido", [r for r in rows if not r["gt_empty"]], boot=True)
-    for ly in ("ARP", "IP", "TCP/UDP"):
-        line(f"capa {ly}", [r for r in rows if r["layer"] == ly])
-    for md in sorted({r["model"] for r in rows}):
-        line(f"modelo {md}", [r for r in rows if r["model"] == md])
-    for mo in ("general", "filtered"):
-        line(f"vista {mo}", [r for r in rows if r["mode"] == mo])
+    print("\nD. By case type")
+    line("judge tie-break", [r for r in rows if r["tie"]])
+    line("unanimous", [r for r in rows if not r["tie"]])
+    line("empty reference (rule 4)", [r for r in rows if r["gt_empty"]])
+    line("reference with content", [r for r in rows if not r["gt_empty"]], boot=True)
+    for layer in ("ARP", "IP", "TCP/UDP"):
+        line(f"layer {layer}", [r for r in rows if r["layer"] == layer])
+    for model in sorted({r["model"] for r in rows}):
+        line(f"model {model}", [r for r in rows if r["model"] == model])
+    for mode in ("general", "filtered"):
+        line(f"view {mode}", [r for r in rows if r["mode"] == mode])
 
-    print("\nD2. Desempates del juez (sus dos pasadas no coinciden)")
-    for key, name in (("model", "modelo"), ("mode", "vista"), ("layer", "capa")):
-        c, n = Counter(), Counter()
+    print("\nD2. Judge tie-breaks (its two passes disagree)")
+    for key, name in (("model", "model"), ("mode", "view"), ("layer", "layer")):
+        tie_count: Counter[str] = Counter()
+        total: Counter[str] = Counter()
         for r in rows:
-            n[r[key]] += 1
-            c[r[key]] += r["tie"]
-        print(f"  por {name}: " + ", ".join(f"{k} {c[k]}/{n[k]} ({c[k] / n[k]:.1%})" for k in sorted(n)))
+            total[r[key]] += 1
+            tie_count[r[key]] += r["tie"]
+        print(f"  by {name}: " + ", ".join(f"{k} {tie_count[k]}/{total[k]} ({tie_count[k] / total[k]:.1%})"
+                                           for k in sorted(total)))
     ties = [r for r in rows if r["tie"]]
     if ties:
-        inv = sum(r["manual"] in r["votes"].split("/") for r in ties)
-        print(f"  En los {len(ties)} desempates, tu etiqueta coincide con una de las dos pasadas en {inv}")
+        matches = sum(r["manual"] in r["votes"].split("/") for r in ties)
+        print(f"  In the {len(ties)} tie-breaks, your label matches one of the two passes in {matches}")
 
-    print("\nE. Sensibilidad")
-    line("sin los vistos con el juez", [r for r in rows if not r["seen"]], boot=True)
-    for mo in ("general", "filtered"):
-        line(f"vista {mo}, sin los vistos", [r for r in rows if r["mode"] == mo and not r["seen"]])
-    line("desempate: la pasada más laxa", [dict(r, judge=lenient(r)) for r in rows], boot=True)
-    line("sin desempates (solo unánimes)", [r for r in rows if not r["tie"]], boot=True)
+    print("\nE. Sensitivity")
+    line("without the files seen with the judge", [r for r in rows if not r["seen"]], boot=True)
+    for mode in ("general", "filtered"):
+        line(f"view {mode}, without seen", [r for r in rows if r["mode"] == mode and not r["seen"]])
+    line("tie-break: laxest pass", [dict(r, judge=lenient(r)) for r in rows], boot=True)
+    line("no tie-breaks (unanimous only)", [r for r in rows if not r["tie"]], boot=True)
 
-    print("\nF. ¿Llegaría el juez a las mismas conclusiones? (% de respuestas con cada etiqueta)")
-    print(f"  {'':<34}{'%C tuyo':>9}{'%C juez':>9}{'%I tuyo':>9}{'%I juez':>9}")
+    print("\nF. Would the judge reach the same conclusions? (% of answers with each label)")
+    print(f"  {'':<34}{'your %C':>9}{'judge %C':>9}{'your %I':>9}{'judge %I':>9}")
     models = sorted({r["model"] for r in rows})
-    for md in models:
-        for mo in ("general", "filtered"):
-            rs = [r for r in rows if r["model"] == md and r["mode"] == mo]
-            if rs:
-                print(f"  {md + ' ' + mo:<34}{pct(rs, 'manual', 'C'):>9.1%}{pct(rs, 'judge', 'C'):>9.1%}"
-                      f"{pct(rs, 'manual', 'I'):>9.1%}{pct(rs, 'judge', 'I'):>9.1%}")
+    for model in models:
+        for mode in ("general", "filtered"):
+            subset = [r for r in rows if r["model"] == model and r["mode"] == mode]
+            if subset:
+                print(f"  {model + ' ' + mode:<34}{pct(subset, 'manual', 'C'):>9.1%}{pct(subset, 'judge', 'C'):>9.1%}"
+                      f"{pct(subset, 'manual', 'I'):>9.1%}{pct(subset, 'judge', 'I'):>9.1%}")
 
-    def rank(who):
+    def rank(who: str) -> list[str]:
         return sorted(models, key=lambda m: -pct([r for r in rows if r["model"] == m], who, "C"))
-    print(f"  Orden de modelos por %C, según tú:   {' > '.join(rank('manual'))}")
-    print(f"                           según el juez: {' > '.join(rank('judge'))}  "
-          f"({'mismo orden' if rank('manual') == rank('judge') else 'orden distinto'})")
-    print("  Efecto del filtrado en %C (filtered - general):")
-    for md in models:
-        g = [r for r in rows if r["model"] == md and r["mode"] == "general"]
-        fl = [r for r in rows if r["model"] == md and r["mode"] == "filtered"]
-        if g and fl:
-            dm = pct(fl, "manual", "C") - pct(g, "manual", "C")
-            dj = pct(fl, "judge", "C") - pct(g, "judge", "C")
-            print(f"    {md:<30} tú {dm:+7.1%}   juez {dj:+7.1%}")
 
-    if dis:
+    print(f"  Model order by %C, according to you:   {' > '.join(rank('manual'))}")
+    print(f"                    according to the judge: {' > '.join(rank('judge'))}  "
+          f"({'same order' if rank('manual') == rank('judge') else 'different order'})")
+    print("  Filtering effect on %C (filtered - general):")
+    for model in models:
+        general = [r for r in rows if r["model"] == model and r["mode"] == "general"]
+        filtered = [r for r in rows if r["model"] == model and r["mode"] == "filtered"]
+        if general and filtered:
+            dm = pct(filtered, "manual", "C") - pct(general, "manual", "C")
+            dj = pct(filtered, "judge", "C") - pct(general, "judge", "C")
+            print(f"    {model:<30} you {dm:+7.1%}   judge {dj:+7.1%}")
+
+    if disagreements:
         os.makedirs(os.path.dirname(out_csv) or ".", exist_ok=True)
-        with open(out_csv, "w", newline="", encoding="utf-8-sig") as g:
-            w = csv.writer(g)
-            w.writerow(["modelo", "vista", "traza", "pregunta_n", "tu_etiqueta", "juez", "votos_juez",
-                        "desempate", "visto", "tu_nota", "pregunta"])
-            for r in sorted(dis, key=lambda r: (r["model"], r["mode"], r["trace"], r["qn"])):
-                w.writerow([r["model"], r["mode"], r["trace"], r["qn"], r["manual"], r["judge"], r["votes"],
-                            int(r["tie"]), int(r["seen"]), r["note"], r["question"][:90]])
-        print(f"\nDesacuerdos guardados en {out_csv} ({len(dis)}).")
+        with open(out_csv, "w", newline="", encoding="utf-8-sig") as handle:
+            writer = csv.writer(handle)
+            writer.writerow(["model", "view", "trace", "question_n", "your_label", "judge", "judge_votes",
+                             "tie_break", "seen", "your_note", "question"])
+            for r in sorted(disagreements, key=lambda r: (r["model"], r["mode"], r["trace"], r["qn"])):
+                writer.writerow([r["model"], r["mode"], r["trace"], r["qn"], r["manual"], r["judge"], r["votes"],
+                                 int(r["tie"]), int(r["seen"]), r["note"], r["question"][:90]])
+        print(f"\nDisagreements saved to {out_csv} ({len(disagreements)}).")
     if report:
         sys.stdout = sys.__stdout__
         report.close()
-        print(f"Informe guardado en {os.path.join(a.out_dir, 'agreement_manual_vs_judge.txt')}")
+        print(f"Report saved to {os.path.join(args.out_dir, 'agreement_manual_vs_judge.txt')}")
 
 
 if __name__ == "__main__":

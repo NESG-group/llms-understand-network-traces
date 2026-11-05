@@ -1,34 +1,34 @@
-#!/usr/bin/env python3
 """
-dotplot_cicids_rounds.py
+graph_cicids.py
 ================================================================================
-Consistencia por pregunta entre las rondas de CICIDS (solo lectura de los JSON del juez).
+Per-question consistency across the CIC-IDS2017 runs (read-only over the judge JSON files).
 
-Por qué no se usa dotplot_model.py con CICIDS: ese script agrega por moda las rondas de
-una MISMA traza. En CICIDS cada ronda es una ventana distinta (otros paquetes), así que
-cada traza existe en una sola ronda: la moda no agrega nada, salen 5 x 4 = 20 bloques por
-modelo y avisos de ficheros inexistentes.
+Why dotplot_model.py is not used with CIC-IDS2017: that script aggregates by mode the runs
+of the SAME trace. In CIC-IDS2017 every run is a different window (other packets), so every
+trace exists in a single run: the mode aggregates nothing, 5 x 4 = 20 blocks per model
+appear and warnings about missing files are printed.
 
-Qué dibuja (un PNG por modelo): dos paneles, uno para C y otro para I. Filas = las 19
-preguntas; columnas = los cuatro niveles (50, 75, 100 y 125 % del presupuesto de datos) y,
-dentro de cada nivel, la vista general (G) y la filtrada (F). Cada celda muestra k/n:
-en cuántas de las n rondas con etiqueta válida esa pregunta recibió C (panel izquierdo)
-o I (panel derecho). Las celdas grises no tienen ninguna etiqueta válida (E, N o ausente).
+What it draws (one PNG per model): two panels, one for C and one for I. Rows = the 19
+questions; columns = the four levels (50, 75, 100 and 125 % of the data budget) and, inside
+each level, the general (G) and the filtered (F) view. Each cell shows k/n: in how many of
+the n runs with a valid label that question received C (left panel) or I (right panel).
+Grey cells have no valid label (E, N or absent).
 
-También imprime las preguntas que nunca reciben C en ninguna vista, nivel ni ronda
-(candidatas a patrón de error sistemático).
+It also prints the questions that never receive C in any view, level or run (candidates for
+a systematic error pattern).
 
-Ojo con la lectura:
-  - Cada ronda es otra ventana: una pregunta puede ser fácil en una ronda porque la capa
-    está vacía (la respuesta correcta es "None"). Mira también el desglose por tipo de
-    pregunta de cicids_round_analysis.py.
-  - Los niveles son prefijos de la misma ventana: no son muestras independientes.
-  - El 125 % (L100) se recorta en el servidor (Ollama 0.33.3): no es "más contexto".
+Reading caveats:
+  - Every run is another window: a question can be easy in one run because the layer is
+    empty (the right answer is "None"). Also look at the breakdown by question type of
+    cicids_round_analysis.py.
+  - Levels are prefixes of the same window: they are not independent samples.
+  - The 125 % level (L100) is trimmed by the server (Ollama 0.33.3): it is not "more context".
 
-Uso (desde la raíz del proyecto):
-  python3 dotplot_cicids_rounds.py                           # todas las rondas que haya
-  python3 dotplot_cicids_rounds.py --runs 1 2 3 4 5
-  python3 dotplot_cicids_rounds.py --models llama3.1:70b qwen2.5:72b --output-dir output_graphs/cicids_rounds
+Usage (from the repository root):
+  uv run python -m llms_understand_network_traces.analysis.graph_cicids
+  uv run python -m llms_understand_network_traces.analysis.graph_cicids --runs 1 2 3 4 5
+  uv run python -m llms_understand_network_traces.analysis.graph_cicids \
+          --models llama3.1:70b qwen2.5:72b --output-dir output_graphs/cicids_rounds
 ================================================================================
 """
 import argparse
@@ -37,7 +37,6 @@ import importlib
 import json
 import os
 import re
-import sys
 from collections import defaultdict
 
 import matplotlib
@@ -46,16 +45,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
-sys.path.insert(0, os.getcwd())
+from llms_understand_network_traces.utils.text import norm
+
 
 MODELS = ["llama3.1:8b", "llama3.1:70b", "qwen2.5:7b", "qwen2.5:72b"]
 MODES = ("general", "filtered")
 PCT = {25: 50, 50: 75, 75: 100, 100: 125}
 VALID = ("C", "P", "I")
-
-
-def norm(q):
-    return re.sub(r"\s+", " ", q.strip())
 
 
 def load_layout(module_name):
@@ -70,7 +66,7 @@ def runs_found(models_dir):
 
 
 def collect(models_dir, model, qs, runs):
-    """data[(vista, nivel)][indice_pregunta] = [etiquetas C/P/I de cada ronda]."""
+    """data[(view, level)][question_index] = [C/P/I labels of each run]."""
     data = defaultdict(lambda: defaultdict(list))
     used, absent = set(), 0
     for run in runs:
@@ -83,7 +79,7 @@ def collect(models_dir, model, qs, runs):
                     with open(f, encoding="utf-8") as fh:
                         d = json.load(fh)
                 except (json.JSONDecodeError, OSError) as e:
-                    print(f"  [WARN] no se puede leer {f}: {e}")
+                    print(f"  [WARN] cannot read {f}: {e}")
                     continue
                 lm = {norm(q): v.get("final_label") for q, v in d.get("questions", {}).items()}
                 for i, q in enumerate(qs):
@@ -134,29 +130,29 @@ def main():
     ap.add_argument("--output-dir", default="output_graphs/cicids_rounds")
     ap.add_argument("--runs", type=int, nargs="*", default=None)
     ap.add_argument("--models", nargs="*", default=MODELS)
-    ap.add_argument("--constants", default="utils.constants")
+    ap.add_argument("--constants", default="llms_understand_network_traces.utils.constants")
     a = ap.parse_args()
 
     qs, n_arp, n_ip = load_layout(a.constants)
     runs = a.runs or runs_found(a.models_dir)
-    print(f"Rondas: {runs}  |  preguntas: {len(qs)} ({a.constants})\n")
+    print(f"Runs: {runs}  |  questions: {len(qs)} ({a.constants})\n")
 
     for model in a.models:
         data, used, absent = collect(a.models_dir, model, qs, runs)
         if not data:
-            print(f"[SKIP] {model}: no hay juicios en las rondas {runs}")
+            print(f"[SKIP] {model}: no judgements in runs {runs}")
             continue
         if absent:
-            print(f"[WARN] {model}: {absent} preguntas de {a.constants} no están en algún fichero (¿--constants equivocado?)")
+            print(f"[WARN] {model}: {absent} questions of {a.constants} are missing in some file (wrong --constants?)")
         fig, axes = plt.subplots(1, 2, figsize=(15, len(qs) * 0.42 + 2.5))
         draw(axes[0], data, qs, n_arp, n_ip, "C", "#2ca02c")
         draw(axes[1], data, qs, n_arp, n_ip, "I", "#d62728")
-        axes[0].set_title("Rondas con etiqueta C (k/n)", fontsize=10)
-        axes[1].set_title("Rondas con etiqueta I (k/n)", fontsize=10)
-        fig.suptitle(f"{model} | rondas {used} | G = vista general, F = vista filtrada | niveles = % del presupuesto de datos",
+        axes[0].set_title("Runs labelled C (k/n)", fontsize=10)
+        axes[1].set_title("Runs labelled I (k/n)", fontsize=10)
+        fig.suptitle(f"{model} | runs {used} | G = general view, F = filtered view | levels = % of the data budget",
                      fontsize=10)
         slug = re.sub(r"[^\w\-.]", "_", model)
-        out = os.path.join(a.output_dir, slug, f"consistencia_{slug}.png")
+        out = os.path.join(a.output_dir, slug, f"consistency_{slug}.png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         fig.tight_layout(rect=(0, 0.03, 1, 0.96))
         fig.savefig(out, dpi=200, bbox_inches="tight")
@@ -164,7 +160,7 @@ def main():
         print(f"[OK] {out}")
         never = [f"P{i + 1}" for i in range(len(qs))
                  if all("C" not in data.get(k, {}).get(i, []) for k in data) and any(i in data[k] for k in data)]
-        print(f"     preguntas sin ninguna C (todas las vistas, niveles y rondas): {never if never else 'ninguna'}\n")
+        print(f"     questions never labelled C (all views, levels and runs): {never if never else 'none'}\n")
 
 
 if __name__ == "__main__":

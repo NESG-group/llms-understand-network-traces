@@ -3,7 +3,7 @@ import subprocess
 from datetime import datetime, timezone, timedelta
 
 # Function to save data as JSON
-def saveJsonToFile(data, file_name):
+def save_json_to_file(data, file_name):
     with open(file_name, "w") as file:
         json.dump(data, file, indent=4) 
 
