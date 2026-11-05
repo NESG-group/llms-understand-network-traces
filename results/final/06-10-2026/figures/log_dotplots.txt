@@ -1,0 +1,103 @@
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_8b_run1.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_8b_run2.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_8b_run3.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_8b_run4.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_8b_run5.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_70b_run1.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_70b_run2.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_70b_run3.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_70b_run4.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_llama3.1_70b_run5.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_7b_run1.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_7b_run2.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_7b_run3.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_7b_run4.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_7b_run5.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_72b_run1.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_72b_run2.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_72b_run3.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_72b_run4.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/por_run/dotplot_qwen2.5_72b_run5.png
+Models to process: ['llama3.1:70b', 'llama3.1:8b', 'qwen2.5:72b', 'qwen2.5:7b']
+Questions from utils.constants: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+
+============================================================
+Model: llama3.1:70b
+============================================================
+  Traces: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+  Runs found: ['run1', 'run2', 'run3', 'run4', 'run5']
+  [OK] Saved: results/final/06-10-2026/figures/moda/llama3.1_70b/dotplot_llama3.1_70b.png
+
+============================================================
+Model: llama3.1:8b
+============================================================
+  Traces: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+  Runs found: ['run1', 'run2', 'run3', 'run4', 'run5']
+  [OK] Saved: results/final/06-10-2026/figures/moda/llama3.1_8b/dotplot_llama3.1_8b.png
+
+============================================================
+Model: qwen2.5:72b
+============================================================
+  Traces: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+  Runs found: ['run1', 'run2', 'run3', 'run4', 'run5']
+  [OK] Saved: results/final/06-10-2026/figures/moda/qwen2.5_72b/dotplot_qwen2.5_72b.png
+
+============================================================
+Model: qwen2.5:7b
+============================================================
+  Traces: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+  Runs found: ['run1', 'run2', 'run3', 'run4', 'run5']
+  [OK] Saved: results/final/06-10-2026/figures/moda/qwen2.5_7b/dotplot_qwen2.5_7b.png
+
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/manual/dotplot_manual_llama3.1_8b.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/manual/dotplot_manual_llama3.1_70b.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/manual/dotplot_manual_qwen2.5_7b.png
+Traces found: ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+Questions: 19 (['L2 - ARP', 'L3 - IP', 'L4 - TCP/UDP'])
+[OK] Saved: results/final/06-10-2026/figures/manual/dotplot_manual_qwen2.5_72b.png

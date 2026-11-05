@@ -1,0 +1,456 @@
+
+========================================================================
+  MODEL: llama3.1:8b
+========================================================================
+
+  Runs found : 5  (['run1', 'run2', 'run3', 'run4', 'run5'])
+  Traces     : ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+
+  1. % C / P / I  |  2. Improvement score  |  3. Cohen's kappa
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Gen  C                    33.3%           0.0%          33.3%          33.3
+    Gen  P                    66.7%           0.0%          33.3%          66.7
+    Gen  I                     0.0%         100.0%          33.3%           0.0
+    Fil  C                   100.0%           0.0%         100.0%         100.0
+    Fil  P                     0.0%           0.0%           0.0%           0.0
+    Fil  I                     0.0%         100.0%           0.0%           0.0
+    Score (raw)                    +2.0           0.0          +3.0          +2.0
+    Score (norm)                 +33.3%          0.0%        +50.0%        +33.3%
+    Kappa                         0.000         1.000         0.000         0.000
+    Kappa interp.               slightalmost perfect        slight        slight
+
+  [L3-IP]
+    Gen  C                     0.0%          25.0%          25.0%           0.0
+    Gen  P                    75.0%          75.0%          50.0%          50.0
+    Gen  I                    25.0%           0.0%          25.0%          50.0
+    Fil  C                    50.0%          50.0%           0.0%          25.0
+    Fil  P                    25.0%          50.0%          75.0%          50.0
+    Fil  I                    25.0%           0.0%          25.0%          25.0
+    Score (raw)                    +2.0          +1.0          -1.0          +2.0
+    Score (norm)                 +25.0%        +12.5%        -12.5%        +25.0%
+    Kappa                         0.333         0.500         0.556         0.200
+    Kappa interp.                 fair      moderate      moderate        slight
+
+  [L4-TCP/UDP]
+    Gen  C                   100.0%          33.3%          25.0%          16.7
+    Gen  P                     0.0%          25.0%          33.3%          50.0
+    Gen  I                     0.0%          41.7%          41.7%          33.3
+    Fil  C                     0.0%          25.0%          33.3%          25.0
+    Fil  P                     0.0%          33.3%          33.3%          41.7
+    Fil  I                   100.0%          41.7%          33.3%          33.3
+    Score (raw)                   -24.0          -1.0          +2.0          +1.0
+    Score (norm)                -100.0%         -4.2%         +8.3%         +4.2%
+    Kappa                         0.000         0.116         0.875         0.870
+    Kappa interp.               slight        slightalmost perfectalmost perfect
+
+  4. Inter-run agreement (general mode)
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%          66.7%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L3-IP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L4-TCP/UDP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  5. Mode confidence distribution (general mode, all layers)
+  ----------------------------------------------------------------------
+
+  Trace: arp-icmp
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: ip-networktrace2
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: nmap22-23-53-80-443
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: nmap22-23-53-80-443-threewayhandshake
+    5/5 runs agree:  18 questions  ( 94.7%)  ██████████████████
+    4/5 runs agree:   1 questions  (  5.3%)  █
+
+  6. Cross-trace consistency  (std dev of %C across traces)
+  ----------------------------------------------------------------------
+
+  Layer              Mode         Mean %C   Std dev  Traces included
+  L2-ARP             General        25.0%      16.6%  n=4
+  L2-ARP             Filtered       75.0%      50.0%  n=4
+  L3-IP              General        12.5%      14.4%  n=4
+  L3-IP              Filtered       31.2%      23.9%  n=4
+  L4-TCP/UDP         General        43.8%      38.1%  n=4
+  L4-TCP/UDP         Filtered       20.8%      14.4%  n=4
+
+  Summary (averaged across traces)
+  ----------------------------------------------------------------------
+
+  [L2-ARP]
+    C  Gen= 25.0%  Fil= 75.0%  Δ= +50.0%
+    P  Gen= 41.7%  Fil=  0.0%  Δ= -41.7%
+    I  Gen= 33.3%  Fil= 25.0%  Δ=  -8.3%
+    Score norm mean= +29.1%  Kappa mean=0.250 (fair)
+
+  [L3-IP]
+    C  Gen= 12.5%  Fil= 31.2%  Δ= +18.7%
+    P  Gen= 62.5%  Fil= 50.0%  Δ= -12.5%
+    I  Gen= 25.0%  Fil= 18.8%  Δ=  -6.2%
+    Score norm mean= +12.5%  Kappa mean=0.397 (fair)
+
+  [L4-TCP/UDP]
+    C  Gen= 43.8%  Fil= 20.8%  Δ= -23.0%
+    P  Gen= 27.1%  Fil= 27.1%  Δ=   0.0%
+    I  Gen= 29.2%  Fil= 52.1%  Δ= +22.9%
+    Score norm mean= -22.9%  Kappa mean=0.465 (moderate)
+
+
+========================================================================
+  MODEL: qwen2.5:72b
+========================================================================
+
+  Runs found : 5  (['run1', 'run2', 'run3', 'run4', 'run5'])
+  Traces     : ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+
+  1. % C / P / I  |  2. Improvement score  |  3. Cohen's kappa
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Gen  C                    66.7%         100.0%          66.7%          33.3
+    Gen  P                    33.3%           0.0%          33.3%          66.7
+    Gen  I                     0.0%           0.0%           0.0%           0.0
+    Fil  C                   100.0%         100.0%         100.0%         100.0
+    Fil  P                     0.0%           0.0%           0.0%           0.0
+    Fil  I                     0.0%           0.0%           0.0%           0.0
+    Score (raw)                    +1.0           0.0          +1.0          +2.0
+    Score (norm)                 +16.7%          0.0%        +16.7%        +33.3%
+    Kappa                         0.000         1.000         0.000         0.000
+    Kappa interp.               slightalmost perfect        slight        slight
+
+  [L3-IP]
+    Gen  C                    75.0%          25.0%          75.0%          75.0
+    Gen  P                     0.0%          75.0%          25.0%          25.0
+    Gen  I                    25.0%           0.0%           0.0%           0.0
+    Fil  C                   100.0%          50.0%          50.0%          50.0
+    Fil  P                     0.0%          50.0%          50.0%          50.0
+    Fil  I                     0.0%           0.0%           0.0%           0.0
+    Score (raw)                    +2.0          +1.0          -1.0          -1.0
+    Score (norm)                 +25.0%        +12.5%        -12.5%        -12.5%
+    Kappa                         0.000         0.500         0.500         0.500
+    Kappa interp.               slight      moderate      moderate      moderate
+
+  [L4-TCP/UDP]
+    Gen  C                   100.0%          75.0%          33.3%          66.7
+    Gen  P                     0.0%           8.3%          50.0%          25.0
+    Gen  I                     0.0%          16.7%          16.7%           8.3
+    Fil  C                   100.0%          91.7%          41.7%          41.7
+    Fil  P                     0.0%           8.3%          25.0%          50.0
+    Fil  I                     0.0%           0.0%          33.3%           8.3
+    Score (raw)                     0.0          +4.0          -1.0          -3.0
+    Score (norm)                   0.0%        +16.7%         -4.2%        -12.5%
+    Kappa                         1.000         0.455         0.510         0.294
+    Kappa interp.       almost perfect      moderate      moderate          fair
+
+  4. Inter-run agreement (general mode)
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L3-IP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L4-TCP/UDP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  5. Mode confidence distribution (general mode, all layers)
+  ----------------------------------------------------------------------
+
+  Trace: arp-icmp
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: ip-networktrace2
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: nmap22-23-53-80-443
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: nmap22-23-53-80-443-threewayhandshake
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  6. Cross-trace consistency  (std dev of %C across traces)
+  ----------------------------------------------------------------------
+
+  Layer              Mode         Mean %C   Std dev  Traces included
+  L2-ARP             General        66.7%      27.2%  n=4
+  L2-ARP             Filtered      100.0%       0.0%  n=4
+  L3-IP              General        62.5%      25.0%  n=4
+  L3-IP              Filtered       62.5%      25.0%  n=4
+  L4-TCP/UDP         General        68.8%      27.5%  n=4
+  L4-TCP/UDP         Filtered       68.8%      31.4%  n=4
+
+  Summary (averaged across traces)
+  ----------------------------------------------------------------------
+
+  [L2-ARP]
+    C  Gen= 66.7%  Fil=100.0%  Δ= +33.3%
+    P  Gen= 33.3%  Fil=  0.0%  Δ= -33.3%
+    I  Gen=  0.0%  Fil=  0.0%  Δ=   0.0%
+    Score norm mean= +16.7%  Kappa mean=0.250 (fair)
+
+  [L3-IP]
+    C  Gen= 62.5%  Fil= 62.5%  Δ=   0.0%
+    P  Gen= 31.2%  Fil= 37.5%  Δ=  +6.3%
+    I  Gen=  6.2%  Fil=  0.0%  Δ=  -6.2%
+    Score norm mean=  +3.1%  Kappa mean=0.375 (fair)
+
+  [L4-TCP/UDP]
+    C  Gen= 68.8%  Fil= 68.8%  Δ=   0.0%
+    P  Gen= 20.8%  Fil= 20.8%  Δ=   0.0%
+    I  Gen= 10.4%  Fil= 10.4%  Δ=   0.0%
+    Score norm mean=  -0.0%  Kappa mean=0.565 (moderate)
+
+
+========================================================================
+  MODEL: llama3.1:70b
+========================================================================
+
+  Runs found : 5  (['run1', 'run2', 'run3', 'run4', 'run5'])
+  Traces     : ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+
+  1. % C / P / I  |  2. Improvement score  |  3. Cohen's kappa
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Gen  C                    33.3%         100.0%          33.3%          33.3
+    Gen  P                    66.7%           0.0%          33.3%          33.3
+    Gen  I                     0.0%           0.0%          33.3%          33.3
+    Fil  C                    66.7%          33.3%           0.0%           0.0
+    Fil  P                    33.3%           0.0%         100.0%         100.0
+    Fil  I                     0.0%          66.7%           0.0%           0.0
+    Score (raw)                    +1.0          -4.0           0.0           0.0
+    Score (norm)                 +16.7%        -66.7%          0.0%          0.0%
+    Kappa                         0.400         0.000         0.000         0.000
+    Kappa interp.                 fair        slight        slight        slight
+
+  [L3-IP]
+    Gen  C                   100.0%          50.0%          75.0%          75.0
+    Gen  P                     0.0%          50.0%          25.0%          25.0
+    Gen  I                     0.0%           0.0%           0.0%           0.0
+    Fil  C                   100.0%          50.0%          50.0%          50.0
+    Fil  P                     0.0%          50.0%          50.0%          50.0
+    Fil  I                     0.0%           0.0%           0.0%           0.0
+    Score (raw)                     0.0           0.0          -1.0          -1.0
+    Score (norm)                   0.0%          0.0%        -12.5%        -12.5%
+    Kappa                         1.000         1.000         0.500         0.500
+    Kappa interp.       almost perfectalmost perfect      moderate      moderate
+
+  [L4-TCP/UDP]
+    Gen  C                   100.0%          66.7%          33.3%          33.3
+    Gen  P                     0.0%          16.7%          33.3%          33.3
+    Gen  I                     0.0%          16.7%          33.3%          33.3
+    Fil  C                    50.0%          66.7%          25.0%          16.7
+    Fil  P                     0.0%          25.0%          33.3%          41.7
+    Fil  I                    50.0%           8.3%          41.7%          41.7
+    Score (raw)                   -12.0          +1.0          -2.0          -3.0
+    Score (norm)                 -50.0%         +4.2%         -8.3%        -12.5%
+    Kappa                         0.000         0.167         0.875         0.375
+    Kappa interp.               slight        slightalmost perfect          fair
+
+  4. Inter-run agreement (general mode)
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Unanimous (all 5/5)            100.0%         100.0%          66.7%          66.7%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L3-IP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L4-TCP/UDP]
+    Unanimous (all 5/5)            100.0%          91.7%          91.7%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  5. Mode confidence distribution (general mode, all layers)
+  ----------------------------------------------------------------------
+
+  Trace: arp-icmp
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: ip-networktrace2
+    5/5 runs agree:  18 questions  ( 94.7%)  ██████████████████
+    4/5 runs agree:   1 questions  (  5.3%)  █
+
+  Trace: nmap22-23-53-80-443
+    5/5 runs agree:  17 questions  ( 89.5%)  █████████████████
+    4/5 runs agree:   2 questions  ( 10.5%)  ██
+
+  Trace: nmap22-23-53-80-443-threewayhandshake
+    5/5 runs agree:  18 questions  ( 94.7%)  ██████████████████
+    4/5 runs agree:   1 questions  (  5.3%)  █
+
+  6. Cross-trace consistency  (std dev of %C across traces)
+  ----------------------------------------------------------------------
+
+  Layer              Mode         Mean %C   Std dev  Traces included
+  L2-ARP             General        50.0%      33.4%  n=4
+  L2-ARP             Filtered       25.0%      31.9%  n=4
+  L3-IP              General        75.0%      20.4%  n=4
+  L3-IP              Filtered       62.5%      25.0%  n=4
+  L4-TCP/UDP         General        58.3%      31.9%  n=4
+  L4-TCP/UDP         Filtered       39.6%      23.0%  n=4
+
+  Summary (averaged across traces)
+  ----------------------------------------------------------------------
+
+  [L2-ARP]
+    C  Gen= 50.0%  Fil= 25.0%  Δ= -25.0%
+    P  Gen= 33.3%  Fil= 58.3%  Δ= +25.0%
+    I  Gen= 16.6%  Fil= 16.7%  Δ=  +0.1%
+    Score norm mean= -12.5%  Kappa mean=0.100 (slight)
+
+  [L3-IP]
+    C  Gen= 75.0%  Fil= 62.5%  Δ= -12.5%
+    P  Gen= 25.0%  Fil= 37.5%  Δ= +12.5%
+    I  Gen=  0.0%  Fil=  0.0%  Δ=   0.0%
+    Score norm mean=  -6.2%  Kappa mean=0.750 (substantial)
+
+  [L4-TCP/UDP]
+    C  Gen= 58.3%  Fil= 39.6%  Δ= -18.7%
+    P  Gen= 20.8%  Fil= 25.0%  Δ=  +4.2%
+    I  Gen= 20.8%  Fil= 35.4%  Δ= +14.6%
+    Score norm mean= -16.6%  Kappa mean=0.354 (fair)
+
+
+========================================================================
+  MODEL: qwen2.5:7b
+========================================================================
+
+  Runs found : 5  (['run1', 'run2', 'run3', 'run4', 'run5'])
+  Traces     : ['arp-icmp', 'ip-networktrace2', 'nmap22-23-53-80-443', 'nmap22-23-53-80-443-threewayhandshake']
+
+  1. % C / P / I  |  2. Improvement score  |  3. Cohen's kappa
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Gen  C                     0.0%         100.0%           0.0%          33.3
+    Gen  P                    66.7%           0.0%          66.7%          66.7
+    Gen  I                    33.3%           0.0%          33.3%           0.0
+    Fil  C                     0.0%          33.3%          33.3%           0.0
+    Fil  P                    66.7%          33.3%          33.3%          66.7
+    Fil  I                    33.3%          33.3%          33.3%          33.3
+    Score (raw)                     0.0          -3.0          +1.0          -2.0
+    Score (norm)                   0.0%        -50.0%        +16.7%        -33.3%
+    Kappa                         1.000         0.000         0.500         0.400
+    Kappa interp.       almost perfect        slight      moderate          fair
+
+  [L3-IP]
+    Gen  C                    25.0%          50.0%          50.0%          50.0
+    Gen  P                    25.0%          50.0%          50.0%          25.0
+    Gen  I                    50.0%           0.0%           0.0%          25.0
+    Fil  C                    75.0%          50.0%          50.0%          50.0
+    Fil  P                    25.0%          50.0%          50.0%          50.0
+    Fil  I                     0.0%           0.0%           0.0%           0.0
+    Score (raw)                    +4.0           0.0           0.0          +1.0
+    Score (norm)                 +50.0%          0.0%          0.0%        +12.5%
+    Kappa                         0.000         1.000         1.000         0.600
+    Kappa interp.               slightalmost perfectalmost perfect      moderate
+
+  [L4-TCP/UDP]
+    Gen  C                   100.0%          41.7%          50.0%          25.0
+    Gen  P                     0.0%          33.3%          33.3%          25.0
+    Gen  I                     0.0%          25.0%          16.7%          50.0
+    Fil  C                   100.0%          58.3%          41.7%          16.7
+    Fil  P                     0.0%          33.3%          33.3%          33.3
+    Fil  I                     0.0%           8.3%          25.0%          50.0
+    Score (raw)                     0.0          +4.0          -2.0          -1.0
+    Score (norm)                   0.0%        +16.7%         -8.3%         -4.2%
+    Kappa                         1.000         0.600         0.217         0.200
+    Kappa interp.       almost perfect      moderate          fair        slight
+
+  4. Inter-run agreement (general mode)
+  ----------------------------------------------------------------------
+
+                              arp-icmpip-networktracnmap22-23-53-8nmap22-23-53-8
+
+  [L2-ARP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%          66.7%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L3-IP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%          75.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  [L4-TCP/UDP]
+    Unanimous (all 5/5)            100.0%         100.0%         100.0%         100.0%
+    Strong    (≥80%)               100.0%         100.0%         100.0%         100.0%
+
+  5. Mode confidence distribution (general mode, all layers)
+  ----------------------------------------------------------------------
+
+  Trace: arp-icmp
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: ip-networktrace2
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: nmap22-23-53-80-443
+    5/5 runs agree:  19 questions  (100.0%)  ████████████████████
+
+  Trace: nmap22-23-53-80-443-threewayhandshake
+    5/5 runs agree:  17 questions  ( 89.5%)  █████████████████
+    4/5 runs agree:   2 questions  ( 10.5%)  ██
+
+  6. Cross-trace consistency  (std dev of %C across traces)
+  ----------------------------------------------------------------------
+
+  Layer              Mode         Mean %C   Std dev  Traces included
+  L2-ARP             General        33.3%      47.1%  n=4
+  L2-ARP             Filtered       16.6%      19.2%  n=4
+  L3-IP              General        43.8%      12.5%  n=4
+  L3-IP              Filtered       56.2%      12.5%  n=4
+  L4-TCP/UDP         General        54.2%      32.3%  n=4
+  L4-TCP/UDP         Filtered       54.2%      35.0%  n=4
+
+  Summary (averaged across traces)
+  ----------------------------------------------------------------------
+
+  [L2-ARP]
+    C  Gen= 33.3%  Fil= 16.6%  Δ= -16.7%
+    P  Gen= 50.0%  Fil= 50.0%  Δ=   0.0%
+    I  Gen= 16.6%  Fil= 33.3%  Δ= +16.7%
+    Score norm mean= -16.6%  Kappa mean=0.475 (moderate)
+
+  [L3-IP]
+    C  Gen= 43.8%  Fil= 56.2%  Δ= +12.4%
+    P  Gen= 37.5%  Fil= 43.8%  Δ=  +6.3%
+    I  Gen= 18.8%  Fil=  0.0%  Δ= -18.8%
+    Score norm mean= +15.6%  Kappa mean=0.650 (substantial)
+
+  [L4-TCP/UDP]
+    C  Gen= 54.2%  Fil= 54.2%  Δ=   0.0%
+    P  Gen= 22.9%  Fil= 25.0%  Δ=  +2.1%
+    I  Gen= 22.9%  Fil= 20.8%  Δ=  -2.1%
+    Score norm mean=  +1.0%  Kappa mean=0.504 (moderate)
