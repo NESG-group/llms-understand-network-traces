@@ -1,0 +1,23 @@
+    1	0.000000000	fe80::9f16:e57e:bad2:c1f	→	ff02::16    	ICMPv6	90	Multicast Listener Report Message v2
+    2	0.192782382	fe80::9f16:e57e:bad2:c1f	→	ff02::16    	ICMPv6	90	Multicast Listener Report Message v2
+    3	29.304230896	          ::	→	ff02::16    	ICMPv6	90	Multicast Listener Report Message v2
+    4	29.305537153	08:00:27:12:c4:2f	→	ff:ff:ff:ff:ff:ff	ARP	60	ARP Announcement for 192.168.1.15
+    5	29.347476409	          ::	→	ff02::16    	ICMPv6	90	Multicast Listener Report Message v2
+    6	29.547640675	          ::	→	ff02::1:ffd2:c1f	ICMPv6	86	Neighbor Solicitation for fe80::9f16:e57e:bad2:c1f
+    7	30.576023525	fe80::9f16:e57e:bad2:c1f	→	ff02::16    	ICMPv6	90	Multicast Listener Report Message v2
+    8	30.614995541	fe80::9f16:e57e:bad2:c1f	→	ff02::2     	ICMPv6	62	Router Solicitation
+    9	30.797641803	fe80::9f16:e57e:bad2:c1f	→	ff02::16    	ICMPv6	90	Multicast Listener Report Message v2
+   10	31.306333301	08:00:27:12:c4:2f	→	ff:ff:ff:ff:ff:ff	ARP	60	ARP Announcement for 192.168.1.15
+   11	33.305519371	08:00:27:12:c4:2f	→	ff:ff:ff:ff:ff:ff	ARP	60	ARP Announcement for 192.168.1.15
+   12	34.391605053	fe80::9f16:e57e:bad2:c1f	→	ff02::2     	ICMPv6	62	Router Solicitation
+   13	40.873104705	08:00:27:12:c4:2f	→	ff:ff:ff:ff:ff:ff	ARP	60	Who has 192.168.1.1? Tell 192.168.1.15
+   14	40.873127009	08:00:27:d1:7b:b1	→	08:00:27:12:c4:2f	ARP	42	192.168.1.1 is at 08:00:27:d1:7b:b1
+   15	40.873962692	192.168.1.15	→	192.168.1.1 	ICMP	98	Echo (ping) request  id=0xe413, seq=1/256, ttl=64
+   16	40.874007138	 192.168.1.1	→	192.168.1.15	ICMP	98	Echo (ping) reply    id=0xe413, seq=1/256, ttl=64 (request in 15)
+   17	41.782792044	fe80::9f16:e57e:bad2:c1f	→	ff02::2     	ICMPv6	62	Router Solicitation
+   18	41.875403121	192.168.1.15	→	192.168.1.1 	ICMP	98	Echo (ping) request  id=0xe413, seq=2/512, ttl=64
+   19	41.875423994	 192.168.1.1	→	192.168.1.15	ICMP	98	Echo (ping) reply    id=0xe413, seq=2/512, ttl=64 (request in 18)
+   20	42.878387738	192.168.1.15	→	192.168.1.1 	ICMP	98	Echo (ping) request  id=0xe413, seq=3/768, ttl=64
+   21	42.878428212	 192.168.1.1	→	192.168.1.15	ICMP	98	Echo (ping) reply    id=0xe413, seq=3/768, ttl=64 (request in 20)
+   22	45.929655339	08:00:27:d1:7b:b1	→	08:00:27:12:c4:2f	ARP	42	Who has 192.168.1.15? Tell 192.168.1.1
+   23	45.930607642	08:00:27:12:c4:2f	→	08:00:27:d1:7b:b1	ARP	60	192.168.1.15 is at 08:00:27:12:c4:2f

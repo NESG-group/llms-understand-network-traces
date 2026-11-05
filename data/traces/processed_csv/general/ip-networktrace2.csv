@@ -1,0 +1,29 @@
+    1	0.000000000	   10.0.2.15	→	185.125.188.54	TCP	74	50014 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=3992792413 TSecr=0 WS=128
+    2	1.019754719	   10.0.2.15	→	185.125.188.54	TCP	74	[TCP Retransmission] 50014 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=3992793432 TSecr=0 WS=128
+    3	1.149443190	   10.0.2.15	→	192.168.100.1	DNS	100	Standard query 0x3428 A gnuhealth.red163.trevenque.es OPT
+    4	1.149606147	   10.0.2.15	→	192.168.100.1	DNS	100	Standard query 0x5def AAAA gnuhealth.red163.trevenque.es OPT
+    5	1.151243783	192.168.100.1	→	10.0.2.15   	DNS	156	Standard query response 0x5def AAAA gnuhealth.red163.trevenque.es SOA ns1.trevenque.es OPT
+    6	1.151243905	192.168.100.1	→	10.0.2.15   	DNS	116	Standard query response 0x3428 A gnuhealth.red163.trevenque.es A 217.18.163.195 OPT
+    7	1.152078040	   10.0.2.15	→	217.18.163.195	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=7e2a)
+    8	1.152643301	   10.0.2.15	→	217.18.163.195	ICMP	362	Echo (ping) request  id=0x0003, seq=1/256, ttl=64
+    9	1.186146297	217.18.163.195	→	10.0.2.15   	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=000b)
+   10	1.186146741	217.18.163.195	→	10.0.2.15   	ICMP	362	Echo (ping) reply    id=0x0003, seq=1/256, ttl=53 (request in 8)
+   11	1.187225807	   10.0.2.15	→	192.168.100.1	DNS	98	Standard query 0x51f3 PTR 195.163.18.217.in-addr.arpa OPT
+   12	1.188535633	192.168.100.1	→	10.0.2.15   	DNS	141	Standard query response 0x51f3 PTR 195.163.18.217.in-addr.arpa PTR gnuhealth.red163.trevenque.es OPT
+   13	2.153634293	   10.0.2.15	→	217.18.163.195	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=7efb)
+   14	2.154033216	   10.0.2.15	→	217.18.163.195	ICMP	362	Echo (ping) request  id=0x0003, seq=2/512, ttl=64
+   15	2.189143476	217.18.163.195	→	10.0.2.15   	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=000d)
+   16	2.189143740	217.18.163.195	→	10.0.2.15   	ICMP	362	Echo (ping) reply    id=0x0003, seq=2/512, ttl=53 (request in 14)
+   17	3.035024050	   10.0.2.15	→	185.125.188.54	TCP	74	[TCP Retransmission] 50014 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=3992795448 TSecr=0 WS=128
+   18	3.155309894	   10.0.2.15	→	217.18.163.195	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=7ff1)
+   19	3.155464095	   10.0.2.15	→	217.18.163.195	ICMP	362	Echo (ping) request  id=0x0003, seq=3/768, ttl=64
+   20	3.189134316	217.18.163.195	→	10.0.2.15   	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=000e)
+   21	3.189134672	217.18.163.195	→	10.0.2.15   	ICMP	362	Echo (ping) reply    id=0x0003, seq=3/768, ttl=53 (request in 19)
+   22	4.157507552	   10.0.2.15	→	217.18.163.195	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=7ff7)
+   23	4.157615740	   10.0.2.15	→	217.18.163.195	ICMP	362	Echo (ping) request  id=0x0003, seq=4/1024, ttl=64
+   24	4.191409900	217.18.163.195	→	10.0.2.15   	IPv4	1514	Fragmented IP protocol (proto=ICMP 1, off=0, ID=000f)
+   25	4.191410168	217.18.163.195	→	10.0.2.15   	ICMP	362	Echo (ping) reply    id=0x0003, seq=4/1024, ttl=53 (request in 23)
+   26	5.659577060	   10.0.2.15	→	185.125.188.54	TCP	74	41304 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=3992798072 TSecr=0 WS=128
+   27	7.195816647	   10.0.2.15	→	185.125.188.54	TCP	74	[TCP Retransmission] 50014 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=3992799608 TSecr=0 WS=128
+   28	10.035521863	   10.0.2.15	→	185.125.188.55	TCP	74	46208 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=2219837978 TSecr=0 WS=128
+   29	11.067781111	   10.0.2.15	→	185.125.188.55	TCP	74	[TCP Retransmission] 46208 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=2219839010 TSecr=0 WS=128
