@@ -345,7 +345,7 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                 if not rs:
                     continue
                 toks = [t for r in rs for t, tr in zip(r["tok"], r["trunc"]) if t is not None and not tr]
-                nq = sum(1 for r in rs for l in r["lab"] if l is not None)
+                sum(1 for r in rs for l in r["lab"] if l is not None)
                 ntr = sum(sum(r["trunc"]) for r in rs)
                 ncut = sum(sum(r["cut"]) for r in rs)
                 ntie = sum(sum(r["tie"]) for r in rs)
