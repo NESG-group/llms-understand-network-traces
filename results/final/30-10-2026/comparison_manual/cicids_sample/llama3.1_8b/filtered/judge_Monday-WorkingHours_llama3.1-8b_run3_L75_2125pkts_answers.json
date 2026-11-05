@@ -1,0 +1,141 @@
+{
+    "gt_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/ground_truth_cicids2017/Monday-WorkingHours_llama3.1-8b_run3_L75_2125pkts_answers.json",
+    "llm_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/models/llama3.1:8b/run3/llm_answers/filtered/Monday-WorkingHours_llama3.1-8b_run3_L75_2125pkts_answers.json",
+    "llm_model": "llama3.1:8b",
+    "mode": "filtered",
+    "temperature": 0.0,
+    "prompt_hash": "b87c4ebf21cc",
+    "rubric_hash": "be7c71bc71de",
+    "questions": {
+        "List the unique MAC addresses of the hosts involved in ARP exchanges": {
+            "question": "List the unique MAC addresses of the hosts involved in ARP exchanges",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address": {
+            "question": "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it": {
+            "question": "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": {
+            "question": "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace",
+            "gt_answer": "Unique IPv4 addresses:\n17.253.14.125\n17.253.14.253\n17.253.20.125\n17.253.20.253\n17.253.24.253\n23.50.69.163\n23.217.36.24\n38.88.18.251\n45.76.92.117\n45.76.244.202\n45.79.11.217\n45.127.112.2\n65.55.44.109\n72.5.72.15\n91.189.89.198\n91.189.89.199\n91.189.91.157\n96.126.105.86\n104.97.95.20\n108.61.56.35\n129.6.15.28\n152.2.133.52\n192.168.10.1\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.17\n192.168.10.25\n192.168.10.50\n192.168.10.255\n199.199.208.25\n204.2.134.163\n204.11.201.12\n208.75.88.4\n208.75.89.4\n208.79.89.249\n208.185.118.89\n216.218.254.202\n224.0.0.251\n255.255.255.255",
+            "llm_answer": "[128 líneas, 9 únicas]\n192.168.10.17\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1829,
+            "tokens_input": 104912,
+            "llm_answer_full": "192.168.10.17\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1\n192.168.10.255\n192.168.10.25\n192.168.10.3\n192.168.10.9\n192.168.10.12\n192.168.10.14\n192.168.10.50\n192.168.10.1",
+            "manual_label": "",
+            "notes": ""
+        },
+        "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)": {
+            "question": "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": {
+            "question": "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.",
+            "gt_answer": "Private IPs:\n192.168.10.1 (as src: 6 packets, as dst: 6 packets)\n192.168.10.3 (as src: 512 packets, as dst: 584 packets)\n192.168.10.9 (as src: 12 packets, as dst: 11 packets)\n192.168.10.12 (as src: 261 packets, as dst: 220 packets)\n192.168.10.14 (as src: 0 packets, as dst: 288 packets)\n192.168.10.17 (as src: 47 packets, as dst: 26 packets)\n192.168.10.25 (as src: 497 packets, as dst: 255 packets)\n192.168.10.50 (as src: 136 packets, as dst: 9 packets)\n192.168.10.255 (as src: 0 packets, as dst: 84 packets)",
+            "llm_answer": "[74 líneas, 6 únicas]\n192.168.10.9, 1, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1829,
+            "tokens_input": 104943,
+            "llm_answer_full": "192.168.10.9, 1, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.168.10.1, 2, 2\n192.168.10.25, 2, 2\n192.168.10.3, 2, 2\n192.168.10.9, 2, 2\n192.",
+            "manual_label": "",
+            "notes": ""
+        },
+        "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": {
+            "question": "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
+            "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.": {
+            "question": "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port": {
+            "question": "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port",
+            "gt_answer": "FIN sessions (port pairs):\n80 -> 49488\n443 -> 49478\n443 -> 49480\n34936 -> 3268\n49152 -> 389\n49153 -> 389\n49154 -> 389\n56562 -> 389\n56568 -> 389\n60498 -> 88\n60504 -> 88",
+            "llm_answer": "[171 líneas, 4 únicas]\n34936 -> 3268\n34946 -> 3268\n34946 -> 88\n34946",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1015,
+            "tokens_input": 33749,
+            "llm_answer_full": "34936 -> 3268\n34946 -> 3268\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946 -> 88\n34946",
+            "manual_label": "",
+            "notes": ""
+        },
+        "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port": {
+            "question": "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.": {
+            "question": "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.",
+            "gt_answer": "No explicitly refused TCP connection attempts found",
+            "llm_answer": "88, 3268, 443, 49478, 49480, 49488, 49480, 49478, 49480, 443, 49480, 443, 49480, 80, 49488, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443, 49480, 443,",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1015,
+            "tokens_input": 33740,
+            "manual_label": "",
+            "notes": ""
+        },
+        "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port": {
+            "question": "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.": {
+            "question": "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.": {
+            "question": "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port": {
+            "question": "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
+            "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.": {
+            "question": "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.": {
+            "question": "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        }
+    }
+}

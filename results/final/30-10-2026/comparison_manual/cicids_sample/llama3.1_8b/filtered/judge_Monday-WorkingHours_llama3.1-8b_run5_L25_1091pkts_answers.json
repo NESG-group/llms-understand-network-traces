@@ -1,0 +1,140 @@
+{
+    "gt_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/ground_truth_cicids2017/Monday-WorkingHours_llama3.1-8b_run5_L25_1091pkts_answers.json",
+    "llm_file": "/home/irenegwh/Documentos/Projects/LLMsUnderstandNetworkTraces/results/models/llama3.1:8b/run5/llm_answers/filtered/Monday-WorkingHours_llama3.1-8b_run5_L25_1091pkts_answers.json",
+    "llm_model": "llama3.1:8b",
+    "mode": "filtered",
+    "temperature": 0.0,
+    "prompt_hash": "b87c4ebf21cc",
+    "rubric_hash": "be7c71bc71de",
+    "questions": {
+        "List the unique MAC addresses of the hosts involved in ARP exchanges": {
+            "question": "List the unique MAC addresses of the hosts involved in ARP exchanges",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address": {
+            "question": "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it": {
+            "question": "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": {
+            "question": "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)": {
+            "question": "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)",
+            "gt_answer": "IPv4 protocols:\n6 - TCP\n17 - UDP",
+            "llm_answer": "[256 líneas, 2 únicas]\n6 - TCP\n17 - UDP",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1085,
+            "tokens_input": 62066,
+            "llm_answer_full": "6 - TCP\n17 - UDP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP",
+            "manual_label": "",
+            "notes": ""
+        },
+        "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": {
+            "question": "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": {
+            "question": "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.",
+            "gt_answer": "Public IPs:\n52.35.5.132 (as src: 1 packets, as dst: 1 packets)\n52.39.237.157 (as src: 4 packets, as dst: 4 packets)\n54.192.37.41 (as src: 11 packets, as dst: 10 packets)\n54.192.37.119 (as src: 32 packets, as dst: 20 packets)\n54.192.37.184 (as src: 1 packets, as dst: 3 packets)\n63.144.176.33 (as src: 1 packets, as dst: 1 packets)\n72.21.91.29 (as src: 2 packets, as dst: 3 packets)\n172.217.3.99 (as src: 4 packets, as dst: 3 packets)\n172.217.11.14 (as src: 525 packets, as dst: 290 packets)\n216.58.217.68 (as src: 15 packets, as dst: 12 packets)\n216.58.217.99 (as src: 56 packets, as dst: 24 packets)",
+            "llm_answer": "[74 líneas, 11 únicas]\n54.192.37.119, 1, 19\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n192.",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1085,
+            "tokens_input": 62083,
+            "llm_answer_full": "54.192.37.119, 1, 19\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n192.168.10.12, 1, 1\n192.168.10.9, 1, 1\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.168.10.1, 1, 2\n192.168.10.3, 1, 6\n172.217.11.14, 1, 34\n216.58.217.68, 1, 5\n216.58.217.99, 1, 5\n52.39.237.157, 1, 2\n172.217.3.99, 1, 2\n192.168.10.9, 1, 1\n192.168.10.12, 1, 1\n192.",
+            "manual_label": "",
+            "notes": ""
+        },
+        "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
+            "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
+            "gt_answer": "Top 5 source ports (ties included): 443 - 647 packets, 1102 - 286 packets, 1078 - 24 packets, 53278 - 20 packets, 1103 - 11 packets\nTop 5 destination ports (ties included): 1102 - 523 packets, 443 - 363 packets, 1078 - 56 packets, 53278 - 32 packets, 1103 - 13 packets",
+            "llm_answer": "Top 5 source ports:\n443, 1102, 1103, 53278, 36258\n\nTop 5 destination ports:\n443, 53278, 1102, 1103, 36258",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1023,
+            "tokens_input": 33328,
+            "manual_label": "",
+            "notes": ""
+        },
+        "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.": {
+            "question": "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port": {
+            "question": "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port": {
+            "question": "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.": {
+            "question": "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port": {
+            "question": "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.": {
+            "question": "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.": {
+            "question": "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port": {
+            "question": "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port",
+            "gt_answer": "No repeated SYN packets without SYN-ACK found",
+            "llm_answer": "None",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1023,
+            "tokens_input": 33307,
+            "manual_label": "",
+            "notes": ""
+        },
+        "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
+            "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.": {
+            "question": "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        },
+        "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.": {
+            "question": "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.",
+            "manual_label": "SKIP",
+            "notes": ""
+        }
+    }
+}
