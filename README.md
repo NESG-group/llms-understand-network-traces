@@ -71,7 +71,7 @@ The four laboratory traces and the question-answer dataset are included under `d
 CIC-IDS2017 is not redistributed. Download the Monday capture and extract the first 50,000 packets with:
 
 ```bash
-bash data/cicids2017/download_cicids2017.sh
+bash scripts/download_cicids2017.sh
 ```
 
 The capture is obtained from the unofficial Hugging Face mirror [bencorn/CICIDS2017](https://huggingface.co/datasets/bencorn/CICIDS2017). The original dataset is described in Sharafaldin et al., ICISSP 2018, and its terms of use apply.
@@ -108,19 +108,22 @@ uv run python scripts/make_figures.py
 ```
 .
 ├── data/
-│   ├── traces/              laboratory traces T1-T4 (PCAPNG)
-│   ├── qa/                  question-answer dataset and reference answers (JSON)
-│   └── cicids2017/          download script and window manifests
+│   ├── traces/
+│   │   ├── raw/                  laboratory traces T1-T4 (PCAPNG)
+│   │   └── processed_csv/        views fed to the LLMs (default and per protocol)
+│   ├── qa/                       reference answers (JSON)
+│   └── cicids2017/               staging manifests (windows used in the paper)
 ├── src/llms_understand_network_traces/
-│   ├── qa_generation/       PyShark reference-answer functions
-│   ├── preprocessing/       TShark conversion (default and protocol-filtered views)
-│   ├── inference/           prompt construction and Ollama queries
-│   ├── judge/               LLM-as-a-judge with swapped-position evaluation
-│   ├── metrics/             C/P/I rates, filtering effect, tokens, Cohen's kappa
-│   ├── cicids/              window extraction and input-size levels
-│   └── agent/               filtering agent skill and MCP views
-├── scripts/                 experiment drivers, figures and tables
-├── results/                 aggregated results used in the paper
+│   ├── preprocessing/            PCAPNG to CSV conversion with TShark
+│   ├── evaluation/               reference answers (PyShark) and LLM answers
+│   ├── comparison/               LLM-as-a-judge and manual comparison
+│   ├── cicids/                   CIC-IDS2017 rounds, context and aggregation
+│   ├── analysis/                 metrics and figures
+│   └── utils/
+├── scripts/                      download and experiment drivers
+├── results/
+│   ├── summary/                  aggregated metrics
+│   └── final/                    manual annotations and figures
 └── tests/
 ```
 
