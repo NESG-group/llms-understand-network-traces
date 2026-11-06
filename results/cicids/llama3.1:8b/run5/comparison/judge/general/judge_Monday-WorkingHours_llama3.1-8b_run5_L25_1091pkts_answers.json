@@ -1,0 +1,675 @@
+{
+    "gt_file": "results/ground_truth_cicids2017/Monday-WorkingHours_llama3.1-8b_run5_L25_1091pkts_answers.json",
+    "llm_file": "results/models/llama3.1:8b/run5/llm_answers/general/Monday-WorkingHours_llama3.1-8b_run5_L25_1091pkts_answers.json",
+    "judge_model": "llama3.3:70b",
+    "llm_model": "llama3.1:8b",
+    "mode": "general",
+    "temperature": 0.0,
+    "prompt_hash": "b87c4ebf21cc",
+    "rubric_hash": "be7c71bc71de",
+    "summary": {
+        "total": 19,
+        "evaluated": 19,
+        "judge_errors": 0,
+        "no_answer": 0,
+        "prompt_truncated_suspected": 0,
+        "output_truncated": 7,
+        "C": 2,
+        "P": 7,
+        "I": 10,
+        "C_pct": 10.5,
+        "P_pct": 36.8,
+        "I_pct": 52.6,
+        "inconsistent_swaps": 0,
+        "unanimous": 19,
+        "degraded": 0
+    },
+    "questions": {
+        "List the unique MAC addresses of the hosts involved in ARP exchanges": {
+            "question": "List the unique MAC addresses of the hosts involved in ARP exchanges",
+            "gt_answer": "Unique MAC addresses of hosts involved in ARP exchanges:\nNone",
+            "llm_answer": "70:6e:6d:1d:bb:02\n01:00:0c:cc:cc:cc\n70:6e:6d:1d:bb:06\n70:6e:6d:1d:bb:0c",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64382,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference states 'None', indicating no MAC addresses, but the candidate lists several addresses, which are not present in the reference.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The reference states 'None', indicating no MAC addresses, but the candidate lists several addresses.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address": {
+            "question": "List the unique ARP flows found in the trace. For each one report: sender MAC address, target MAC address, sender IP address, and target IP address",
+            "gt_answer": "ARP flows:\nNone",
+            "llm_answer": "None",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64401,
+            "final_label": "C",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "C",
+                "pass2": "C"
+            },
+            "pass1": {
+                "reasoning": "Both reference and candidate state there are no ARP flows, matching the 'None' condition.",
+                "label": "C",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Both candidate and reference state there are no ARP flows, matching the 'None' or 'No X found' criteria.",
+                "label": "C",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it": {
+            "question": "List all complete ARP request-reply exchanges found in the trace. For each one report: the resolved IP address, its MAC address, and the IP address that requested it",
+            "gt_answer": "Completed exchanges:\nNone",
+            "llm_answer": "1. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n2. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n3. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n4. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n5. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n6. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n7. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n8. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n9. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n10. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n11. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n12. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n13. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n14. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n15. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n16. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n17. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n18. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n19. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n20. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n21. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n22. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n23. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n24. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n25. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n26. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n27. 192.168.10.12, 70:6e:6d:1d:bb:0c, 192.168.10.9\n28. 192.168.10.12, 70:6e:6d:1d:bb:",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64403,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference states 'None', indicating no complete ARP exchanges, but the candidate lists many exchanges.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The reference states 'None', indicating no completed exchanges, but the candidate lists many exchanges.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": {
+            "question": "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace",
+            "gt_answer": "Unique IPv4 addresses:\n52.35.5.132\n52.39.237.157\n54.192.37.41\n54.192.37.119\n54.192.37.184\n63.144.176.33\n72.21.91.29\n172.217.3.99\n172.217.11.14\n192.168.10.1\n192.168.10.3\n192.168.10.9\n192.168.10.12\n216.58.217.68\n216.58.217.99",
+            "llm_answer": "54.192.37.119\n192.168.10.12\n192.168.10.9\n172.217.11.14\n216.58.217.99\n172.217.3.99\n216.58.217.68\n52.39.237.157\n70:6e:6d:1d:bb:02\n01:00:0c:cc:cc:cc\n54.192.37.41\n192.168.10.3\n192.168.10.1\n192.168.10.12\n54.192.37.184\n54.192.37.41\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.11.14\n216.58.217.99\n172.217.",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64389,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "Missing reference elements: 52.35.5.132, 63.144.176.33, 72.21.91.29. Extra candidate elements: 70:6e:6d:1d:bb:02, 01:00:0c:cc:cc:cc (MAC addresses, not IPv4).",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate is missing reference elements like 52.35.5.132, 63.144.176.33, 72.21.91.29, and contains non-IPv4 addresses 70:6e:6d:1d:bb:02, 01:00:0c:cc:cc:cc",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)": {
+            "question": "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)",
+            "gt_answer": "IPv4 protocols:\n6 - TCP\n17 - UDP",
+            "llm_answer": "6 - TCP\n17 - UDP\n1 - ICMP\n50 - ICMPv6\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 - TCP\n6 -",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64405,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "The candidate contains all reference elements (6 - TCP, 17 - UDP) but also introduces extra elements (1 - ICMP, 50 - ICMPv6) not present in the reference.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The candidate includes all reference elements (6 - TCP, 17 - UDP) but also introduces an extra element (1 - ICMP, 50 - ICMPv6) not present in the reference and has many duplicates of the correct elements.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": {
+            "question": "List all IPv4 addresses in the trace that belong to private ranges (RFC 1918). For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.",
+            "gt_answer": "Private IPs:\n192.168.10.1 (as src: 7 packets, as dst: 7 packets)\n192.168.10.3 (as src: 31 packets, as dst: 31 packets)\n192.168.10.9 (as src: 358 packets, as dst: 626 packets)\n192.168.10.12 (as src: 37 packets, as dst: 50 packets)",
+            "llm_answer": "192.168.10.12, 3, 14\n192.168.10.9, 4, 14\n192.168.10.1, 2, 4\n192.168.10.3, 4, 8",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64420,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "All IPs are present, but packet counts are incorrect for each.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "All IPs are present, but packet counts are incorrect for each.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.": {
+            "question": "List all IPv4 addresses in the trace that are public (globally routable) unicast addresses. For each one report: the IP address, the number of packets in which it appears as source, and the number of packets in which it appears as destination.",
+            "gt_answer": "Public IPs:\n52.35.5.132 (as src: 1 packets, as dst: 1 packets)\n52.39.237.157 (as src: 4 packets, as dst: 4 packets)\n54.192.37.41 (as src: 11 packets, as dst: 10 packets)\n54.192.37.119 (as src: 32 packets, as dst: 20 packets)\n54.192.37.184 (as src: 1 packets, as dst: 3 packets)\n63.144.176.33 (as src: 1 packets, as dst: 1 packets)\n72.21.91.29 (as src: 2 packets, as dst: 3 packets)\n172.217.3.99 (as src: 4 packets, as dst: 3 packets)\n172.217.11.14 (as src: 525 packets, as dst: 290 packets)\n216.58.217.68 (as src: 15 packets, as dst: 12 packets)\n216.58.217.99 (as src: 56 packets, as dst: 24 packets)",
+            "llm_answer": "54.192.37.119, 1, 14\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n172.217.3.99, 1, 1\n54.192.37.41, 1, 1\n54.192.37.184, 1, 1\n52.39.237.157, 1, 1\n52.35.5.132, 1, 1\n72.21.91.29, 1, 1\n70:6e:6d:1d:bb:02, 1, 1\n70:6e:6d:1d:bb:0c, 1, 1\n70:6e:6d:1d:bb:06, 1, 1\n70:6e:6d:1d:bb:09, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.3.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216.58.217.99, 1, 1\n172.217.11.14, 1, 1\n216.58.217.68, 1, 1\n216",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64422,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "Candidate misses some reference IPs and has incorrect packet counts. It also includes non-IPv4 addresses (MAC addresses) not present in the reference.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate is missing 63.144.176.33 and has incorrect packet counts for all IPs. It also includes non-IP addresses (70:6e:6d:1d:bb:02, etc.) not present in the reference.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
+            "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
+            "gt_answer": "Top 5 source ports (ties included): 443 - 647 packets, 1102 - 286 packets, 1078 - 24 packets, 53278 - 20 packets, 1103 - 11 packets\nTop 5 destination ports (ties included): 1102 - 523 packets, 443 - 363 packets, 1078 - 56 packets, 53278 - 32 packets, 1103 - 13 packets",
+            "llm_answer": "Top 5 source ports:\n1. 1102 - 104 packets\n2. 1104 - 34 packets\n3. 1103 - 33 packets\n4. 1102 - 32 packets\n5. 1102 - 32 packets\n\nTop 5 destination ports:\n1. 443 - 104 packets\n2. 1102 - 32 packets\n3. 1104 - 32 packets\n4. 443 - 32 packets\n5. 443 - 32 packets",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64424,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "Candidate misses most reference ports and packet counts, introducing incorrect ports like 1104 and incorrect counts.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate misses reference elements like 1078, 53278, and has incorrect ports and packet counts. Extra elements like 1104 are also present.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.": {
+            "question": "TCP: List all the well-known destination ports (ports 0 to 1023) observed in TCP packets. Report as a simple list of ports.",
+            "gt_answer": "Well-known TCP destination ports:\n80\n443",
+            "llm_answer": "80, 443, 1102, 1103, 443",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64400,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "The candidate includes all reference ports (80, 443) but also introduces extra ports (1102, 1103) not present in the reference and duplicates a port (443).",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate includes extra ports (1102, 1103) not in the reference and duplicates port 443, while all reference ports are present.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port": {
+            "question": "TCP: List the port pairs of TCP sessions closed with a FIN. Report each pair in the direction of the packet that carried the FIN flag, as: source_port -> destination_port",
+            "gt_answer": "FIN sessions (port pairs):\n80 -> 1093\n80 -> 1100\n443 -> 1098\n1093 -> 80\n1098 -> 443\n1100 -> 80",
+            "llm_answer": "54.192.37.119 -> 443\n54.192.37.184 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54.192.37.119 -> 443\n54",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64406,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "All reference elements are missing, and the candidate lists IP addresses instead of port pairs, with no matching elements.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate lacks reference elements (e.g., 80 -> 1093, 443 -> 1098) and introduces incorrect elements (e.g., 54.192.37.119 -> 443)",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port": {
+            "question": "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port",
+            "gt_answer": "No RST sessions found",
+            "llm_answer": "54.192.37.119 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172.217.11.14 -> 443\n172",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64409,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference states 'No RST sessions found', but the candidate lists multiple port pairs, indicating that the candidate has extra elements not present in the reference.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The reference states 'No RST sessions found', but the candidate lists multiple port pairs, indicating that the candidate introduces elements not present in the reference and fails to state that there are no items.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.": {
+            "question": "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet. Report as a simple list of ports.",
+            "gt_answer": "No explicitly refused TCP connection attempts found",
+            "llm_answer": "80, 443",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64397,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference states no ports were found, but the candidate lists ports 80 and 443, introducing elements not present in the reference.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The reference states no ports were found, but the candidate lists ports 80 and 443, introducing elements not present in the reference.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port": {
+            "question": "TCP: List the port pairs that successfully completed a TCP three-way handshake. Report as: client_port -> server_port",
+            "gt_answer": "Completed handshakes (port pairs):\n1102 -> 443\n1103 -> 443\n36258 -> 443",
+            "llm_answer": "53278 -> 443\n36258 -> 443\n1102 -> 443\n1103 -> 443\n1104 -> 443\n1102 -> 443 (multiple instances)\n1103 -> 443 (multiple instances)\n1104 -> 443 (multiple instances)\n443 -> 1102 (multiple instances)\n443 -> 1103 (multiple instances)\n443 -> 1104 (multiple instances)",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64393,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "Reference elements 1102, 1103, and 36258 are present, but 53278 is extra and not in the reference. Also, reversed directions and duplicates are present.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate misses 53278, has extra 1104, and reverses some pairs. Reference elements 1102 -> 443, 1103 -> 443, and 36258 -> 443 are present but with extra or reversed instances.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.": {
+            "question": "TCP: List all the source ports that initiated more than one TCP session attempt (sent more than one SYN packet). Report as a simple list of ports.",
+            "gt_answer": "No source ports sent more than one SYN packet",
+            "llm_answer": "1102, 443, 80, 1082, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443, 443,",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": true,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64400,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference states no source ports sent more than one SYN packet, but the candidate lists many ports.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The reference states no source ports sent more than one SYN packet, but the candidate lists many ports.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.": {
+            "question": "TCP: List all the source ports that sent a TCP SYN packet but failed to complete the three-way handshake. Report as a simple list of ports.",
+            "gt_answer": "Source ports that sent SYN but failed to complete handshake:\n1104",
+            "llm_answer": "1102, 1103, 1082, 1079",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64399,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference lists port 1104, but the candidate lists different ports (1102, 1103, 1082, 1079) without 1104. This indicates missing reference elements and extra incorrect elements.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The candidate is missing the reference element 1104 and introduces extra elements 1102, 1103, 1082, 1079 not present in the reference.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port": {
+            "question": "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port",
+            "gt_answer": "No repeated SYN packets without SYN-ACK found",
+            "llm_answer": "None",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64403,
+            "final_label": "C",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "C",
+                "pass2": "C"
+            },
+            "pass1": {
+                "reasoning": "Both reference and candidate state there are no items, using equivalent phrases.",
+                "label": "C",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Both candidate and reference state there are no items, using equivalent phrases.",
+                "label": "C",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
+            "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
+            "gt_answer": "Top 5 source ports (ties included): 53 - 29 packets, 123 - 4 packets, 49803 - 2 packets, 51866 - 2 packets, 52923 - 2 packets, 54716 - 2 packets, 55208 - 2 packets, 55694 - 2 packets, 55716 - 2 packets, 57540 - 2 packets, 58521 - 2 packets, 58562 - 2 packets, 64220 - 2 packets\nTop 5 destination ports (ties included): 53 - 29 packets, 123 - 4 packets, 49803 - 2 packets, 51866 - 2 packets, 52923 - 2 packets, 54716 - 2 packets, 55208 - 2 packets, 55694 - 2 packets, 55716 - 2 packets, 57540 - 2 packets, 58521 - 2 packets, 58562 - 2 packets, 64220 - 2 packets",
+            "llm_answer": "Top 5 source ports:\n1. 1102 - 34\n2. 1104 - 2\n3. 1103 - 2\n4. 1100 - 2\n5. 1098 - 2\n\nTop 5 destination ports:\n1. 443 - 34\n2. 1102 - 34\n3. 1104 - 2\n4. 1103 - 2\n5. 80 - 2",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64424,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "All reference ports are missing, and candidate ports do not match reference ports or counts.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate misses all reference ports and introduces new ones with wrong counts.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.": {
+            "question": "UDP: List all the well-known destination ports (ports 0 to 1023) observed in UDP packets. Report as a simple list of ports.",
+            "gt_answer": "Well-known UDP destination ports:\n53\n123",
+            "llm_answer": "53, 80, 443, 1102, 1103, 1104, 443",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64400,
+            "final_label": "P",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "P",
+                "pass2": "P"
+            },
+            "pass1": {
+                "reasoning": "Candidate includes reference ports 53, but misses 123 and adds extra ports not in the reference.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "Candidate misses port 123, includes extra ports 80, 443, 1102, 1103, 1104, and duplicates port 443. Reference port 53 is present.",
+                "label": "P",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        },
+        "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.": {
+            "question": "UDP: List all the destination ports that received more than one UDP packet and never appear as a UDP source port in the trace. Report as a simple list of ports.",
+            "gt_answer": "No UDP destination ports found that received more than one packet and never appear as a source port",
+            "llm_answer": "53, 80, 443, 1102, 1103, 1104",
+            "truncation_suspected": false,
+            "margin_violated": false,
+            "output_truncated": false,
+            "csv_empty": false,
+            "csv_rows": 1091,
+            "tokens_input": 64403,
+            "final_label": "I",
+            "consistent": true,
+            "unanimous": true,
+            "single_pass": false,
+            "degraded": false,
+            "votes": {
+                "pass1": "I",
+                "pass2": "I"
+            },
+            "pass1": {
+                "reasoning": "The reference states no ports were found, but the candidate lists several ports, introducing incorrect elements.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            },
+            "pass2": {
+                "reasoning": "The reference states no ports were found, but the candidate lists several ports, introducing elements not present in the reference.",
+                "label": "I",
+                "error": false,
+                "degraded": false,
+                "attempt": 1
+            }
+        }
+    }
+}
