@@ -37,10 +37,10 @@ The originals are not touched. Output: <out>/<model>/<view>/<file>.json
 Usage (from the repository root):
   # one full run (e.g. the basic traces)
   uv run python -m llms_understand_network_traces.comparison.preprocesses_manual \
-      --models-dir results/models --run run1 --out <output> --blind --manual --compact
+      --models-dir results/basic --run run1 --out <output> --blind --manual --compact
   # CIC-IDS2017 sample: 4 questions per model and level (3 with content + 1 empty), one random run per cell
   uv run python -m llms_understand_network_traces.comparison.preprocesses_manual \
-      --models-dir results/models --runs 1 2 3 4 5 --sample 3 --sample-empty 1 \
+      --models-dir results/basic --runs 1 2 3 4 5 --sample 3 --sample-empty 1 \
       --out <output> --blind --manual --compact
 ================================================================================
 """

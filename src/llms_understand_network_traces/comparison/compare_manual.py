@@ -45,7 +45,7 @@ content" block. And with few questions, kappa is unstable.
 Usage (from the repository root):
   uv run python -m llms_understand_network_traces.comparison.compare_manual \
     --manual-dir results/final/06-10-2026/comparison_manual/basic_run1 \
-    --judge-dir results/models \
+    --judge-dir results/basic \
     --seen seen_by_judge.txt \
     --out-dir results/final/06-10-2026/comparison_manual
 ================================================================================

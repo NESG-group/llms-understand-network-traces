@@ -64,8 +64,12 @@ Included in the repository:
 
 - `data/traces/raw/`: the four laboratory traces (PCAPNG).
 - `data/traces/processed_csv/`: their CSV views (`general`, `arp`, `ip`, `tcp`, `udp`).
-- `data/cicids2017/staging/<model>_run<N>/manifest.json`: the exact windows used in the paper.
-- `results/`: summaries, manual annotations and figures (see below).
+- `data/qa/`: reference answers (PyShark) of the laboratory traces.
+- `data/cicids2017/staging/<model>_run<N>/manifest.json`: the exact CIC-IDS2017 windows used in the paper.
+- `results/ground_truth_cicids2017/`: reference answers of the CIC-IDS2017 levels.
+- `results/basic/` and `results/cicids/`: model answers and judge outputs, `<model>/run<N>/{llm_answers,comparison/judge}/{general,filtered}`.
+- `results/manual/{basic,cicids}/`: manual annotations of a sample of judged answers.
+- `results/summary/`: aggregated metrics tables.
 
 CIC-IDS2017 is not redistributed. Fetch the first 50,000 packets of the Monday capture from the [Hugging Face mirror](https://huggingface.co/datasets/bencorn/CICIDS2017):
 
@@ -75,63 +79,83 @@ uv run bash scripts/download_cicids2017.sh --max-packets 50000 --out-dir data/ci
 
 The original dataset is described in Sharafaldin et al. (ICISSP 2018); its terms of use apply.
 
-## Reproducing the experiments
+> Directory names contain `:` (for example `results/basic/llama3.1:8b`), so the repository can be cloned on Linux and macOS but not on Windows (use WSL).
+
+## Reproducing the analysis (no GPU needed)
+
+The stored model answers, judge outputs and manual annotations are enough to regenerate every metric, figure and table of the paper. TShark and Ollama are not required for this step.
+
+```bash
+uv sync
+bash scripts/reproduce_analysis.sh            # writes to results/reproduced/
+```
+
+It runs, in order: aggregated metrics (`metrics`), per-run dotplots, modal dotplots (`dotplot_model`), dotplots of the manual labels, the CIC-IDS2017 figures (`dotplot_cicids`, `graph_cicids`) and the judge vs. manual comparison (`compare_manual`, Cohen's and weighted kappa). Reference outputs of the paper are in `results/summary/`.
+
+Individual commands:
+
+```bash
+uv run python -m llms_understand_network_traces.analysis.metrics --dataset basic
+uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids
+uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models-dir results/basic
+uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/basic
+uv run python -m llms_understand_network_traces.analysis.dotplot_cicids
+uv run python -m llms_understand_network_traces.analysis.graph_cicids --runs 1 2 3 4 5
+uv run python -m llms_understand_network_traces.comparison.compare_manual \
+    --manual-dir results/manual/basic --judge-dir results/basic --run run1
+```
+
+## Reproducing the experiments (needs Ollama and a GPU)
+
+`llms_understand_network_traces.pipeline` runs each step; every step is resumable per run and model.
+
+```bash
+PIPE="uv run python -m llms_understand_network_traces.pipeline"
+```
+
+| Step | What it does |
+|---|---|
+| `prepare` | (CIC-IDS2017) builds the window and the nested levels, then converts them to CSV |
+| `gt` | reference answers with PyShark (CIC-IDS2017: one trace per process, up to 5 attempts) |
+| `llm` | model answers, `general` and `filtered` views |
+| `judge` | LLM-as-a-judge (default `llama3.3:70b`) |
+| `dotplot` | dotplot of the judged run |
+| `all` | `gt`, `llm`, `judge` and `dotplot` |
 
 ### Basic scenario
 
 ```bash
-M=llama3.1:8b          # repeat for each answering model
-
-# 1. PCAPNG -> CSV views
-uv run python -m llms_understand_network_traces.preprocessing.convert_pcap_to_csv
-
-# 2. Reference answers (PyShark) -> data/qa
-uv run python -m llms_understand_network_traces.evaluation.answer_with_pyshark
-
-# 3. Model answers -> results/models/$M/run1/llm_answers
-uv run python -m llms_understand_network_traces.evaluation.answer_with_llm --model $M --run run1
-
-# 4. Judge (pass the judge model: the script default is a small test model)
-uv run python -m llms_understand_network_traces.comparison.compare_with_llm_judge \
-    --judge-model llama3.3:70b \
-    --gt-folder data/qa \
-    --llm-folder results/models/$M/run1/llm_answers/general \
-    --output-folder results/models/$M/run1/comparison/judge/general
-# repeat with .../llm_answers/filtered and .../judge/filtered
+uv run python -m llms_understand_network_traces.preprocessing.convert_pcap_to_csv   # only to regenerate the CSVs
+$PIPE gt --dataset basic
+$PIPE llm --dataset basic --model llama3.1:8b --runs 5
+$PIPE judge --dataset basic --model llama3.1:8b --runs 5
+$PIPE dotplot --dataset basic --model llama3.1:8b --runs 5
 ```
 
-Use `--help` on each module for the remaining options (`--num-ctx`, `--mode`, `--trace`, `--temperature`, ...). Answers and judgements are written under `results/models/<model>/run<N>/`.
+Everything for the four answering models: `bash scripts/run_basic.sh` (`RUNS`, `MODELS` and `JUDGE` can be overridden).
 
 ### CIC-IDS2017
 
 ```bash
-uv run python -m llms_understand_network_traces.cicids.cicids_context \
-    --model $M --run run1 --source data/cicids2017/source/<capture>.pcapng
+$PIPE prepare --dataset cicids --model llama3.1:8b --first-run 1 --runs 5 \
+    --source data/cicids2017/source/Monday-WorkingHours_50000pkts.pcapng
+$PIPE gt --dataset cicids --model llama3.1:8b --first-run 1 --runs 5
+$PIPE llm --dataset cicids --model llama3.1:8b --first-run 1 --runs 5
+$PIPE judge --dataset cicids --model llama3.1:8b --first-run 1 --runs 5
 uv run python -m llms_understand_network_traces.cicids.cicids_status
 ```
 
-`cicids_context` builds the nested windows (writing the manifests in `data/cicids2017/staging/`) and runs the answer generation; the judge step is the same as above.
+Everything for the four models: `bash scripts/run_cicids.sh`. Run generation, judging and `--verify` one at a time: they share Ollama's memory.
 
-### Metrics, validation and figures
+`prepare` picks a random contiguous window of 8,000 packets (seed = run number, shared by all models) and writes one pcapng per level, with the manifest, to `data/cicids2017/staging/<model>_run<N>/`. The same options as in `answer_with_llm` (`--num-ctx`, `--temperature`, `--num-predict`, `--timeout`, `--retries`) are accepted by `pipeline`; `--help` lists the rest.
+
+`scripts/ollama_context_probe.py` checks how many tokens the server actually processes for a given `num_ctx`.
+
+## Tests
 
 ```bash
-# Aggregated metrics (Markdown + CSV)
-uv run python -m llms_understand_network_traces.analysis.metrics --dataset basic
-uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids
-
-# Per-model metrics (kappa between views, run agreement, ...)
-uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models-dir results/models
-
-# Judge vs. manual annotations
-uv run python -m llms_understand_network_traces.comparison.preprocesses_manual \
-    --models-dir results/models --run run1 --out <dir> --blind --manual --compact
-uv run python -m llms_understand_network_traces.comparison.compare_manual \
-    --manual-dir <annotated-dir> --judge-dir results/models --run run1
-
-# Figures
-uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/models
-uv run python -m llms_understand_network_traces.analysis.dotplot_cicids
-uv run python -m llms_understand_network_traces.analysis.graph_cicids --runs 1 2 3 4 5
+uv run pytest -m "not tshark"     # unit tests
+uv run pytest -m tshark           # needs TShark; regenerates the CSVs and reference answers
 ```
 
 ## Repository structure
@@ -140,21 +164,28 @@ uv run python -m llms_understand_network_traces.analysis.graph_cicids --runs 1 2
 .
 ├── data/
 │   ├── traces/{raw,processed_csv}/     laboratory traces and CSV views
+│   ├── qa/                             reference answers of the laboratory traces
 │   └── cicids2017/staging/             window manifests (data not included)
-├── scripts/download_cicids2017.sh      fetch and clip the CIC-IDS2017 capture
+├── scripts/
+│   ├── reproduce_analysis.sh           metrics, figures and validation from the stored results
+│   ├── run_basic.sh, run_cicids.sh     full experiments (Ollama)
+│   ├── download_cicids2017.sh          fetch and clip the CIC-IDS2017 capture
+│   └── ollama_context_probe.py         context truncation check
 ├── src/llms_understand_network_traces/
+│   ├── pipeline.py                     orchestrator
 │   ├── preprocessing/                  TShark conversion
 │   ├── evaluation/                     PyShark references, LLM answers
 │   ├── cicids/                         windows, context levels, round analysis
 │   ├── comparison/                     LLM judge, manual validation
 │   ├── analysis/                       metrics and dotplots
 │   └── utils/                          constants (questions) and helpers
+├── tests/
 └── results/
-    ├── summary/                        aggregated metrics tables
-    └── final/                          manual annotations and figures of the paper
+    ├── basic/, cicids/                 model answers and judge outputs
+    ├── ground_truth_cicids2017/        CIC-IDS2017 reference answers
+    ├── manual/                         manual annotations
+    └── summary/                        aggregated metrics tables
 ```
-
-Raw per-run outputs (model answers and judge JSONs) are large and are published as release assets (`results-final-raw.zip`); extract them under `results/` to rerun the analysis scripts.
 
 ## Evaluation protocol
 

@@ -29,7 +29,7 @@ Expected structure:
 
 Usage:
     uv run python -m llms_understand_network_traces.analysis.metrics_per_model
-    uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models-dir results/models --output metrics.txt
+    uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models-dir results/basic --output metrics.txt
     uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models llama3.1:8b qwen2.5:72b
 """
 
@@ -502,8 +502,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Compute evaluation metrics per model from judge results."
     )
-    parser.add_argument("--models-dir", default="results/models",
-                        help="Root directory containing one subfolder per model (default: results/models)")
+    parser.add_argument("--models-dir", default="results/basic",
+                        help="Root directory containing one subfolder per model (default: results/basic)")
     parser.add_argument("--output", default=None,
                         help="Optional path to save the report as a .txt file")
     parser.add_argument("--prefix", default="judge_",

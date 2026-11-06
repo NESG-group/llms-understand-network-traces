@@ -551,6 +551,7 @@ if __name__ == "__main__":
     parser.add_argument("--num-ctx",     type=int, default=None, help="Context window passed to Ollama (num_ctx). Default: the model's own maximum context length, read from Ollama, so every model uses its full context. Pass a value to cap it (KV-cache memory grows with it).")
     parser.add_argument("--num-predict", type=int, default=1024, help="Maximum output tokens (default: 1024)")
     parser.add_argument("--run",         default="run1", help="Run identifier (default: run1)")
+    parser.add_argument("--results-dir", default="results/basic", help="Root folder for the model outputs (default: results/basic)")
     parser.add_argument("--trace",       default=None, help="Run only this trace stem (e.g. Monday-WorkingHours_300pkts). Default: all traces.")
     parser.add_argument("--csv-folder",  default="data/traces/processed_csv", help="Base folder with per-view CSV subfolders")
     parser.add_argument("--mode",        default="all", choices=["general", "wide", "filtered", "all"], help="Which view(s) to run (default: all = general + filtered; 'wide' only when requested)")
@@ -567,7 +568,7 @@ if __name__ == "__main__":
         parser.error("Could not read the model's context length from Ollama; pass --num-ctx explicitly.")
     print(f"num_ctx = {num_ctx} ({'given with --num-ctx' if args.num_ctx else 'model maximum'})")
 
-    output_base = os.path.join("results", "models", args.model, args.run, "llm_answers")
+    output_base = os.path.join(args.results_dir, args.model, args.run, "llm_answers")
 
     common = dict(
         model_name=args.model,

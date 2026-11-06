@@ -40,7 +40,7 @@ def main():
                     print(f"{M:<13}{R:>5}  sin preparar (no existe {man})")
                 continue
             stems = [l["stem"] for l in json.load(open(man))["levels"]]
-            base = f"results/models/{M}/run{R}"
+            base = f"results/cicids/{M}/run{R}"
             gt = [f"results/ground_truth_cicids2017/{s}_answers.json" for s in stems]
             llm = [f"{base}/llm_answers/{m}/{s}_answers.json" for s in stems for m in ("general", "filtered")]
             jd = [f"{base}/comparison/judge/{m}/judge_{s}_answers.json" for s in stems for m in ("general", "filtered")]

@@ -5,7 +5,7 @@ CIC-IDS2017 version of dotplot_model.py. Same drawing (filled dots = general vie
 rings = filtered view, columns C/P/I and rows P1..P19), but every BLOCK is a context
 level (50, 75, 100 and 125 % of the data budget) instead of a trace, and the label of
 each question is the MODE over the available runs (by default, those found in
-results/models/<model>/run*).
+results/cicids/<model>/run*).
 
 Difference with dotplot_model.py: there the mode aggregates the runs of the same trace;
 in CIC-IDS2017 every run is another window of the pcap (other packets), so the same level
@@ -191,7 +191,7 @@ def generate_dotplot(blocks, general_labels, filtered_labels, method_label, outp
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--models-dir", default="results/models")
+    ap.add_argument("--models-dir", default="results/cicids")
     ap.add_argument("--output-dir", default="output_graphs/cicids_mode")
     ap.add_argument("--runs", type=int, nargs="*", default=None)
     ap.add_argument("--models", nargs="*", default=MODELS)

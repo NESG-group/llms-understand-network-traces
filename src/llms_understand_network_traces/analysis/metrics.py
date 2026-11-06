@@ -44,7 +44,7 @@ Usage (from the repository root):
   uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids
   uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids --runs 1 2 3 4 5 --tag _5runs
   uv run python -m llms_understand_network_traces.analysis.metrics --dataset basic \
-        --models-dir results/models --tag _basic_t0
+        --models-dir results/basic --tag _basic_t0
 ================================================================================
 """
 import argparse
@@ -449,7 +449,7 @@ def write_csvs(recs, csv_pairs, prefix):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dataset", choices=("basic", "cicids"), required=True, help="basic = basic traces; cicids = CIC-IDS2017 windows")
-    ap.add_argument("--models-dir", default="results/models", help="folder with one subfolder per model (e.g. a snapshot)")
+    ap.add_argument("--models-dir", default=None, help="folder with one subfolder per model (default: results/<dataset>)")
     ap.add_argument("--models", nargs="*", default=None, help="restrict to these models (default: all subfolders)")
     ap.add_argument("--runs", type=int, nargs="*", default=None, help="runs to include (default: all)")
     ap.add_argument("--constants", default="llms_understand_network_traces.utils.constants", help="module with ALL_QUESTIONS, ARP_QUESTIONS and IP_QUESTIONS")
@@ -462,6 +462,7 @@ def main():
     ap.add_argument("--no-files", action="store_true", help="only print, do not write files")
     a = ap.parse_args()
 
+    a.models_dir = a.models_dir or f"results/{a.dataset}"
     qs, layers = load_layout(a.constants)
     if not os.path.isdir(a.models_dir):
         raise SystemExit(f"--models-dir does not exist: {a.models_dir}")
