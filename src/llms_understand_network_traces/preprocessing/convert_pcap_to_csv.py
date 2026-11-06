@@ -292,7 +292,7 @@ def _write_meta(output_folder, types, disable_protocols):
 
 # --- Main conversion function --- #
 
-def convertpcap2csv(
+def convert_pcap_to_csv(
     pcapng_folder=DEFAULT_RAW,
     output_folder=DEFAULT_OUT,
     type="general",
@@ -346,7 +346,7 @@ if __name__ == "__main__":
     # The 'wide' view is left out for now (opt-in). The code is kept so it can be enabled later.
     types = ["general"] + (["wide"] if args.include_wide else []) + ["IP", "ARP", "TCP", "UDP"]
     for t in types:
-        convertpcap2csv(pcapng_folder=args.input, output_folder=args.output,
+        convert_pcap_to_csv(pcapng_folder=args.input, output_folder=args.output,
                         type=t, disable_protocols=args.disable_protocol)
 
     _write_meta(args.output, types, args.disable_protocol)

@@ -393,7 +393,7 @@ def main() -> None:
     parser.add_argument("--disable-protocol", nargs="*", default=[], metavar="PROTO",
                         help="The SAME dissectors disabled when preprocessing CIC-IDS2017 for the general view")
     parser.add_argument("--preprocess-script", default=None,
-                        help="Alternative preprocessing script (default: the packaged convertpcap2csv)")
+                        help="Alternative preprocessing script (default: the packaged convert_pcap_to_csv)")
     parser.add_argument("--verify", action="store_true", help="Verify the generated pcaps instead of generating them")
     parser.add_argument("--tolerance", type=float, default=0.02,
                         help="Relative deviation allowed by --verify (default 0.02)")

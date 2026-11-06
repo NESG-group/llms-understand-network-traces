@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from llms_understand_network_traces.evaluation import answer_with_pyshark
-from llms_understand_network_traces.preprocessing import convertpcap2csv as conv
+from llms_understand_network_traces.preprocessing import convert_pcap_to_csv as conv
 from llms_understand_network_traces.utils import constants
 
 from conftest import CSV_DIR, RAW_DIR, TRACES
@@ -31,7 +31,7 @@ def raw_copy(tmp_path_factory: pytest.TempPathFactory) -> Path:
 def converted(tmp_path_factory: pytest.TempPathFactory, raw_copy: Path) -> Path:
     out = tmp_path_factory.mktemp("csv")
     for view in ("ARP", "IP", "TCP", "UDP"):
-        conv.convertpcap2csv(str(raw_copy), str(out), type=view)
+        conv.convert_pcap_to_csv(str(raw_copy), str(out), type=view)
     return out
 
 
