@@ -226,9 +226,4 @@ data/cicids2017/staging/*/*
 !data/cicids2017/staging/*/manifest.json
 
 # Results
-results/models/
-results/snapshots/
-results/final/*/figures/por_run/
-results/final/*/models/
-results/final/*/basic/
-results/models_backup*/
+results/reproduced/
