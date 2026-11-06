@@ -1,5 +1,6 @@
 import csv
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -19,10 +20,18 @@ def read_rows(path: Path) -> list[list[str]]:
 
 
 @pytest.fixture(scope="module")
-def converted(tmp_path_factory: pytest.TempPathFactory) -> Path:
+def raw_copy(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    target = tmp_path_factory.mktemp("raw")
+    for trace in TRACES:
+        shutil.copy(RAW_DIR / f"{trace}.pcapng", target / f"{trace}.pcapng")
+    return target
+
+
+@pytest.fixture(scope="module")
+def converted(tmp_path_factory: pytest.TempPathFactory, raw_copy: Path) -> Path:
     out = tmp_path_factory.mktemp("csv")
     for view in ("ARP", "IP", "TCP", "UDP"):
-        conv.convertpcap2csv(str(RAW_DIR), str(out), type=view)
+        conv.convert_pcap_to_csv(str(raw_copy), str(out), type=view)
     return out
 
 
@@ -36,9 +45,9 @@ def test_filtered_views_match_the_committed_csv(converted: Path, trace: str, vie
 
 
 @pytest.fixture(scope="module")
-def reference_answers(tmp_path_factory: pytest.TempPathFactory) -> dict[str, dict[str, str]]:
+def reference_answers(tmp_path_factory: pytest.TempPathFactory, raw_copy: Path) -> dict[str, dict[str, str]]:
     out = tmp_path_factory.mktemp("qa")
-    answer_with_pyshark.pyshark_answers(str(RAW_DIR), str(out))
+    answer_with_pyshark.pyshark_answers(str(raw_copy), str(out))
     return {
         trace: json.loads((out / f"{trace}_answers.json").read_text())["Questions"]
         for trace in TRACES
