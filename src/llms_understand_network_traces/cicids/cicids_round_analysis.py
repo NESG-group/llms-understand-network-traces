@@ -43,7 +43,7 @@ def main() -> None:
                 continue
             with open(man) as handle:
                 stems = [level["stem"] for level in json.load(handle)["levels"]]
-            base = f"results/models/{model}/run{run}"
+            base = f"results/cicids/{model}/run{run}"
             gt = [f"results/ground_truth_cicids2017/{s}_answers.json" for s in stems]
             llm = [f"{base}/llm_answers/{m}/{s}_answers.json" for s in stems for m in ("general", "filtered")]
             jd = [f"{base}/comparison/judge/{m}/judge_{s}_answers.json" for s in stems for m in ("general", "filtered")]

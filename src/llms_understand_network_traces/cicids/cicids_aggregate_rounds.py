@@ -6,10 +6,10 @@ view and level, with the mean and standard deviation across runs, plus the input
 tokens and truncated prompts of every run.
 
 Reads, for each model and run:
-  results/models/<model>/run<N>/comparison/judge/<view>/judge_Monday*_answers.json
+  results/cicids/<model>/run<N>/comparison/judge/<view>/judge_Monday*_answers.json
       ("summary" field: C, P, I, judge_errors, prompt_truncated_suspected,
        output_truncated, inconsistent_swaps)
-  results/models/<model>/run<N>/llm_answers/<view>/Monday*_answers.json
+  results/cicids/<model>/run<N>/llm_answers/<view>/Monday*_answers.json
       ("Questions" field: tokens_input, data_tokens, truncation_suspected, csv_source)
 
 Blocks:
@@ -125,7 +125,7 @@ def fmt(x: float | None) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--models-dir", default="results/models")
+    parser.add_argument("--models-dir", default="results/cicids")
     parser.add_argument("--runs", type=int, nargs="*", default=None, help="runs to include (default: all found)")
     parser.add_argument("--csv", default=None, help="also save a long table (one row per model, run, view and level)")
     args = parser.parse_args()

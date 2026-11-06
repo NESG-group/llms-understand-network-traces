@@ -23,7 +23,7 @@ Output:
     <output_dir>/<model_slug>/dotplot_<model_slug>.png
 
 Usage:
-    uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/models
+    uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/basic
     uv run python -m llms_understand_network_traces.analysis.dotplot_model --output-dir output_graphs/dotplots
 """
 
@@ -290,8 +290,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Aggregate run labels by majority vote and generate one dotplot per model."
     )
-    parser.add_argument("--models-dir", default="results/models",
-                        help="Root directory containing one subfolder per model (default: results/models)")
+    parser.add_argument("--models-dir", default="results/basic",
+                        help="Root directory containing one subfolder per model (default: results/basic)")
     parser.add_argument("--output-dir", default="output_graphs/models",
                         help="Directory where per-model PNGs will be saved (default: output_graphs/models)")
     parser.add_argument("--prefix", default="judge_",

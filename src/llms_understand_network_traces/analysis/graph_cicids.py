@@ -126,7 +126,7 @@ def draw(ax, data, qs, n_arp, n_ip, label, color):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--models-dir", default="results/models")
+    ap.add_argument("--models-dir", default="results/cicids")
     ap.add_argument("--output-dir", default="output_graphs/cicids_rounds")
     ap.add_argument("--runs", type=int, nargs="*", default=None)
     ap.add_argument("--models", nargs="*", default=MODELS)
