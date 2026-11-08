@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/ip-networktrace2_answers.json",
-    "llm_file": "results/models/qwen2.5:72b/run1/llm_answers/filtered/ip-networktrace2_answers.json",
+    "gt_file": "data/qa/basic/ip-networktrace2_answers.json",
+    "llm_file": "results/basic/qwen2.5:72b/run1/llm_answers/filtered/ip-networktrace2_answers.json",
     "llm_model": "qwen2.5:72b",
     "mode": "filtered",
     "temperature": 0.0,
@@ -218,7 +218,7 @@
         "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 53 - 3 packets, 38722 - 1 packets, 39202 - 1 packets, 43920 - 1 packets\nTop 5 destination ports (ties included): 53 - 3 packets, 38722 - 1 packets, 39202 - 1 packets, 43920 - 1 packets",
-            "llm_answer": "[10 líneas, 8 únicas]\nTop 5 source ports:\n39202: 2\n38722: 1\n43920: 1\n53: 2\nTop 5 destination ports:\n53: 4\n39202: 1",
+            "llm_answer": "[10 lines, 8 unique]\nTop 5 source ports:\n39202: 2\n38722: 1\n43920: 1\n53: 2\nTop 5 destination ports:\n53: 4\n39202: 1",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

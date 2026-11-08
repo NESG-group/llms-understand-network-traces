@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443-threewayhandshake_answers.json",
-    "llm_file": "results/models/llama3.1:70b/run3/llm_answers/general/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "llm_file": "results/basic/llama3.1:70b/run3/llm_answers/general/nmap22-23-53-80-443-threewayhandshake_answers.json",
     "judge_model": "llama3.3:70b",
     "llm_model": "llama3.1:70b",
     "mode": "general",

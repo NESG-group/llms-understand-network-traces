@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443-threewayhandshake_answers.json",
-    "llm_file": "results/models/qwen2.5:7b/run1/llm_answers/filtered/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "llm_file": "results/basic/qwen2.5:7b/run1/llm_answers/filtered/nmap22-23-53-80-443-threewayhandshake_answers.json",
     "llm_model": "qwen2.5:7b",
     "mode": "filtered",
     "temperature": 0.0,
@@ -140,7 +140,7 @@
         "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port": {
             "question": "TCP: List the port pairs of TCP sessions that were reset (RST). Report each pair in the direction of the packet that carried the RST flag, as: source_port -> destination_port",
             "gt_answer": "RST sessions (port pairs):\n23 -> 60812\n443 -> 55020\n37912 -> 53\n41558 -> 22\n53322 -> 80",
-            "llm_answer": "[6 líneas, 4 únicas]\n443 -> 55020\n53322 -> 80\n41558 -> 22\n37912 -> 53",
+            "llm_answer": "[6 lines, 4 unique]\n443 -> 55020\n53322 -> 80\n41558 -> 22\n37912 -> 53",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

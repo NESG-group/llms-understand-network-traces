@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443-threewayhandshake_answers.json",
-    "llm_file": "results/models/llama3.1:70b/run1/llm_answers/filtered/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "llm_file": "results/basic/llama3.1:70b/run1/llm_answers/filtered/nmap22-23-53-80-443-threewayhandshake_answers.json",
     "llm_model": "llama3.1:70b",
     "mode": "filtered",
     "temperature": 0.0,
@@ -101,7 +101,7 @@
         "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 37912 - 3 packets, 41558 - 3 packets, 53322 - 3 packets, 22 - 1 packets, 23 - 1 packets, 53 - 1 packets, 80 - 1 packets, 443 - 1 packets, 55020 - 1 packets, 60812 - 1 packets\nTop 5 destination ports (ties included): 22 - 3 packets, 53 - 3 packets, 80 - 3 packets, 23 - 1 packets, 443 - 1 packets, 37912 - 1 packets, 41558 - 1 packets, 53322 - 1 packets, 55020 - 1 packets, 60812 - 1 packets",
-            "llm_answer": "[14 líneas, 13 únicas]\nTop 5 source ports:\n53322 (3)\n41558 (3)\n37912 (3)\n60812 (1)\n55020 (1)\n23 (1)\n22 (1)\nTop 5 destination ports:\n80 (3)\n53 (3)\n22 (2)\n443 (1)",
+            "llm_answer": "[14 lines, 13 unique]\nTop 5 source ports:\n53322 (3)\n41558 (3)\n37912 (3)\n60812 (1)\n55020 (1)\n23 (1)\n22 (1)\nTop 5 destination ports:\n80 (3)\n53 (3)\n22 (2)\n443 (1)",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

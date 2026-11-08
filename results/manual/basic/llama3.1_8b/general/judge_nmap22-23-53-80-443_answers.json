@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443_answers.json",
-    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/general/nmap22-23-53-80-443_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443_answers.json",
+    "llm_file": "results/basic/llama3.1:8b/run1/llm_answers/general/nmap22-23-53-80-443_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "general",
     "temperature": 0.0,
@@ -49,7 +49,7 @@
         "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": {
             "question": "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace",
             "gt_answer": "Unique IPv4 addresses:\n192.168.1.1\n192.168.1.15",
-            "llm_answer": "[3 líneas, 2 únicas]\n192.168.1.1\n192.168.1.15",
+            "llm_answer": "[3 lines, 2 unique]\n192.168.1.1\n192.168.1.15",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,
@@ -63,7 +63,7 @@
         "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)": {
             "question": "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)",
             "gt_answer": "IPv4 protocols:\n1 - ICMP\n6 - TCP\n17 - UDP",
-            "llm_answer": "[256 líneas, 4 únicas]\n6 - TCP\n17 - UDP\n1 - ICMPv6\n6 -",
+            "llm_answer": "[256 lines, 4 unique]\n6 - TCP\n17 - UDP\n1 - ICMPv6\n6 -",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": true,
@@ -103,7 +103,7 @@
         "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 49579 - 8 packets, 22 - 1 packets, 23 - 1 packets, 53 - 1 packets, 80 - 1 packets, 443 - 1 packets\nTop 5 destination ports (ties included): 49579 - 5 packets, 22 - 2 packets, 53 - 2 packets, 80 - 2 packets, 23 - 1 packets, 443 - 1 packets",
-            "llm_answer": "[12 líneas, 10 únicas]\nTop 5 source ports:\n49579\t4\n49835\t2\n80\t1\n443\t1\n53\t1\nTop 5 destination ports:\n80\t2\n23\t2\n22\t1",
+            "llm_answer": "[12 lines, 10 unique]\nTop 5 source ports:\n49579\t4\n49835\t2\n80\t1\n443\t1\n53\t1\nTop 5 destination ports:\n80\t2\n23\t2\n22\t1",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,
@@ -221,7 +221,7 @@
         "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 49835 - 6 packets, 53 - 2 packets\nTop 5 destination ports (ties included): 53 - 2 packets, 49835 - 2 packets, 22 - 1 packets, 23 - 1 packets, 80 - 1 packets, 443 - 1 packets",
-            "llm_answer": "[6 líneas, 5 únicas]\nUDP: \n49835\t4\n80\t1\n22\t1\nNone",
+            "llm_answer": "[6 lines, 5 unique]\nUDP: \n49835\t4\n80\t1\n22\t1\nNone",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

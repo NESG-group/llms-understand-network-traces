@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/arp-icmp_answers.json",
-    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/filtered/arp-icmp_answers.json",
+    "gt_file": "data/qa/basic/arp-icmp_answers.json",
+    "llm_file": "results/basic/llama3.1:8b/run1/llm_answers/filtered/arp-icmp_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "filtered",
     "temperature": 0.0,
@@ -10,7 +10,7 @@
         "List the unique MAC addresses of the hosts involved in ARP exchanges": {
             "question": "List the unique MAC addresses of the hosts involved in ARP exchanges",
             "gt_answer": "Unique MAC addresses of hosts involved in ARP exchanges:\n08:00:27:12:c4:2f\n08:00:27:d1:7b:b1",
-            "llm_answer": "[4 líneas, 3 únicas]\n08:00:27:12:c4:2f\n00:00:00:00:00:00\n08:00:27:d1:7b:b1",
+            "llm_answer": "[4 lines, 3 unique]\n08:00:27:12:c4:2f\n00:00:00:00:00:00\n08:00:27:d1:7b:b1",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,
@@ -63,7 +63,7 @@
         "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)": {
             "question": "List the unique values of the IPv4 protocol field (ip.proto) found in the trace. For each one report: protocol number and protocol name (format: number - NAME)",
             "gt_answer": "IPv4 protocols:\n1 - ICMP",
-            "llm_answer": "[2 líneas, 1 únicas]\n1 - ICMP",
+            "llm_answer": "[2 lines, 1 unique]\n1 - ICMP",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,
@@ -103,7 +103,7 @@
         "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "No TCP packets found",
-            "llm_answer": "[6 líneas, 4 únicas]\ntop 5 source ports:\n1, 80, 443, 22, 21\n  123,  45,  34,  23,  20\ntop 5 destination ports:",
+            "llm_answer": "[6 lines, 4 unique]\ntop 5 source ports:\n1, 80, 443, 22, 21\n  123,  45,  34,  23,  20\ntop 5 destination ports:",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,
@@ -221,7 +221,7 @@
         "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "No UDP packets found",
-            "llm_answer": "[22 líneas, 9 únicas]\nudp.srcport,packet count\n53, 5\n1234, 4\n80, 3\n22, 3\n443, 3\n5353, 2\nudp.dstport,packet count\n5353, 5",
+            "llm_answer": "[22 lines, 9 unique]\nudp.srcport,packet count\n53, 5\n1234, 4\n80, 3\n22, 3\n443, 3\n5353, 2\nudp.dstport,packet count\n5353, 5",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

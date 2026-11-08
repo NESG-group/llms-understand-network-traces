@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth_cicids2017/Monday-WorkingHours_qwen2.5-72b_run3_L75_404pkts_answers.json",
-    "llm_file": "results/models/qwen2.5:72b/run3/llm_answers/general/Monday-WorkingHours_qwen2.5-72b_run3_L75_404pkts_answers.json",
+    "gt_file": "data/qa/cicids/Monday-WorkingHours_qwen2.5-72b_run3_L75_404pkts_answers.json",
+    "llm_file": "results/cicids/qwen2.5:72b/run3/llm_answers/general/Monday-WorkingHours_qwen2.5-72b_run3_L75_404pkts_answers.json",
     "judge_model": "llama3.3:70b",
     "llm_model": "qwen2.5:72b",
     "mode": "general",

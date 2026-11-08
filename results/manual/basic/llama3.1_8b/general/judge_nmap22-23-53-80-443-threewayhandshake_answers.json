@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443-threewayhandshake_answers.json",
-    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/general/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "llm_file": "results/basic/llama3.1:8b/run1/llm_answers/general/nmap22-23-53-80-443-threewayhandshake_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "general",
     "temperature": 0.0,
@@ -49,7 +49,7 @@
         "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": {
             "question": "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace",
             "gt_answer": "Unique IPv4 addresses:\n192.168.1.1\n192.168.1.15",
-            "llm_answer": "[82 líneas, 5 únicas]\n192.168.1.1\n192.168.1.15\n08:00:27:d1:7b:b1\n08:00:27:12:c4:2f\n08:00:27:d",
+            "llm_answer": "[82 lines, 5 unique]\n192.168.1.1\n192.168.1.15\n08:00:27:d1:7b:b1\n08:00:27:12:c4:2f\n08:00:27:d",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": true,
@@ -219,7 +219,7 @@
         "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 62053 - 6 packets, 53 - 2 packets\nTop 5 destination ports (ties included): 53 - 2 packets, 62053 - 2 packets, 22 - 1 packets, 23 - 1 packets, 80 - 1 packets, 443 - 1 packets",
-            "llm_answer": "[12 líneas, 8 únicas]\nTop 5 source ports:\n62053\t4\nTop 5 destination ports:\n23\t3\n80\t3\n22\t3\n53\t0\nNone",
+            "llm_answer": "[12 lines, 8 unique]\nTop 5 source ports:\n62053\t4\nTop 5 destination ports:\n23\t3\n80\t3\n22\t3\n53\t0\nNone",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443_answers.json",
-    "llm_file": "results/models/qwen2.5:7b/run1/llm_answers/filtered/nmap22-23-53-80-443_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443_answers.json",
+    "llm_file": "results/basic/qwen2.5:7b/run1/llm_answers/filtered/nmap22-23-53-80-443_answers.json",
     "judge_model": "llama3.3:70b",
     "llm_model": "qwen2.5:7b",
     "mode": "filtered",

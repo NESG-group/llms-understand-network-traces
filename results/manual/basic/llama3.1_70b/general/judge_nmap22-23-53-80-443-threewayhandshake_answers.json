@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/nmap22-23-53-80-443-threewayhandshake_answers.json",
-    "llm_file": "results/models/llama3.1:70b/run1/llm_answers/general/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "gt_file": "data/qa/basic/nmap22-23-53-80-443-threewayhandshake_answers.json",
+    "llm_file": "results/basic/llama3.1:70b/run1/llm_answers/general/nmap22-23-53-80-443-threewayhandshake_answers.json",
     "llm_model": "llama3.1:70b",
     "mode": "general",
     "temperature": 0.0,
@@ -101,7 +101,7 @@
         "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 37912 - 3 packets, 41558 - 3 packets, 53322 - 3 packets, 22 - 1 packets, 23 - 1 packets, 53 - 1 packets, 80 - 1 packets, 443 - 1 packets, 55020 - 1 packets, 60812 - 1 packets\nTop 5 destination ports (ties included): 22 - 3 packets, 53 - 3 packets, 80 - 3 packets, 23 - 1 packets, 443 - 1 packets, 37912 - 1 packets, 41558 - 1 packets, 53322 - 1 packets, 55020 - 1 packets, 60812 - 1 packets",
-            "llm_answer": "[205 líneas, 11 únicas]\nTop 5 source ports:\n53322 (2)\n41558 (2)\n37912 (2)\n60812 (1)\n55020 (1)\n62053 (1)\n37912 (1)\n53322 (1)\n41558 (1)\n37912 (",
+            "llm_answer": "[205 lines, 11 unique]\nTop 5 source ports:\n53322 (2)\n41558 (2)\n37912 (2)\n60812 (1)\n55020 (1)\n62053 (1)\n37912 (1)\n53322 (1)\n41558 (1)\n37912 (",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": true,

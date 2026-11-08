@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/ip-networktrace2_answers.json",
-    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/general/ip-networktrace2_answers.json",
+    "gt_file": "data/qa/basic/ip-networktrace2_answers.json",
+    "llm_file": "results/basic/llama3.1:8b/run1/llm_answers/general/ip-networktrace2_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "general",
     "temperature": 0.0,
@@ -101,7 +101,7 @@
         "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "TCP: List the top 5 source ports and top 5 destination ports observed in TCP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 50014 - 4 packets, 46208 - 2 packets, 41304 - 1 packets\nTop 5 destination ports (ties included): 443 - 7 packets",
-            "llm_answer": "[12 líneas, 7 únicas]\nTop 5 source ports:\n50014\t2\n41304\t1\n46208\t1\nNone\t1\nTop 5 destination ports:\n443\t4",
+            "llm_answer": "[12 lines, 7 unique]\nTop 5 source ports:\n50014\t2\n41304\t1\n46208\t1\nNone\t1\nTop 5 destination ports:\n443\t4",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

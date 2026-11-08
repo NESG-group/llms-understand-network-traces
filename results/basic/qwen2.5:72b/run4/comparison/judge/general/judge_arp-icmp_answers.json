@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/arp-icmp_answers.json",
-    "llm_file": "results/models/qwen2.5:72b/run4/llm_answers/general/arp-icmp_answers.json",
+    "gt_file": "data/qa/basic/arp-icmp_answers.json",
+    "llm_file": "results/basic/qwen2.5:72b/run4/llm_answers/general/arp-icmp_answers.json",
     "judge_model": "llama3.3:70b",
     "llm_model": "qwen2.5:72b",
     "mode": "general",

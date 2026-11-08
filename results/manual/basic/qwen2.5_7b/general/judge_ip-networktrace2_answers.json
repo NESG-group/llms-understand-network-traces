@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/ip-networktrace2_answers.json",
-    "llm_file": "results/models/qwen2.5:7b/run1/llm_answers/general/ip-networktrace2_answers.json",
+    "gt_file": "data/qa/basic/ip-networktrace2_answers.json",
+    "llm_file": "results/basic/qwen2.5:7b/run1/llm_answers/general/ip-networktrace2_answers.json",
     "llm_model": "qwen2.5:7b",
     "mode": "general",
     "temperature": 0.0,
@@ -205,7 +205,7 @@
         "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port": {
             "question": "TCP: List all the port pairs where a source port sent repeated TCP SYN packets without receiving a single SYN-ACK response. Report as: source_port -> destination_port",
             "gt_answer": "Port pairs with repeated SYNs and no SYN-ACK response:\n46208 -> 443\n50014 -> 443",
-            "llm_answer": "[5 líneas, 3 únicas]\n50014 -> 443\n41304 -> 443\n46208 -> 443",
+            "llm_answer": "[5 lines, 3 unique]\n50014 -> 443\n41304 -> 443\n46208 -> 443",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

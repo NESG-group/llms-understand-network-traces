@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/ip-networktrace2_answers.json",
-    "llm_file": "results/models/llama3.1:8b/run1/llm_answers/filtered/ip-networktrace2_answers.json",
+    "gt_file": "data/qa/basic/ip-networktrace2_answers.json",
+    "llm_file": "results/basic/llama3.1:8b/run1/llm_answers/filtered/ip-networktrace2_answers.json",
     "llm_model": "llama3.1:8b",
     "mode": "filtered",
     "temperature": 0.0,
@@ -49,7 +49,7 @@
         "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace": {
             "question": "List all unique IPv4 addresses that appear as source or destination of IPv4 packets in the trace",
             "gt_answer": "Unique IPv4 addresses:\n10.0.2.15\n185.125.188.54\n185.125.188.55\n192.168.100.1\n217.18.163.195",
-            "llm_answer": "[33 líneas, 5 únicas]\n10.0.2.15\n185.125.188.54\n185.125.188.55\n192.168.100.1\n217.18.163.195",
+            "llm_answer": "[33 lines, 5 unique]\n10.0.2.15\n185.125.188.54\n185.125.188.55\n192.168.100.1\n217.18.163.195",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,
@@ -219,7 +219,7 @@
         "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.": {
             "question": "UDP: List the top 5 source ports and top 5 destination ports observed in UDP packets, ranked by packet count (descending). Include ties at the 5th position, even if this results in more than 5 ports. Report each port with its packet count.",
             "gt_answer": "Top 5 source ports (ties included): 53 - 3 packets, 38722 - 1 packets, 39202 - 1 packets, 43920 - 1 packets\nTop 5 destination ports (ties included): 53 - 3 packets, 38722 - 1 packets, 39202 - 1 packets, 43920 - 1 packets",
-            "llm_answer": "[12 líneas, 8 únicas]\nTop 5 source ports:\n1. 53, 2\n2. 39202, 2\n3. 38722, 2\n4. 43920, 2\n5. 53, 2\nTop 5 destination ports:\n1. 53, 4",
+            "llm_answer": "[12 lines, 8 unique]\nTop 5 source ports:\n1. 53, 2\n2. 39202, 2\n3. 38722, 2\n4. 43920, 2\n5. 53, 2\nTop 5 destination ports:\n1. 53, 4",
             "truncation_suspected": false,
             "margin_violated": false,
             "output_truncated": false,

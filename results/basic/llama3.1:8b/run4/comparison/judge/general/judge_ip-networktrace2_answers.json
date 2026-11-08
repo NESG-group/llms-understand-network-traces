@@ -1,6 +1,6 @@
 {
-    "gt_file": "results/ground_truth/ip-networktrace2_answers.json",
-    "llm_file": "results/models/llama3.1:8b/run4/llm_answers/general/ip-networktrace2_answers.json",
+    "gt_file": "data/qa/basic/ip-networktrace2_answers.json",
+    "llm_file": "results/basic/llama3.1:8b/run4/llm_answers/general/ip-networktrace2_answers.json",
     "judge_model": "llama3.3:70b",
     "llm_model": "llama3.1:8b",
     "mode": "general",
