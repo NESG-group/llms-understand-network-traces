@@ -4,8 +4,10 @@ version = "0.1.0"
 description = "Reproducible benchmark for evaluating LLMs on question answering over network traffic traces."
 readme = "README.md"
 authors = [
-    { name = "Carlota de la Vega", email = "carlotadelavega@ugr.es" },
-    { name = "Irene Gosálvez White", email = "irenegwh@ugr.es" }
+    { name = "Irene Gosálvez-White", email = "irenegwh@ugr.es" },
+    { name = "Carlota de la Vega-Soriano", email = "carlotadelavega@ugr.es" },
+    { name = "Roberto Magán-Carrión", email = "rmagan@ugr.es" },
+    { name = "Pedro García-Teodoro", email = "pgteodor@ugr.es" }
 ]
 requires-python = ">=3.12"
 dependencies = [

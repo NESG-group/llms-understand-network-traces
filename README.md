@@ -20,9 +20,11 @@ The filtering agent (Hermes + MCP) belongs to the VIGILANT backend and is not pa
 | Scenario | Data | Purpose |
 |---|---|---|
 | Basic | `arp-icmp`, `ip-networktrace2`, `nmap22-23-53-80-443`, `nmap22-23-53-80-443-threewayhandshake` (T1-T4) | Reliable check of reference answers and model errors |
-| CIC-IDS2017 | Monday (benign), windows from the first 50,000 packets | Effect of input size on real traffic |
+| CIC-IDS2017 | Monday, July 3, 2017 (benign), windows from the first 50,000 packets | Effect of input size on real traffic |
 
-For CIC-IDS2017 each model gets four nested input levels (L25, L50, L75, L100 = 50, 75, 100 and 125 % of its input-token budget) over five runs with run-specific seeds.
+For CIC-IDS2017 each model gets four nested input levels (L25, L50, L75, L100 = 50, 75, 100 and 125 % of its input-token budget) over five runs with run-specific seeds. The paper analyses L25, L50 and L75; L100 is generated but excluded from the analysis because the server truncates it (see the caveat below), and it appears in the tables as a separate group.
+
+> **Terminology.** The paper calls the unfiltered TShark text the *default view*; in the code, file names and result folders it is the `general` view. `filtered` is the same in both. Question numbers P1-P19 follow the order of `utils/constants.py` (P1-P3 ARP, P4-P7 IPv4, P8-P19 TCP/UDP).
 
 ## Models
 
@@ -32,7 +34,7 @@ For CIC-IDS2017 each model gets four nested input levels (L25, L50, L75, L100 = 
 | Qwen 2.5 (`qwen2.5:7b`, `qwen2.5:72b`) | 7.6B / 72.7B | Q4_K_M | Answers |
 | Llama 3.3 (`llama3.3:70b`) | 70.6B | Q4_K_M | Judge |
 
-Experiments used Ollama 0.33.3 and TShark 4.2.2 on an NVIDIA GB10 (121 GiB). No API keys are needed.
+Experiments used Ollama 0.33.3 and TShark 4.2.2 on a system with an NVIDIA GB10 GPU, 121 GiB of RAM and a 20-core ARM CPU. Context windows are the maximum reported by Ollama for each model (131,072 tokens for Llama, 32,768 for Qwen). No API keys are needed.
 
 ## Installation
 
@@ -62,16 +64,15 @@ All commands below are run from the repository root.
 
 Included in the repository:
 
-- `data/traces/raw/`: the four laboratory traces (PCAPNG).
-- `data/traces/processed_csv/`: their CSV views (`general`, `arp`, `ip`, `tcp`, `udp`).
-- `data/qa/`: reference answers (PyShark) of the laboratory traces.
-- `data/cicids2017/staging/<model>_run<N>/manifest.json`: the exact CIC-IDS2017 windows used in the paper.
-- `results/ground_truth_cicids2017/`: reference answers of the CIC-IDS2017 levels.
+- `data/traces/raw/basic/`: the four laboratory traces (PCAPNG).
+- `data/traces/raw/cicids/<model>_run<N>/`: the CIC-IDS2017 extracts actually fed to each model, one PCAPNG per context level (`L25`, `L50`, `L75`, `L100`) plus the `manifest.json` of the window.
+- `data/traces/processed_csv/{basic,cicids}/`: their CSV views (`general`, `arp`, `ip`, `tcp`, `udp`).
+- `data/qa/{basic,cicids}/`: reference answers (PyShark) of the laboratory traces and of the CIC-IDS2017 extracts.
 - `results/basic/` and `results/cicids/`: model answers and judge outputs, `<model>/run<N>/{llm_answers,comparison/judge}/{general,filtered}`.
-- `results/manual/{basic,cicids}/`: manual annotations of a sample of judged answers.
-- `results/summary/`: aggregated metrics tables.
+- `results/manual/basic/`: manual annotations of a sample of judged answers (laboratory traces only; the CIC-IDS2017 sample was not annotated).
+- `results/summary/`: the final metrics tables of the paper (`metrics_basic_final.md`, `metrics_cicids_final.md`).
 
-CIC-IDS2017 is not redistributed. Fetch the first 50,000 packets of the Monday capture from the [Hugging Face mirror](https://huggingface.co/datasets/bencorn/CICIDS2017):
+Only the extracts used in the experiments are redistributed, so the CIC-IDS2017 steps `gt`, `llm` and `judge` run without downloading anything. The original 50,000-packet capture the windows are drawn from is not included; it is only needed to rebuild the windows with `prepare`. Fetch it from the [Hugging Face mirror](https://huggingface.co/datasets/bencorn/CICIDS2017):
 
 ```bash
 uv run bash scripts/download_cicids2017.sh --max-packets 50000 --out-dir data/cicids2017/source
@@ -90,17 +91,24 @@ uv sync
 bash scripts/reproduce_analysis.sh            # writes to results/reproduced/
 ```
 
-It runs, in order: aggregated metrics (`metrics`), per-run dotplots, modal dotplots (`dotplot_model`), dotplots of the manual labels, the CIC-IDS2017 figures (`dotplot_cicids`, `graph_cicids`) and the judge vs. manual comparison (`compare_manual`, Cohen's and weighted kappa). Reference outputs of the paper are in `results/summary/`.
+It runs, in order: aggregated metrics (`metrics`), per-run dotplots, modal dotplots (`dotplot_model`), dotplots of the manual labels, the CIC-IDS2017 figure (`dotplot_cicids`) and the judge vs. manual comparison of the laboratory traces (`compare_manual`, Cohen's and weighted kappa). Reference outputs of the paper are in `results/summary/`.
+
+To check that the stored results give the tables of the paper, regenerate the two summaries and compare them (no output means identical):
+
+```bash
+uv run python -m llms_understand_network_traces.analysis.metrics --dataset basic  --out-dir results/reproduced/metrics --tag _final
+uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids --out-dir results/reproduced/metrics --tag _final
+diff results/reproduced/metrics/metrics_basic_final.md  results/summary/metrics_basic_final.md
+diff results/reproduced/metrics/metrics_cicids_final.md results/summary/metrics_cicids_final.md
+```
 
 Individual commands:
 
 ```bash
 uv run python -m llms_understand_network_traces.analysis.metrics --dataset basic
 uv run python -m llms_understand_network_traces.analysis.metrics --dataset cicids
-uv run python -m llms_understand_network_traces.analysis.metrics_per_model --models-dir results/basic
 uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/basic
-uv run python -m llms_understand_network_traces.analysis.dotplot_cicids
-uv run python -m llms_understand_network_traces.analysis.graph_cicids --runs 1 2 3 4 5
+uv run python -m llms_understand_network_traces.analysis.dotplot_cicids --levels 25 50 75   # as in Fig. 3 of the paper
 uv run python -m llms_understand_network_traces.comparison.compare_manual \
     --manual-dir results/manual/basic --judge-dir results/basic --run run1
 ```
@@ -136,18 +144,20 @@ Everything for the four answering models: `bash scripts/run_basic.sh` (`RUNS`, `
 
 ### CIC-IDS2017
 
+The windows used in the paper are already in `data/traces/raw/cicids/`. Skip `prepare` to reuse them; it is only needed to rebuild the windows and requires the original capture (see [Data](#data)).
+
 ```bash
 $PIPE prepare --dataset cicids --model llama3.1:8b --first-run 1 --runs 5 \
     --source data/cicids2017/source/Monday-WorkingHours_50000pkts.pcapng
 $PIPE gt --dataset cicids --model llama3.1:8b --first-run 1 --runs 5
 $PIPE llm --dataset cicids --model llama3.1:8b --first-run 1 --runs 5
 $PIPE judge --dataset cicids --model llama3.1:8b --first-run 1 --runs 5
-uv run python -m llms_understand_network_traces.cicids.cicids_status
+uv run python -m llms_understand_network_traces.cicids.status
 ```
 
-Everything for the four models: `bash scripts/run_cicids.sh`. Run generation, judging and `--verify` one at a time: they share Ollama's memory.
+Everything for the four models: `bash scripts/run_cicids.sh` (it only runs `prepare` for the windows that are missing; `PREPARE=1` forces a rebuild). Run generation, judging and `--verify` one at a time: they share Ollama's memory.
 
-`prepare` picks a random contiguous window of 8,000 packets (seed = run number, shared by all models) and writes one pcapng per level, with the manifest, to `data/cicids2017/staging/<model>_run<N>/`. The same options as in `answer_with_llm` (`--num-ctx`, `--temperature`, `--num-predict`, `--timeout`, `--retries`) are accepted by `pipeline`; `--help` lists the rest.
+`prepare` picks a random contiguous window of 8,000 packets (seed = run number, shared by all models) and writes one pcapng per level, with the manifest, to `data/traces/raw/cicids/<model>_run<N>/`. The same options as in `answer_with_llm` (`--num-ctx`, `--temperature`, `--num-predict`, `--timeout`, `--retries`) are accepted by `pipeline`; `--help` lists the rest.
 
 `scripts/ollama_context_probe.py` checks how many tokens the server actually processes for a given `num_ctx`.
 
@@ -163,9 +173,9 @@ uv run pytest -m tshark           # needs TShark; regenerates the CSVs and refer
 ```
 .
 ├── data/
-│   ├── traces/{raw,processed_csv}/     laboratory traces and CSV views
-│   ├── qa/                             reference answers of the laboratory traces
-│   └── cicids2017/staging/             window manifests (data not included)
+│   ├── traces/{raw,processed_csv}/     PCAPNG traces and CSV views, each in basic/ and cicids/
+│   ├── qa/{basic,cicids}/              reference answers
+│   └── cicids2017/                     original capture (downloaded, not tracked)
 ├── scripts/
 │   ├── reproduce_analysis.sh           metrics, figures and validation from the stored results
 │   ├── run_basic.sh, run_cicids.sh     full experiments (Ollama)
@@ -174,34 +184,46 @@ uv run pytest -m tshark           # needs TShark; regenerates the CSVs and refer
 ├── src/llms_understand_network_traces/
 │   ├── pipeline.py                     orchestrator
 │   ├── preprocessing/                  TShark conversion
-│   ├── evaluation/                     PyShark references, LLM answers
-│   ├── cicids/                         windows, context levels, round analysis
+│   ├── generation/                     PyShark references, LLM answers
+│   ├── cicids/                         windows, context levels, run status
 │   ├── comparison/                     LLM judge, manual validation
 │   ├── analysis/                       metrics and dotplots
 │   └── utils/                          constants (questions) and helpers
 ├── tests/
 └── results/
     ├── basic/, cicids/                 model answers and judge outputs
-    ├── ground_truth_cicids2017/        CIC-IDS2017 reference answers
-    ├── manual/                         manual annotations
-    └── summary/                        aggregated metrics tables
+    ├── manual/basic/                   manual annotations
+    └── summary/                        final metrics tables of the paper
 ```
 
 ## Evaluation protocol
 
 - **Labels**: Correct (matches the reference with nothing missing, wrong or extra), Partial (identifies part of it), Incorrect. Order, formatting and duplicates are ignored.
-- **Position bias**: each answer is judged twice with positions swapped; disagreements are resolved by a tie-break rule and recorded.
+- **Position bias**: each answer is judged twice with the positions of the reference and the candidate swapped; if the two passes disagree, the stricter label is kept and the case is recorded as an inconsistency.
 - **Excluded from percentages**: E (judge error) and N (no answer).
-- **Caveat**: the L100 level of the general view exceeds the context and is truncated by the server (Ollama 0.33.3); it is not "more context".
+- **Caveat**: the L100 level of the general view exceeds the context window and Ollama 0.33.3 truncates it to about half of the configured size, so the model never receives the full input; it is not "more context".
+
+## Paper and reproducibility map
+
+Where each result of the paper comes from. Run `bash scripts/reproduce_analysis.sh` first (outputs go to `results/reproduced/`); `results/summary/` holds the tables as used in the paper.
+
+| In the paper | Source in this repository |
+|---|---|
+| Table II (packets per trace and view) | row counts of `data/traces/processed_csv/basic/` (`general` = default view; one file per protocol view, minus its header row) |
+| Table III, quantitative columns (C/P/I per layer and view) | `results/summary/metrics_cicids_final.md`, sections 1 (all layers) and 2 (per layer); groups L25, L50, L75 = 50, 75 and 100 % |
+| Table III, qualitative column (transition score) | section 4 of the same file, column `Score %` |
+| Token reduction and mean prompt length (Section V) | sections 5 and 6 of the same file |
+| Fig. 3 (modal label per question) | `analysis.dotplot_cicids --levels 25 50 75`, written by `reproduce_analysis.sh` to `results/reproduced/figures/cicids_mode/` |
+| Judge vs. manual agreement (95.1 %, kappa 0.92, weighted kappa 0.94, 29 of 30 disagreements stricter) | `comparison.compare_manual`, written to `results/reproduced/validation/basic/agreement_manual_vs_judge.txt` from the 608 labels in `results/manual/basic/` (annotation sheets built with `comparison.preprocess_manual`) |
+| Basic-scenario results | `results/summary/metrics_basic_final.md` |
 
 ## Citation
 
-```bibtex
-```
+The citation details will be added here once the paper is published.
 
 ## Acknowledgements
 
-This work is a result of the VIGILANT project (Ref. PID2024-161902OB-I00), funded by the Spanish Ministry of Science, Innovation and Universities.
+This work is a result of the VIGILANT project (Ref. PID2024-161902OB-I00), funded by MICIU/AEI/10.13039/501100011033 (Spanish Ministry of Science, Innovation and Universities).
 
 ## License
 
