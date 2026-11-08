@@ -1,0 +1,363 @@
+    1	  0.000000	192.168.10.12	→	208.75.89.4 	NTP	90	NTP Version 4, client
+    2	  0.000016	192.168.10.12	→	72.5.72.15  	NTP	90	NTP Version 4, client
+    3	  0.000017	192.168.10.12	→	216.218.254.202	NTP	90	NTP Version 4, client
+    4	  0.000017	192.168.10.12	→	96.126.105.86	NTP	90	NTP Version 4, client
+    5	  0.000019	192.168.10.12	→	208.79.89.249	NTP	90	NTP Version 4, client
+    6	  0.000021	192.168.10.12	→	152.2.133.52	NTP	90	NTP Version 4, client
+    7	  0.000022	192.168.10.12	→	199.199.208.25	NTP	90	NTP Version 4, client
+    8	  0.023980	96.126.105.86	→	192.168.10.12	NTP	90	NTP Version 4, server
+    9	  0.044973	152.2.133.52	→	192.168.10.12	NTP	90	NTP Version 4, server
+   10	  0.050457	199.199.208.25	→	192.168.10.12	NTP	90	NTP Version 4, server
+   11	  0.077611	 208.75.89.4	→	192.168.10.12	NTP	90	NTP Version 4, server
+   12	  0.077906	208.79.89.249	→	192.168.10.12	NTP	90	NTP Version 4, server
+   13	  0.080732	  72.5.72.15	→	192.168.10.12	NTP	90	NTP Version 4, server
+   14	  0.081028	216.218.254.202	→	192.168.10.12	NTP	90	NTP Version 4, server
+   15	  0.162052	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   16	  0.162068	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   17	  0.162071	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   18	  0.162073	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   19	  0.162075	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   20	  0.162078	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   21	  0.162080	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   22	  0.162082	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   23	  0.162084	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   24	  0.162087	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   25	  0.162089	fe80::3109:ba1d:7470:7dd	→	ff02::1:3   	LLMNR	152	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   26	  0.162119	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   27	  0.162123	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   28	  0.162125	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   29	  0.162126	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   30	  0.162127	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   31	  0.162128	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   32	  0.162129	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   33	  0.162130	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   34	  0.162131	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   35	  0.162132	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   36	  0.162133	192.168.10.3	→	224.0.0.252 	LLMNR	132	Standard query 0xd820 PTR 7.6.5.9.b.9.e.f.f.f.e.a.3.2.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+   37	  0.511091	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   38	  0.511096	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   39	  0.511097	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   40	  0.511099	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   41	  0.511100	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   42	  0.511102	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   43	  0.511103	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   44	  0.511105	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   45	  0.511106	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   46	  0.511107	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   47	  0.511108	192.168.10.17	→	224.0.0.251 	MDNS	263	Standard query response 0x0000 TXT, cache flush A, cache flush 192.168.10.17 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   48	  0.583319	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   49	  0.583335	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   50	  0.583338	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   51	  0.583340	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   52	  0.583342	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   53	  0.583344	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   54	  0.583346	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   55	  0.583348	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   56	  0.583350	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   57	  0.583353	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   58	  0.583355	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   59	  1.000036	192.168.10.12	→	108.61.56.35	NTP	90	NTP Version 4, client
+   60	  1.000052	192.168.10.12	→	45.79.11.217	NTP	90	NTP Version 4, client
+   61	  1.000052	192.168.10.12	→	129.6.15.28 	NTP	90	NTP Version 3, client
+   62	  1.000052	192.168.10.12	→	204.11.201.12	NTP	90	NTP Version 4, client
+   63	  1.023580	108.61.56.35	→	192.168.10.12	NTP	90	NTP Version 4, server
+   64	  1.030259	 129.6.15.28	→	192.168.10.12	NTP	90	NTP Version 3, server
+   65	  1.057625	45.79.11.217	→	192.168.10.12	NTP	90	NTP Version 4, server
+   66	  1.096390	204.11.201.12	→	192.168.10.12	NTP	90	NTP Version 4, server
+   67	  1.174177	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   68	  1.174193	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   69	  1.174196	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   70	  1.174198	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   71	  1.174200	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   72	  1.174202	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   73	  1.174205	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   74	  1.174207	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   75	  1.174209	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   76	  1.174212	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   77	  1.174214	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	253	Standard query response 0x0000 PTR _workstation._tcp.local PTR ubuntu14-64 [00:23:ae:9b:95:67]._workstation._tcp.local TXT, cache flush SRV, cache flush 0 0 9 ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+   78	  1.225352	70:6e:6d:1d:bb:03	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/3  
+   79	  1.225566	70:6e:6d:1d:bb:0c	→	01:00:0c:cc:cc:cc	CDP	458	Device ID: SWCL  Port ID: GigabitEthernet1/0/12  
+   80	  1.428925	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   81	  1.428933	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   82	  1.428934	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   83	  1.428936	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   84	  1.428937	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   85	  1.428939	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   86	  1.428940	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   87	  1.428942	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   88	  1.428943	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   89	  1.428944	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   90	  1.428945	fe80::223:aeff:fe9b:9567	→	ff02::2     	ICMPv6	70	Router Solicitation from 00:23:ae:9b:95:67
+   91	  1.682205	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   92	  1.682211	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   93	  1.682213	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   94	  1.682214	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   95	  1.682215	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   96	  1.682216	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   97	  1.682217	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   98	  1.682219	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+   99	  1.682220	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+  100	  1.682221	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+  101	  1.682222	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<20>
+  102	  1.682223	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  103	  1.682224	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  104	  1.682226	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  105	  1.682227	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  106	  1.682228	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  107	  1.682229	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  108	  1.682231	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  109	  1.682232	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  110	  1.682233	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  111	  1.682234	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  112	  1.682236	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<03>
+  113	  1.682237	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  114	  1.682238	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  115	  1.682240	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  116	  1.682241	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  117	  1.682242	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  118	  1.682244	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  119	  1.682245	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  120	  1.682246	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  121	  1.682247	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  122	  1.682248	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  123	  1.682250	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB UBUNTU14-64<00>
+  124	  1.682251	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  125	  1.682252	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  126	  1.682253	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  127	  1.682254	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  128	  1.682256	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  129	  1.682257	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  130	  1.682258	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  131	  1.682259	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  132	  1.682260	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  133	  1.682262	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  134	  1.682263	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<00>
+  135	  1.682265	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  136	  1.682266	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  137	  1.682267	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  138	  1.682268	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  139	  1.682269	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  140	  1.682271	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  141	  1.682272	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  142	  1.682273	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  143	  1.682274	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  144	  1.682275	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  145	  1.682276	192.168.10.17	→	192.168.10.255	NBNS	110	Registration NB TESTBED1<1e>
+  146	  1.682278	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  147	  1.682279	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  148	  1.682280	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  149	  1.682281	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  150	  1.682282	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  151	  1.682283	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  152	  1.682284	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  153	  1.682286	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  154	  1.682287	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  155	  1.682289	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  156	  1.682290	192.168.10.17	→	192.168.10.255	NBNS	92	Name query NB TESTBED1<1d>
+  157	  1.682298	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  158	  1.682305	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  159	  1.682306	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  160	  1.682308	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  161	  1.682309	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  162	  1.682310	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  163	  1.682312	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  164	  1.682313	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  165	  1.682314	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  166	  1.682315	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  167	  1.682317	192.168.10.12	→	192.168.10.255	BROWSER	234	Browser Election Request
+  168	  1.759156	192.168.10.17	→	192.168.10.3	NTP	90	NTP Version 4, client
+  169	  1.759159	192.168.10.17	→	192.168.10.3	NTP	90	NTP Version 4, client
+  170	  1.759253	192.168.10.3	→	192.168.10.17	NTP	90	NTP Version 3, server
+  171	  1.759256	192.168.10.3	→	192.168.10.17	NTP	90	NTP Version 3, server
+  172	  1.821135	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  173	  1.821150	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  174	  1.821153	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  175	  1.821155	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  176	  1.821158	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  177	  1.821160	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  178	  1.821162	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  179	  1.821164	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  180	  1.821167	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  181	  1.821169	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  182	  1.821172	fe80::223:aeff:fe9b:9567	→	ff02::fb    	MDNS	313	Standard query response 0x0000 TXT, cache flush AAAA, cache flush fe80::223:aeff:fe9b:9567 PTR, cache flush ubuntu14-64.local HINFO, cache flush X86_64 LINUX SRV, cache flush 0 0 9 ubuntu14-64.local
+  183	  1.821180	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  184	  1.821184	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  185	  1.821186	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  186	  1.821187	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  187	  1.821188	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  188	  1.821189	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  189	  1.821190	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  190	  1.821191	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  191	  1.821192	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  192	  1.821194	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  193	  1.821195	192.168.10.17	→	224.0.0.251 	MDNS	185	Standard query response 0x0000 PTR, cache flush ubuntu14-64.local AAAA, cache flush fe80::223:aeff:fe9b:9567
+  194	  2.000089	192.168.10.12	→	208.75.89.4 	NTP	90	NTP Version 4, client
+  195	  2.000094	192.168.10.12	→	72.5.72.15  	NTP	90	NTP Version 4, client
+  196	  2.000095	192.168.10.12	→	216.218.254.202	NTP	90	NTP Version 4, client
+  197	  2.000095	192.168.10.12	→	96.126.105.86	NTP	90	NTP Version 4, client
+  198	  2.000097	192.168.10.12	→	208.79.89.249	NTP	90	NTP Version 4, client
+  199	  2.000098	192.168.10.12	→	152.2.133.52	NTP	90	NTP Version 4, client
+  200	  2.000099	192.168.10.12	→	199.199.208.25	NTP	90	NTP Version 4, client
+  201	  2.023944	96.126.105.86	→	192.168.10.12	NTP	90	NTP Version 4, server
+  202	  2.045042	152.2.133.52	→	192.168.10.12	NTP	90	NTP Version 4, server
+  203	  2.050585	199.199.208.25	→	192.168.10.12	NTP	90	NTP Version 4, server
+  204	  2.077609	 208.75.89.4	→	192.168.10.12	NTP	90	NTP Version 4, server
+  205	  2.077933	208.79.89.249	→	192.168.10.12	NTP	90	NTP Version 4, server
+  206	  2.080897	  72.5.72.15	→	192.168.10.12	NTP	90	NTP Version 4, server
+  207	  2.080901	216.218.254.202	→	192.168.10.12	NTP	90	NTP Version 4, server
+  208	  2.224824	70:6e:6d:1d:bb:03	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/3  
+  209	  2.552650	18:66:da:9b:e3:7d	→	00:23:ae:9b:95:67	ARP	60	Who has 192.168.10.17? Tell 192.168.10.3
+  210	  2.552654	18:66:da:9b:e3:7d	→	00:23:ae:9b:95:67	ARP	60	Who has 192.168.10.17? Tell 192.168.10.3
+  211	  2.552667	00:23:ae:9b:95:67	→	18:66:da:9b:e3:7d	ARP	60	192.168.10.17 is at 00:23:ae:9b:95:67
+  212	  2.552667	00:23:ae:9b:95:67	→	18:66:da:9b:e3:7d	ARP	60	192.168.10.17 is at 00:23:ae:9b:95:67
+  213	  3.000117	192.168.10.12	→	108.61.56.35	NTP	90	NTP Version 4, client
+  214	  3.000121	192.168.10.12	→	129.6.15.28 	NTP	90	NTP Version 3, client
+  215	  3.000121	192.168.10.12	→	45.79.11.217	NTP	90	NTP Version 4, client
+  216	  3.000123	192.168.10.12	→	204.11.201.12	NTP	90	NTP Version 4, client
+  217	  3.023681	108.61.56.35	→	192.168.10.12	NTP	90	NTP Version 4, server
+  218	  3.030334	 129.6.15.28	→	192.168.10.12	NTP	90	NTP Version 3, server
+  219	  3.057572	45.79.11.217	→	192.168.10.12	NTP	90	NTP Version 4, server
+  220	  3.096475	204.11.201.12	→	192.168.10.12	NTP	90	NTP Version 4, server
+  221	  3.216135	192.168.10.17	→	192.168.10.3	DNS	82	Standard query 0x36da SRV _ldap._tcp.TESTBED1.CA
+  222	  3.216139	192.168.10.17	→	192.168.10.3	DNS	82	Standard query 0x36da SRV _ldap._tcp.TESTBED1.CA
+  223	  3.216396	192.168.10.3	→	192.168.10.17	DNS	132	Standard query response 0x36da SRV _ldap._tcp.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  224	  3.216400	192.168.10.3	→	192.168.10.17	DNS	132	Standard query response 0x36da SRV _ldap._tcp.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  225	  3.216629	192.168.10.17	→	192.168.10.3	TCP	74	42095 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294899484 TSecr=0 WS=128
+  226	  3.216632	192.168.10.17	→	192.168.10.3	TCP	74	[TCP Retransmission] 42095 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294899484 TSecr=0 WS=128
+  227	  3.216702	192.168.10.3	→	192.168.10.17	TCP	74	389 → 42095 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602228340 TSecr=4294899484
+  228	  3.216706	192.168.10.3	→	192.168.10.17	TCP	74	[TCP Retransmission] 389 → 42095 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602228340 TSecr=4294899484
+  229	  3.216738	192.168.10.17	→	192.168.10.3	TCP	66	42095 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294899484 TSecr=602228340
+  230	  3.216786	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Dup ACK 229#1] 42095 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294899484 TSecr=602228340
+  231	  3.216866	192.168.10.17	→	192.168.10.3	LDAP	145	searchRequest(1) "<ROOT>" baseObject 
+  232	  3.216914	192.168.10.17	→	192.168.10.3	TCP	145	[TCP Retransmission] 42095 → 389 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=79 TSval=4294899484 TSecr=602228340
+  233	  3.216984	192.168.10.3	→	192.168.10.17	LDAP	229	searchResEntry(1) "<ROOT>"  | searchResDone(1) success  [1 result]
+  234	  3.216986	192.168.10.3	→	192.168.10.17	TCP	229	[TCP Retransmission] 389 → 42095 [PSH, ACK] Seq=1 Ack=80 Win=532736 Len=163 TSval=602228340 TSecr=4294899484
+  235	  3.217041	192.168.10.17	→	192.168.10.3	TCP	66	42095 → 389 [ACK] Seq=80 Ack=164 Win=30336 Len=0 TSval=4294899485 TSecr=602228340
+  236	  3.217090	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Dup ACK 235#1] 42095 → 389 [ACK] Seq=80 Ack=164 Win=30336 Len=0 TSval=4294899485 TSecr=602228340
+  237	  3.217139	192.168.10.17	→	192.168.10.3	LDAP	73	unbindRequest(2) 
+  238	  3.217140	192.168.10.17	→	192.168.10.3	TCP	73	[TCP Retransmission] 42095 → 389 [PSH, ACK] Seq=80 Ack=164 Win=30336 Len=7 TSval=4294899485 TSecr=602228340
+  239	  3.217141	192.168.10.17	→	192.168.10.3	TCP	66	42095 → 389 [FIN, ACK] Seq=87 Ack=164 Win=30336 Len=0 TSval=4294899485 TSecr=602228340
+  240	  3.217188	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Retransmission] 42095 → 389 [FIN, ACK] Seq=87 Ack=164 Win=30336 Len=0 TSval=4294899485 TSecr=602228340
+  241	  3.217189	192.168.10.3	→	192.168.10.17	TCP	66	389 → 42095 [ACK] Seq=164 Ack=88 Win=532736 Len=0 TSval=602228341 TSecr=4294899485
+  242	  3.217237	192.168.10.3	→	192.168.10.17	TCP	66	[TCP Dup ACK 241#1] 389 → 42095 [ACK] Seq=164 Ack=88 Win=532736 Len=0 TSval=602228341 TSecr=4294899485
+  243	  3.217238	192.168.10.3	→	192.168.10.17	TCP	60	389 → 42095 [RST, ACK] Seq=164 Ack=88 Win=0 Len=0
+  244	  3.217239	192.168.10.3	→	192.168.10.17	TCP	60	389 → 42095 [RST, ACK] Seq=164 Ack=88 Win=0 Len=0
+  245	  3.217291	192.168.10.17	→	192.168.10.3	DNS	113	Standard query 0x9b92 SRV _ldap._tcp.Default-First-Site-Name._sites.TESTBED1.CA
+  246	  3.217294	192.168.10.17	→	192.168.10.3	DNS	113	Standard query 0x9b92 SRV _ldap._tcp.Default-First-Site-Name._sites.TESTBED1.CA
+  247	  3.217507	192.168.10.3	→	192.168.10.17	DNS	163	Standard query response 0x9b92 SRV _ldap._tcp.Default-First-Site-Name._sites.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  248	  3.217510	192.168.10.3	→	192.168.10.17	DNS	163	Standard query response 0x9b92 SRV _ldap._tcp.Default-First-Site-Name._sites.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  249	  3.217673	192.168.10.17	→	192.168.10.3	DNS	82	Standard query 0x94dd SRV _ldap._tcp.TESTBED1.CA
+  250	  3.217676	192.168.10.17	→	192.168.10.3	DNS	82	Standard query 0x94dd SRV _ldap._tcp.TESTBED1.CA
+  251	  3.217852	192.168.10.3	→	192.168.10.17	DNS	132	Standard query response 0x94dd SRV _ldap._tcp.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  252	  3.217855	192.168.10.3	→	192.168.10.17	DNS	132	Standard query response 0x94dd SRV _ldap._tcp.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  253	  3.218094	192.168.10.17	→	192.168.10.3	TCP	74	42096 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294899485 TSecr=0 WS=128
+  254	  3.218142	192.168.10.17	→	192.168.10.3	TCP	74	[TCP Retransmission] 42096 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294899485 TSecr=0 WS=128
+  255	  3.218179	192.168.10.3	→	192.168.10.17	TCP	74	389 → 42096 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602228342 TSecr=4294899485
+  256	  3.218183	192.168.10.3	→	192.168.10.17	TCP	74	[TCP Retransmission] 389 → 42096 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602228342 TSecr=4294899485
+  257	  3.218211	192.168.10.17	→	192.168.10.3	TCP	66	42096 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294899485 TSecr=602228342
+  258	  3.218260	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Dup ACK 257#1] 42096 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294899485 TSecr=602228342
+  259	  3.218310	192.168.10.17	→	192.168.10.3	LDAP	326	searchRequest(1) "<ROOT>" baseObject 
+  260	  3.218311	192.168.10.17	→	192.168.10.3	TCP	326	[TCP Retransmission] 42096 → 389 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=260 TSval=4294899485 TSecr=602228342
+  261	  3.218515	192.168.10.3	→	192.168.10.17	TCP	1514	389 → 42096 [ACK] Seq=1 Ack=261 Win=532736 Len=1448 TSval=602228342 TSecr=4294899485 [TCP segment of a reassembled PDU]
+  262	  3.218520	192.168.10.3	→	192.168.10.17	TCP	3135	[TCP Out-Of-Order] 389 → 42096 [PSH, ACK] Seq=1 Ack=261 Win=532736 Len=3069 TSval=602228342 TSecr=4294899485
+  263	  3.218523	192.168.10.3	→	192.168.10.17	TCP	1687	[TCP Retransmission] 389 → 42096 [PSH, ACK] Seq=1449 Ack=261 Win=532736 Len=1621 TSval=602228342 TSecr=4294899485 [TCP segment of a reassembled PDU]
+  264	  3.218534	192.168.10.17	→	192.168.10.3	TCP	66	42096 → 389 [ACK] Seq=261 Ack=3070 Win=35456 Len=0 TSval=4294899485 TSecr=602228342
+  265	  3.218582	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Dup ACK 264#1] 42096 → 389 [ACK] Seq=261 Ack=3070 Win=35456 Len=0 TSval=4294899485 TSecr=602228342
+  266	  3.222480	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x9a00 SRV _kerberos._udp.TESTBED1.CA
+  267	  3.222484	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x9a00 SRV _kerberos._udp.TESTBED1.CA
+  268	  3.222668	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x9a00 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  269	  3.222671	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x9a00 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  270	  3.222859	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x5434 SRV _kerberos._tcp.TESTBED1.CA
+  271	  3.222862	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x5434 SRV _kerberos._tcp.TESTBED1.CA
+  272	  3.223037	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x5434 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  273	  3.223041	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x5434 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  274	  3.223621	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0xeb65 A DC.Testbed1.ca
+  275	  3.223625	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0xeb65 A DC.Testbed1.ca
+  276	  3.223626	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x6fca AAAA DC.Testbed1.ca
+  277	  3.223626	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x6fca AAAA DC.Testbed1.ca
+  278	  3.223818	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0xeb65 A DC.Testbed1.ca A 192.168.10.3
+  279	  3.223822	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0xeb65 A DC.Testbed1.ca A 192.168.10.3
+  280	  3.223883	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0x6fca AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  281	  3.223884	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0x6fca AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  282	  3.224013	192.168.10.17	→	192.168.10.3	KRB5	218	AS-REQ
+  283	  3.224016	192.168.10.17	→	192.168.10.3	KRB5	218	AS-REQ
+  284	  3.224469	192.168.10.3	→	192.168.10.17	KRB5	221	KRB Error: KRB5KDC_ERR_PREAUTH_REQUIRED
+  285	  3.224472	192.168.10.3	→	192.168.10.17	KRB5	221	KRB Error: KRB5KDC_ERR_PREAUTH_REQUIRED
+  286	  3.224650	192.168.10.17	→	192.168.10.3	DNS	93	Standard query 0x481f SRV _kerberos-master._udp.TESTBED1.CA
+  287	  3.224654	192.168.10.17	→	192.168.10.3	DNS	93	Standard query 0x481f SRV _kerberos-master._udp.TESTBED1.CA
+  288	  3.224832	192.168.10.3	→	192.168.10.17	DNS	154	Standard query response 0x481f No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  289	  3.224836	192.168.10.3	→	192.168.10.17	DNS	154	Standard query response 0x481f No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  290	  3.225157	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x5875 SRV _kerberos._udp.TESTBED1.CA
+  291	  3.225160	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x5875 SRV _kerberos._udp.TESTBED1.CA
+  292	  3.225384	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x5875 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  293	  3.225387	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x5875 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  294	  3.225551	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0xc52c SRV _kerberos._tcp.TESTBED1.CA
+  295	  3.225555	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0xc52c SRV _kerberos._tcp.TESTBED1.CA
+  296	  3.225568	70:6e:6d:1d:bb:03	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/3  
+  297	  3.225733	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0xc52c SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  298	  3.225736	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0xc52c SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  299	  3.225942	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x846f A DC.Testbed1.ca
+  300	  3.225946	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x846f A DC.Testbed1.ca
+  301	  3.225946	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x9e54 AAAA DC.Testbed1.ca
+  302	  3.225947	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x9e54 AAAA DC.Testbed1.ca
+  303	  3.226141	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0x846f A DC.Testbed1.ca A 192.168.10.3
+  304	  3.226144	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0x846f A DC.Testbed1.ca A 192.168.10.3
+  305	  3.226208	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0x9e54 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  306	  3.226209	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0x9e54 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  307	  3.226317	192.168.10.17	→	192.168.10.3	KRB5	292	AS-REQ
+  308	  3.226321	192.168.10.17	→	192.168.10.3	KRB5	292	AS-REQ
+  309	  3.227059	192.168.10.3	→	192.168.10.17	KRB5	1472	AS-REP
+  310	  3.227063	192.168.10.3	→	192.168.10.17	KRB5	1472	AS-REP
+  311	  3.227212	192.168.10.17	→	192.168.10.3	DNS	93	Standard query 0x7b0d SRV _kerberos-master._udp.TESTBED1.CA
+  312	  3.227215	192.168.10.17	→	192.168.10.3	DNS	93	Standard query 0x7b0d SRV _kerberos-master._udp.TESTBED1.CA
+  313	  3.227389	192.168.10.3	→	192.168.10.17	DNS	154	Standard query response 0x7b0d No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  314	  3.227392	192.168.10.3	→	192.168.10.17	DNS	154	Standard query response 0x7b0d No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  315	  3.228712	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x29e7 SRV _kerberos._udp.TESTBED1.CA
+  316	  3.228715	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x29e7 SRV _kerberos._udp.TESTBED1.CA
+  317	  3.228892	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x29e7 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  318	  3.228896	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x29e7 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  319	  3.229071	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x6c41 SRV _kerberos._tcp.TESTBED1.CA
+  320	  3.229074	192.168.10.17	→	192.168.10.3	DNS	86	Standard query 0x6c41 SRV _kerberos._tcp.TESTBED1.CA
+  321	  3.229247	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x6c41 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  322	  3.229251	192.168.10.3	→	192.168.10.17	DNS	136	Standard query response 0x6c41 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  323	  3.229708	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x8ff8 A DC.Testbed1.ca
+  324	  3.229712	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x8ff8 A DC.Testbed1.ca
+  325	  3.229713	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x5064 AAAA DC.Testbed1.ca
+  326	  3.229714	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x5064 AAAA DC.Testbed1.ca
+  327	  3.229889	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0x8ff8 A DC.Testbed1.ca A 192.168.10.3
+  328	  3.229892	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0x8ff8 A DC.Testbed1.ca A 192.168.10.3
+  329	  3.229907	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0x5064 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  330	  3.229908	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0x5064 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  331	  3.230135	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x2272 A DC.Testbed1.ca
+  332	  3.230138	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0x2272 A DC.Testbed1.ca
+  333	  3.230139	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0xe162 AAAA DC.Testbed1.ca
+  334	  3.230140	192.168.10.17	→	192.168.10.3	DNS	74	Standard query 0xe162 AAAA DC.Testbed1.ca
+  335	  3.230316	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0x2272 A DC.Testbed1.ca A 192.168.10.3
+  336	  3.230319	192.168.10.3	→	192.168.10.17	DNS	90	Standard query response 0x2272 A DC.Testbed1.ca A 192.168.10.3
+  337	  3.230333	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0xe162 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  338	  3.230334	192.168.10.3	→	192.168.10.17	DNS	121	Standard query response 0xe162 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  339	  3.230458	192.168.10.17	→	192.168.10.3	TCP	74	35497 → 88 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294899488 TSecr=0 WS=128
+  340	  3.230461	192.168.10.17	→	192.168.10.3	TCP	74	[TCP Retransmission] 35497 → 88 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294899488 TSecr=0 WS=128
+  341	  3.230491	192.168.10.3	→	192.168.10.17	TCP	74	88 → 35497 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602228354 TSecr=4294899488
+  342	  3.230495	192.168.10.3	→	192.168.10.17	TCP	74	[TCP Retransmission] 88 → 35497 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602228354 TSecr=4294899488
+  343	  3.230531	192.168.10.17	→	192.168.10.3	TCP	66	35497 → 88 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294899488 TSecr=602228354
+  344	  3.230579	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Dup ACK 343#1] 35497 → 88 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294899488 TSecr=602228354
+  345	  3.230581	192.168.10.17	→	192.168.10.3	TCP	1514	[TCP segment of a reassembled PDU]
+  346	  3.230630	192.168.10.17	→	192.168.10.3	TCP	1641	[TCP Out-Of-Order] 35497 → 88 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=1575 TSval=4294899488 TSecr=602228354
+  347	  3.230632	192.168.10.17	→	192.168.10.3	TCP	193	[TCP Retransmission] 35497 → 88 [PSH, ACK] Seq=1449 Ack=1 Win=29312 Len=127 TSval=4294899488 TSecr=602228354
+  348	  3.230644	192.168.10.3	→	192.168.10.17	TCP	66	88 → 35497 [ACK] Seq=1 Ack=1576 Win=532736 Len=0 TSval=602228354 TSecr=4294899488
+  349	  3.230645	192.168.10.3	→	192.168.10.17	TCP	66	[TCP Dup ACK 348#1] 88 → 35497 [ACK] Seq=1 Ack=1576 Win=532736 Len=0 TSval=602228354 TSecr=4294899488
+  350	  3.231512	192.168.10.3	→	192.168.10.17	KRB5	1642	TGS-REP
+  351	  3.231517	192.168.10.3	→	192.168.10.17	TCP	1642	[TCP Retransmission] 88 → 35497 [PSH, ACK] Seq=1 Ack=1576 Win=532736 Len=1576 TSval=602228354 TSecr=4294899488
+  352	  3.231554	192.168.10.17	→	192.168.10.3	TCP	66	35497 → 88 [ACK] Seq=1576 Ack=1577 Win=32384 Len=0 TSval=4294899488 TSecr=602228354
+  353	  3.231557	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Dup ACK 352#1] 35497 → 88 [ACK] Seq=1576 Ack=1577 Win=32384 Len=0 TSval=4294899488 TSecr=602228354
+  354	  3.231558	192.168.10.17	→	192.168.10.3	TCP	66	35497 → 88 [FIN, ACK] Seq=1576 Ack=1577 Win=32384 Len=0 TSval=4294899488 TSecr=602228354
+  355	  3.231559	192.168.10.17	→	192.168.10.3	TCP	66	[TCP Retransmission] 35497 → 88 [FIN, ACK] Seq=1576 Ack=1577 Win=32384 Len=0 TSval=4294899488 TSecr=602228354
+  356	  3.231595	192.168.10.3	→	192.168.10.17	TCP	66	88 → 35497 [ACK] Seq=1577 Ack=1577 Win=532736 Len=0 TSval=602228355 TSecr=4294899488
+  357	  3.231653	192.168.10.17	→	192.168.10.3	DNS	93	Standard query 0x948b SRV _kerberos-master._tcp.TESTBED1.CA
+  358	  3.231668	192.168.10.3	→	192.168.10.17	TCP	60	88 → 35497 [RST, ACK] Seq=1577 Ack=1577 Win=0 Len=0
+  359	  3.231669	192.168.10.3	→	192.168.10.17	TCP	66	[TCP Window Update] 88 → 35497 [ACK] Seq=1577 Ack=1577 Win=532736 Len=0 TSval=602228355 TSecr=4294899488
+  360	  3.231670	192.168.10.3	→	192.168.10.17	TCP	60	88 → 35497 [RST, ACK] Seq=1577 Ack=1577 Win=0 Len=0
+  361	  3.231701	192.168.10.17	→	192.168.10.3	DNS	93	Standard query 0x948b SRV _kerberos-master._tcp.TESTBED1.CA
+  362	  3.231857	192.168.10.3	→	192.168.10.17	DNS	154	Standard query response 0x948b No such name SRV _kerberos-master._tcp.TESTBED1.CA SOA dc.testbed1.ca
+  363	  3.231860	192.168.10.3	→	192.168.10.17	DNS	154	Standard query response 0x948b No such name SRV _kerberos-master._tcp.TESTBED1.CA SOA dc.testbed1.ca

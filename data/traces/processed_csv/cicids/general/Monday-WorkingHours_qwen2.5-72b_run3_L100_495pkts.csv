@@ -1,0 +1,495 @@
+    1	  0.000000	192.168.10.17	→	199.199.208.25	NTP	90	NTP Version 4, client
+    2	  0.000003	192.168.10.17	→	204.2.134.163	NTP	90	NTP Version 4, client
+    3	  0.006153	00:23:ae:9b:95:67	→	00:c1:b1:14:eb:31	ARP	60	Who has 192.168.10.1? Tell 192.168.10.17
+    4	  0.006626	00:c1:b1:14:eb:31	→	00:23:ae:9b:95:67	ARP	60	192.168.10.1 is at 00:c1:b1:14:eb:31
+    5	  0.030101	 129.6.15.28	→	192.168.10.17	NTP	90	NTP Version 3, server
+    6	  0.050382	199.199.208.25	→	192.168.10.17	NTP	90	NTP Version 4, server
+    7	  0.077455	 208.75.88.4	→	192.168.10.17	NTP	90	NTP Version 4, server
+    8	  0.081023	216.218.254.202	→	192.168.10.17	NTP	90	NTP Version 4, server
+    9	  0.099876	204.2.134.163	→	192.168.10.17	NTP	90	NTP Version 4, server
+   10	  0.273175	70:6e:6d:1d:bb:09	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/9  
+   11	  0.530399	192.168.10.50	→	192.168.10.3	LDAP	335	
+   12	  0.530403	192.168.10.50	→	192.168.10.3	TCP	335	[TCP Retransmission] 55726 → 389 [PSH, ACK] Seq=1 Ack=1 Win=752 Len=269 TSval=4294910828 TSecr=602261636
+   13	  0.530700	192.168.10.3	→	192.168.10.50	LDAP	382	
+   14	  0.530704	192.168.10.3	→	192.168.10.50	TCP	382	[TCP Retransmission] 389 → 55726 [PSH, ACK] Seq=1 Ack=270 Win=2077 Len=316 TSval=602262428 TSecr=4294910828
+   15	  0.530784	192.168.10.50	→	192.168.10.3	TCP	66	55726 → 389 [ACK] Seq=270 Ack=317 Win=774 Len=0 TSval=4294910828 TSecr=602262428
+   16	  0.530788	192.168.10.50	→	192.168.10.3	TCP	66	[TCP Dup ACK 15#1] 55726 → 389 [ACK] Seq=270 Ack=317 Win=774 Len=0 TSval=4294910828 TSecr=602262428
+   17	  0.530900	192.168.10.50	→	192.168.10.3	LDAP	335	
+   18	  0.530948	192.168.10.50	→	192.168.10.3	TCP	335	[TCP Retransmission] 55726 → 389 [PSH, ACK] Seq=270 Ack=317 Win=774 Len=269 TSval=4294910828 TSecr=602262428
+   19	  0.531173	192.168.10.3	→	192.168.10.50	LDAP	382	
+   20	  0.531177	192.168.10.3	→	192.168.10.50	TCP	382	[TCP Retransmission] 389 → 55726 [PSH, ACK] Seq=317 Ack=539 Win=2076 Len=316 TSval=602262428 TSecr=4294910828
+   21	  0.574307	192.168.10.50	→	192.168.10.3	TCP	66	55726 → 389 [ACK] Seq=539 Ack=633 Win=797 Len=0 TSval=4294910839 TSecr=602262428
+   22	  0.574310	192.168.10.50	→	192.168.10.3	TCP	66	[TCP Dup ACK 21#1] 55726 → 389 [ACK] Seq=539 Ack=633 Win=797 Len=0 TSval=4294910839 TSecr=602262428
+   23	  0.999992	192.168.10.17	→	208.79.89.249	NTP	90	NTP Version 4, client
+   24	  1.000000	192.168.10.17	→	208.75.89.4 	NTP	90	NTP Version 4, client
+   25	  1.077691	 208.75.89.4	→	192.168.10.17	NTP	90	NTP Version 4, server
+   26	  1.078431	208.79.89.249	→	192.168.10.17	NTP	90	NTP Version 4, server
+   27	  1.273168	70:6e:6d:1d:bb:09	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/9  
+   28	  1.999978	192.168.10.17	→	208.75.88.4 	NTP	90	NTP Version 4, client
+   29	  1.999982	192.168.10.17	→	129.6.15.28 	NTP	90	NTP Version 4, client
+   30	  1.999993	192.168.10.17	→	204.2.134.163	NTP	90	NTP Version 4, client
+   31	  1.999993	192.168.10.17	→	199.199.208.25	NTP	90	NTP Version 4, client
+   32	  2.030109	 129.6.15.28	→	192.168.10.17	NTP	90	NTP Version 3, server
+   33	  2.050267	199.199.208.25	→	192.168.10.17	NTP	90	NTP Version 4, server
+   34	  2.077831	 208.75.88.4	→	192.168.10.17	NTP	90	NTP Version 4, server
+   35	  2.099939	204.2.134.163	→	192.168.10.17	NTP	90	NTP Version 4, server
+   36	  2.269925	70:6e:6d:1d:bb:09	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/9  
+   37	  3.273065	70:6e:6d:1d:bb:09	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/9  
+   38	  3.784433	18:66:da:9b:e3:7d	→	00:c1:b1:14:eb:31	ARP	60	Who has 192.168.10.1? Tell 192.168.10.3
+   39	  3.785003	00:c1:b1:14:eb:31	→	18:66:da:9b:e3:7d	ARP	60	192.168.10.1 is at 00:c1:b1:14:eb:31
+   40	  4.000003	192.168.10.17	→	208.75.88.4 	NTP	90	NTP Version 4, client
+   41	  4.000007	192.168.10.17	→	129.6.15.28 	NTP	90	NTP Version 4, client
+   42	  4.000006	192.168.10.17	→	204.2.134.163	NTP	90	NTP Version 4, client
+   43	  4.030206	 129.6.15.28	→	192.168.10.17	NTP	90	NTP Version 3, server
+   44	  4.077900	 208.75.88.4	→	192.168.10.17	NTP	90	NTP Version 4, server
+   45	  4.099824	204.2.134.163	→	192.168.10.17	NTP	90	NTP Version 4, server
+   46	  4.273606	70:6e:6d:1d:bb:09	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/9  
+   47	  4.848805	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   48	  4.848809	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   49	  4.848810	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   50	  4.848811	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   51	  4.848812	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   52	  4.848813	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   53	  4.848814	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   54	  4.848815	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   55	  4.848816	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   56	  4.848817	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   57	  4.848818	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   58	  4.848819	192.168.10.50	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   59	  5.269780	70:6e:6d:1d:bb:09	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/9  
+   60	  5.999996	192.168.10.17	→	208.75.88.4 	NTP	90	NTP Version 4, client
+   61	  6.000000	192.168.10.17	→	129.6.15.28 	NTP	90	NTP Version 4, client
+   62	  6.000001	192.168.10.17	→	204.2.134.163	NTP	90	NTP Version 4, client
+   63	  6.030101	 129.6.15.28	→	192.168.10.17	NTP	90	NTP Version 3, server
+   64	  6.077682	 208.75.88.4	→	192.168.10.17	NTP	90	NTP Version 4, server
+   65	  6.099892	204.2.134.163	→	192.168.10.17	NTP	90	NTP Version 4, server
+   66	  6.458682	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   67	  6.458698	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   68	  6.458701	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   69	  6.458703	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   70	  6.458705	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   71	  6.458707	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   72	  6.458709	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   73	  6.458711	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   74	  6.458713	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   75	  6.458715	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   76	  6.458717	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   77	  6.458719	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   78	  6.980346	70:6e:6d:1d:bb:0a	→	01:00:0c:cc:cc:cc	CDP	458	Device ID: SWCL  Port ID: GigabitEthernet1/0/10  
+   79	  7.999976	192.168.10.17	→	208.75.88.4 	NTP	90	NTP Version 4, client
+   80	  8.077849	 208.75.88.4	→	192.168.10.17	NTP	90	NTP Version 4, server
+   81	 10.178657	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   82	 10.178662	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   83	 10.178663	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   84	 10.178664	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   85	 10.178665	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   86	 10.178666	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   87	 10.178667	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   88	 10.178668	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   89	 10.178669	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   90	 10.178670	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   91	 10.178671	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   92	 10.178672	192.168.10.12	→	224.0.0.251 	MDNS	87	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   93	 11.812434	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   94	 11.812450	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   95	 11.812452	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   96	 11.812455	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   97	 11.812457	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   98	 11.812459	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+   99	 11.812461	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+  100	 11.812463	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+  101	 11.812465	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+  102	 11.812467	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+  103	 11.812469	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+  104	 11.812471	fe80::8cc1:7756:5ffc:823f	→	ff02::fb    	MDNS	107	Standard query 0x0000 PTR _ipps._tcp.local, "QM" question PTR _ipp._tcp.local, "QM" question
+  105	 12.954008	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  106	 12.954014	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  107	 12.954015	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  108	 12.954016	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  109	 12.954017	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  110	 12.954019	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  111	 12.954020	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  112	 12.954021	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  113	 12.954022	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  114	 12.954024	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  115	 12.954025	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  116	 12.954026	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  117	 12.954027	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  118	 12.954028	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  119	 12.954029	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  120	 12.954031	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  121	 12.954032	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  122	 12.954033	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  123	 12.954034	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  124	 12.954035	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  125	 12.954037	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  126	 12.954038	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  127	 12.954039	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  128	 12.954040	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  129	 12.954077	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  130	 12.954086	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  131	 12.954088	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  132	 12.954089	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  133	 12.954091	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  134	 12.954093	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  135	 12.954094	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  136	 12.954096	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  137	 12.954097	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  138	 12.954099	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  139	 12.954101	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  140	 12.954102	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  141	 12.954104	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  142	 12.954106	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  143	 12.954107	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  144	 12.954109	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  145	 12.954111	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  146	 12.954113	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  147	 12.954114	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  148	 12.954116	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  149	 12.954117	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  150	 12.954119	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  151	 12.954121	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  152	 12.954122	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  153	 12.964195	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  154	 12.964201	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  155	 12.964203	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  156	 12.964204	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  157	 12.964205	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  158	 12.964206	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  159	 12.964207	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  160	 12.964208	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  161	 12.964210	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  162	 12.964211	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  163	 12.964212	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  164	 12.964213	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  165	 12.964214	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  166	 12.964215	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  167	 12.964217	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  168	 12.964218	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  169	 12.964219	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  170	 12.964220	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  171	 12.964221	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  172	 12.964222	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  173	 12.964224	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  174	 12.964224	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  175	 12.964225	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  176	 12.964227	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  177	 12.964228	192.168.10.50	→	192.168.10.255	BJNP	60	Scanner Command: Discover
+  178	 12.964232	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  179	 12.964234	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  180	 12.964236	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  181	 12.964238	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  182	 12.964239	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  183	 12.964241	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  184	 12.964243	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  185	 12.964244	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  186	 12.964246	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  187	 12.964248	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  188	 12.964249	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  189	 12.964251	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  190	 12.964253	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  191	 12.964254	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  192	 12.964256	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  193	 12.964258	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  194	 12.964259	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  195	 12.964261	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  196	 12.964263	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  197	 12.964264	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  198	 12.964266	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  199	 12.964267	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  200	 12.964269	fe80::3e30:c3c4:d72f:ae4c	→	ff02::1     	BJNP	78	Scanner Command: Discover
+  201	 13.567931	192.168.10.12	→	192.168.10.3	TCP	66	34936 → 3268 [FIN, ACK] Seq=1 Ack=1 Win=299 Len=0 TSval=4294916083 TSecr=602216477
+  202	 13.567934	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Retransmission] 34936 → 3268 [FIN, ACK] Seq=1 Ack=1 Win=299 Len=0 TSval=4294916083 TSecr=602216477
+  203	 13.568000	192.168.10.3	→	192.168.10.12	TCP	60	3268 → 34936 [RST, ACK] Seq=1 Ack=2 Win=0 Len=0
+  204	 13.568004	192.168.10.3	→	192.168.10.12	TCP	60	3268 → 34936 [RST, ACK] Seq=1 Ack=2 Win=0 Len=0
+  205	 13.619776	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  206	 13.619792	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  207	 13.619795	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  208	 13.619797	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  209	 13.619799	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  210	 13.619801	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  211	 13.619803	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  212	 13.619805	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  213	 13.619807	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  214	 13.619809	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  215	 13.619811	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  216	 13.619813	fe80::3e30:c3c4:d72f:ae4c	→	ff02::fb    	MDNS	99	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  217	 13.619999	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  218	 13.620003	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  219	 13.620004	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  220	 13.620005	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  221	 13.620006	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  222	 13.620007	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  223	 13.620008	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  224	 13.620009	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  225	 13.620010	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  226	 13.620011	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  227	 13.620012	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  228	 13.620013	192.168.10.50	→	224.0.0.251 	MDNS	79	Standard query 0x0000 PTR _scanner._tcp.local, "QM" question
+  229	 13.786899	192.168.10.12	→	192.168.10.3	LDAP	193	
+  230	 13.786903	192.168.10.12	→	192.168.10.3	TCP	193	[TCP Retransmission] 56548 → 389 [PSH, ACK] Seq=1 Ack=1 Win=480 Len=127 TSval=4294916137 TSecr=602216477
+  231	 13.787041	192.168.10.3	→	192.168.10.12	LDAP	251	
+  232	 13.787045	192.168.10.3	→	192.168.10.12	TCP	251	[TCP Retransmission] 389 → 56548 [PSH, ACK] Seq=1 Ack=128 Win=2081 Len=185 TSval=602275685 TSecr=4294916137
+  233	 13.787046	192.168.10.3	→	192.168.10.12	TCP	60	389 → 56548 [RST, ACK] Seq=186 Ack=128 Win=0 Len=0
+  234	 13.787046	192.168.10.3	→	192.168.10.12	TCP	60	389 → 56548 [RST, ACK] Seq=186 Ack=128 Win=0 Len=0
+  235	 13.787074	192.168.10.12	→	192.168.10.3	TCP	66	56548 → 389 [ACK] Seq=128 Ack=186 Win=503 Len=0 TSval=4294916137 TSecr=602275685
+  236	 13.787109	192.168.10.3	→	192.168.10.12	TCP	60	389 → 56548 [RST] Seq=186 Win=0 Len=0
+  237	 13.787123	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 235#1] 56548 → 389 [ACK] Seq=128 Ack=186 Win=503 Len=0 TSval=4294916137 TSecr=602275685
+  238	 13.787158	192.168.10.3	→	192.168.10.12	TCP	60	389 → 56548 [RST] Seq=186 Win=0 Len=0
+  239	 13.787689	192.168.10.12	→	192.168.10.3	TCP	74	56558 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916138 TSecr=0 WS=128
+  240	 13.787692	192.168.10.12	→	192.168.10.3	TCP	74	[TCP Retransmission] 56558 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916138 TSecr=0 WS=128
+  241	 13.787734	192.168.10.3	→	192.168.10.12	TCP	74	389 → 56558 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275686 TSecr=4294916138
+  242	 13.787738	192.168.10.3	→	192.168.10.12	TCP	74	[TCP Retransmission] 389 → 56558 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275686 TSecr=4294916138
+  243	 13.787769	192.168.10.12	→	192.168.10.3	TCP	66	56558 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916138 TSecr=602275686
+  244	 13.787818	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 243#1] 56558 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916138 TSecr=602275686
+  245	 13.787867	192.168.10.12	→	192.168.10.3	LDAP	326	searchRequest(1) "<ROOT>" baseObject 
+  246	 13.787869	192.168.10.12	→	192.168.10.3	TCP	326	[TCP Retransmission] 56558 → 389 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=260 TSval=4294916138 TSecr=602275686
+  247	 13.788076	192.168.10.3	→	192.168.10.12	TCP	1514	389 → 56558 [ACK] Seq=1 Ack=261 Win=532736 Len=1448 TSval=602275686 TSecr=4294916138 [TCP segment of a reassembled PDU]
+  248	 13.788082	192.168.10.3	→	192.168.10.12	TCP	3135	[TCP Out-Of-Order] 389 → 56558 [PSH, ACK] Seq=1 Ack=261 Win=532736 Len=3069 TSval=602275686 TSecr=4294916138
+  249	 13.788085	192.168.10.3	→	192.168.10.12	TCP	1687	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=1449 Ack=261 Win=532736 Len=1621 TSval=602275686 TSecr=4294916138 [TCP segment of a reassembled PDU]
+  250	 13.788089	192.168.10.12	→	192.168.10.3	TCP	66	56558 → 389 [ACK] Seq=261 Ack=3070 Win=35456 Len=0 TSval=4294916138 TSecr=602275686
+  251	 13.788138	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 250#1] 56558 → 389 [ACK] Seq=261 Ack=3070 Win=35456 Len=0 TSval=4294916138 TSecr=602275686
+  252	 13.792365	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x2850 SRV _kerberos._udp.TESTBED1.CA
+  253	 13.792367	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x2850 SRV _kerberos._udp.TESTBED1.CA
+  254	 13.792650	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x2850 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  255	 13.792653	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x2850 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  256	 13.792782	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x2cfe SRV _kerberos._tcp.TESTBED1.CA
+  257	 13.792830	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x2cfe SRV _kerberos._tcp.TESTBED1.CA
+  258	 13.793019	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x2cfe SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  259	 13.793023	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x2cfe SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  260	 13.793534	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x8001 A DC.Testbed1.ca
+  261	 13.793582	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x8001 A DC.Testbed1.ca
+  262	 13.793583	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x4d55 AAAA DC.Testbed1.ca
+  263	 13.793583	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x4d55 AAAA DC.Testbed1.ca
+  264	 13.793726	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x8001 A DC.Testbed1.ca A 192.168.10.3
+  265	 13.793729	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x8001 A DC.Testbed1.ca A 192.168.10.3
+  266	 13.793841	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0x4d55 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  267	 13.793889	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0x4d55 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  268	 13.793956	192.168.10.12	→	192.168.10.3	KRB5	216	AS-REQ
+  269	 13.794005	192.168.10.12	→	192.168.10.3	KRB5	216	AS-REQ
+  270	 13.794412	192.168.10.3	→	192.168.10.12	KRB5	221	KRB Error: KRB5KDC_ERR_PREAUTH_REQUIRED
+  271	 13.794415	192.168.10.3	→	192.168.10.12	KRB5	221	KRB Error: KRB5KDC_ERR_PREAUTH_REQUIRED
+  272	 13.794520	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0xf976 SRV _kerberos-master._udp.TESTBED1.CA
+  273	 13.794568	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0xf976 SRV _kerberos-master._udp.TESTBED1.CA
+  274	 13.794748	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0xf976 No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  275	 13.794752	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0xf976 No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  276	 13.794928	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x6a76 SRV _kerberos._udp.TESTBED1.CA
+  277	 13.794977	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x6a76 SRV _kerberos._udp.TESTBED1.CA
+  278	 13.795146	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x6a76 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  279	 13.795149	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x6a76 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  280	 13.795254	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x9571 SRV _kerberos._tcp.TESTBED1.CA
+  281	 13.795302	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x9571 SRV _kerberos._tcp.TESTBED1.CA
+  282	 13.795429	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x9571 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  283	 13.795431	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x9571 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  284	 13.795604	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x2349 A DC.Testbed1.ca
+  285	 13.795653	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x2349 A DC.Testbed1.ca
+  286	 13.795653	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x80fe AAAA DC.Testbed1.ca
+  287	 13.795654	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x80fe AAAA DC.Testbed1.ca
+  288	 13.795814	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x2349 A DC.Testbed1.ca A 192.168.10.3
+  289	 13.795817	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x2349 A DC.Testbed1.ca A 192.168.10.3
+  290	 13.795831	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0x80fe AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  291	 13.795832	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0x80fe AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  292	 13.795906	192.168.10.12	→	192.168.10.3	KRB5	290	AS-REQ
+  293	 13.795955	192.168.10.12	→	192.168.10.3	KRB5	290	AS-REQ
+  294	 13.796646	192.168.10.3	→	192.168.10.12	KRB5	1452	AS-REP
+  295	 13.796650	192.168.10.3	→	192.168.10.12	KRB5	1452	AS-REP
+  296	 13.796725	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0x04b0 SRV _kerberos-master._udp.TESTBED1.CA
+  297	 13.796773	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0x04b0 SRV _kerberos-master._udp.TESTBED1.CA
+  298	 13.796885	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0x04b0 No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  299	 13.797068	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0x04b0 No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  300	 13.798299	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0xcc24 SRV _kerberos._udp.TESTBED1.CA
+  301	 13.798347	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0xcc24 SRV _kerberos._udp.TESTBED1.CA
+  302	 13.798502	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0xcc24 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  303	 13.798505	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0xcc24 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  304	 13.798626	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x5506 SRV _kerberos._tcp.TESTBED1.CA
+  305	 13.798674	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x5506 SRV _kerberos._tcp.TESTBED1.CA
+  306	 13.798824	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x5506 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  307	 13.798828	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x5506 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  308	 13.798977	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x1ace A DC.Testbed1.ca
+  309	 13.799026	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x1ace A DC.Testbed1.ca
+  310	 13.799026	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xd511 AAAA DC.Testbed1.ca
+  311	 13.799027	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xd511 AAAA DC.Testbed1.ca
+  312	 13.799185	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x1ace A DC.Testbed1.ca A 192.168.10.3
+  313	 13.799188	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x1ace A DC.Testbed1.ca A 192.168.10.3
+  314	 13.799201	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xd511 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  315	 13.799202	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xd511 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  316	 13.799316	192.168.10.12	→	192.168.10.3	IPv4	1514	Fragmented IP protocol (proto=UDP 17, off=0, ID=47e1)
+  317	 13.799317	192.168.10.12	→	192.168.10.3	KRB5	113	TGS-REQ
+  318	 13.799364	192.168.10.12	→	192.168.10.3	IPv4	1514	Fragmented IP protocol (proto=UDP 17, off=0, ID=47e1)
+  319	 13.799365	192.168.10.12	→	192.168.10.3	KRB5	113	TGS-REQ
+  320	 13.800329	192.168.10.3	→	192.168.10.12	KRB5	331	KRB Error: KRB5KRB_ERR_RESPONSE_TOO_BIG
+  321	 13.800332	192.168.10.3	→	192.168.10.12	KRB5	331	KRB Error: KRB5KRB_ERR_RESPONSE_TOO_BIG
+  322	 13.800431	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0x9f0b SRV _kerberos-master._udp.TESTBED1.CA
+  323	 13.800499	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0x9f0b SRV _kerberos-master._udp.TESTBED1.CA
+  324	 13.800630	70:6e:6d:1d:bb:07	→	01:00:0c:cc:cc:cc	CDP	457	Device ID: SWCL  Port ID: GigabitEthernet1/0/7  
+  325	 13.800661	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0x9f0b No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  326	 13.800665	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0x9f0b No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  327	 13.800802	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x1ec5 SRV _kerberos._tcp.TESTBED1.CA
+  328	 13.800850	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x1ec5 SRV _kerberos._tcp.TESTBED1.CA
+  329	 13.801016	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x1ec5 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  330	 13.801019	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x1ec5 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  331	 13.801163	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x3473 A DC.Testbed1.ca
+  332	 13.801212	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x3473 A DC.Testbed1.ca
+  333	 13.801213	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xb495 AAAA DC.Testbed1.ca
+  334	 13.801214	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xb495 AAAA DC.Testbed1.ca
+  335	 13.801374	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x3473 A DC.Testbed1.ca A 192.168.10.3
+  336	 13.801377	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x3473 A DC.Testbed1.ca A 192.168.10.3
+  337	 13.801390	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xb495 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  338	 13.801391	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xb495 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  339	 13.801495	192.168.10.12	→	192.168.10.3	TCP	74	60498 → 88 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916141 TSecr=0 WS=128
+  340	 13.801498	192.168.10.12	→	192.168.10.3	TCP	74	[TCP Retransmission] 60498 → 88 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916141 TSecr=0 WS=128
+  341	 13.801528	192.168.10.3	→	192.168.10.12	TCP	74	88 → 60498 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275699 TSecr=4294916141
+  342	 13.801576	192.168.10.3	→	192.168.10.12	TCP	74	[TCP Retransmission] 88 → 60498 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275699 TSecr=4294916141
+  343	 13.801597	192.168.10.12	→	192.168.10.3	TCP	66	60498 → 88 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916141 TSecr=602275699
+  344	 13.801646	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 343#1] 60498 → 88 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916141 TSecr=602275699
+  345	 13.801649	192.168.10.12	→	192.168.10.3	KRB5	1621	TGS-REQ
+  346	 13.801651	192.168.10.12	→	192.168.10.3	TCP	1621	[TCP Retransmission] 60498 → 88 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=1555 TSval=4294916141 TSecr=602275699
+  347	 13.801702	192.168.10.3	→	192.168.10.12	TCP	66	88 → 60498 [ACK] Seq=1 Ack=1556 Win=532736 Len=0 TSval=602275700 TSecr=4294916141
+  348	 13.801750	192.168.10.3	→	192.168.10.12	TCP	66	[TCP Dup ACK 347#1] 88 → 60498 [ACK] Seq=1 Ack=1556 Win=532736 Len=0 TSval=602275700 TSecr=4294916141
+  349	 13.802568	192.168.10.3	→	192.168.10.12	KRB5	1620	TGS-REP
+  350	 13.802615	192.168.10.3	→	192.168.10.12	TCP	1620	[TCP Retransmission] 88 → 60498 [PSH, ACK] Seq=1 Ack=1556 Win=532736 Len=1554 TSval=602275700 TSecr=4294916141
+  351	 13.802642	192.168.10.12	→	192.168.10.3	TCP	66	60498 → 88 [ACK] Seq=1556 Ack=1555 Win=32384 Len=0 TSval=4294916141 TSecr=602275700
+  352	 13.802645	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 351#1] 60498 → 88 [ACK] Seq=1556 Ack=1555 Win=32384 Len=0 TSval=4294916141 TSecr=602275700
+  353	 13.802646	192.168.10.12	→	192.168.10.3	TCP	66	60498 → 88 [FIN, ACK] Seq=1556 Ack=1555 Win=32384 Len=0 TSval=4294916141 TSecr=602275700
+  354	 13.802647	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Retransmission] 60498 → 88 [FIN, ACK] Seq=1556 Ack=1555 Win=32384 Len=0 TSval=4294916141 TSecr=602275700
+  355	 13.802670	192.168.10.3	→	192.168.10.12	TCP	66	88 → 60498 [ACK] Seq=1555 Ack=1557 Win=532736 Len=0 TSval=602275701 TSecr=4294916141
+  356	 13.802741	192.168.10.3	→	192.168.10.12	TCP	60	88 → 60498 [RST, ACK] Seq=1555 Ack=1557 Win=0 Len=0
+  357	 13.802742	192.168.10.3	→	192.168.10.12	TCP	66	[TCP Window Update] 88 → 60498 [ACK] Seq=1555 Ack=1557 Win=532736 Len=0 TSval=602275701 TSecr=4294916141
+  358	 13.802743	192.168.10.3	→	192.168.10.12	TCP	60	88 → 60498 [RST, ACK] Seq=1555 Ack=1557 Win=0 Len=0
+  359	 13.802744	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0xa528 SRV _kerberos-master._tcp.TESTBED1.CA
+  360	 13.802745	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0xa528 SRV _kerberos-master._tcp.TESTBED1.CA
+  361	 13.802882	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0xa528 No such name SRV _kerberos-master._tcp.TESTBED1.CA SOA dc.testbed1.ca
+  362	 13.802885	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0xa528 No such name SRV _kerberos-master._tcp.TESTBED1.CA SOA dc.testbed1.ca
+  363	 13.803207	192.168.10.12	→	192.168.10.3	LDAP	1359	bindRequest(2) "<ROOT>" sasl 
+  364	 13.803255	192.168.10.12	→	192.168.10.3	TCP	1359	[TCP Retransmission] 56558 → 389 [PSH, ACK] Seq=261 Ack=3070 Win=35456 Len=1293 TSval=4294916141 TSecr=602275686
+  365	 13.803746	192.168.10.3	→	192.168.10.12	LDAP	226	bindResponse(2) saslBindInProgress 
+  366	 13.803750	192.168.10.3	→	192.168.10.12	TCP	226	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=3070 Ack=1554 Win=531456 Len=160 TSval=602275700 TSecr=4294916141
+  367	 13.803978	192.168.10.12	→	192.168.10.3	LDAP	88	bindRequest(3) "<ROOT>" sasl 
+  368	 13.804115	192.168.10.3	→	192.168.10.12	LDAP	140	bindResponse(3) saslBindInProgress 
+  369	 13.804118	192.168.10.3	→	192.168.10.12	TCP	140	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=3230 Ack=1576 Win=531456 Len=74 TSval=602275700 TSecr=4294916142
+  370	 13.804149	192.168.10.12	→	192.168.10.3	TCP	88	[TCP Spurious Retransmission] 56558 → 389 [PSH, ACK] Seq=1554 Ack=3230 Win=38272 Len=22 TSval=4294916142 TSecr=602275700
+  371	 13.804321	192.168.10.12	→	192.168.10.3	LDAP	140	bindRequest(4) "<ROOT>" sasl 
+  372	 13.804322	192.168.10.12	→	192.168.10.3	TCP	140	[TCP Retransmission] 56558 → 389 [PSH, ACK] Seq=1576 Ack=3304 Win=38272 Len=74 TSval=4294916142 TSecr=602275700
+  373	 13.804339	192.168.10.3	→	192.168.10.12	LDAP	90	bindResponse(4) success 
+  374	 13.804387	192.168.10.3	→	192.168.10.12	TCP	90	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=3304 Ack=1650 Win=531456 Len=24 TSval=602275700 TSecr=4294916142
+  375	 13.804503	192.168.10.12	→	192.168.10.3	LDAP	193	SASL GSS-API Privacy: payload (78 bytes)
+  376	 13.804551	192.168.10.12	→	192.168.10.3	TCP	193	[TCP Retransmission] 56558 → 389 [PSH, ACK] Seq=1650 Ack=3328 Win=38272 Len=127 TSval=4294916142 TSecr=602275700
+  377	 13.804728	192.168.10.3	→	192.168.10.12	LDAP	228	SASL GSS-API Privacy: payload (112 bytes)
+  378	 13.804730	192.168.10.3	→	192.168.10.12	TCP	228	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=3328 Ack=1777 Win=532736 Len=162 TSval=602275700 TSecr=4294916142
+  379	 13.804894	192.168.10.12	→	192.168.10.3	LDAP	195	SASL GSS-API Privacy: payload (80 bytes)
+  380	 13.804943	192.168.10.12	→	192.168.10.3	TCP	195	[TCP Retransmission] 56558 → 389 [PSH, ACK] Seq=1777 Ack=3490 Win=41216 Len=129 TSval=4294916142 TSecr=602275700
+  381	 13.805062	192.168.10.3	→	192.168.10.12	LDAP	280	SASL GSS-API Privacy: payload (164 bytes)
+  382	 13.805063	192.168.10.3	→	192.168.10.12	TCP	280	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=3490 Ack=1906 Win=532480 Len=214 TSval=602275700 TSecr=4294916142
+  383	 13.805225	192.168.10.12	→	192.168.10.3	LDAP	311	SASL GSS-API Privacy: payload (195 bytes)
+  384	 13.805272	192.168.10.12	→	192.168.10.3	TCP	311	[TCP Retransmission] 56558 → 389 [PSH, ACK] Seq=1906 Ack=3704 Win=44032 Len=245 TSval=4294916142 TSecr=602275700
+  385	 13.805478	192.168.10.3	→	192.168.10.12	LDAP	382	SASL GSS-API Privacy: payload (265 bytes)
+  386	 13.805480	192.168.10.3	→	192.168.10.12	TCP	382	[TCP Retransmission] 389 → 56558 [PSH, ACK] Seq=3704 Ack=2151 Win=532480 Len=316 TSval=602275700 TSecr=4294916142
+  387	 13.806379	192.168.10.12	→	192.168.10.3	DNS	82	Standard query 0xfbf0 SRV _ldap._tcp.TESTBED1.CA
+  388	 13.806427	192.168.10.12	→	192.168.10.3	DNS	82	Standard query 0xfbf0 SRV _ldap._tcp.TESTBED1.CA
+  389	 13.806563	192.168.10.3	→	192.168.10.12	DNS	132	Standard query response 0xfbf0 SRV _ldap._tcp.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  390	 13.806565	192.168.10.3	→	192.168.10.12	DNS	132	Standard query response 0xfbf0 SRV _ldap._tcp.TESTBED1.CA SRV 0 100 389 DC.Testbed1.ca A 192.168.10.3
+  391	 13.806701	192.168.10.12	→	192.168.10.3	TCP	74	56562 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916142 TSecr=0 WS=128
+  392	 13.806749	192.168.10.12	→	192.168.10.3	TCP	74	[TCP Retransmission] 56562 → 389 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916142 TSecr=0 WS=128
+  393	 13.806790	192.168.10.3	→	192.168.10.12	TCP	74	389 → 56562 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275705 TSecr=4294916142
+  394	 13.806794	192.168.10.3	→	192.168.10.12	TCP	74	[TCP Retransmission] 389 → 56562 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275705 TSecr=4294916142
+  395	 13.806824	192.168.10.12	→	192.168.10.3	TCP	66	56562 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916142 TSecr=602275705
+  396	 13.806872	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 395#1] 56562 → 389 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916142 TSecr=602275705
+  397	 13.806921	192.168.10.12	→	192.168.10.3	LDAP	145	searchRequest(1) "<ROOT>" baseObject 
+  398	 13.806922	192.168.10.12	→	192.168.10.3	TCP	145	[TCP Retransmission] 56562 → 389 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=79 TSval=4294916142 TSecr=602275705
+  399	 13.806961	192.168.10.3	→	192.168.10.12	LDAP	229	searchResEntry(1) "<ROOT>"  | searchResDone(1) success  [1 result]
+  400	 13.807009	192.168.10.3	→	192.168.10.12	TCP	229	[TCP Retransmission] 389 → 56562 [PSH, ACK] Seq=1 Ack=80 Win=532736 Len=163 TSval=602275705 TSecr=4294916142
+  401	 13.807022	192.168.10.12	→	192.168.10.3	TCP	66	56562 → 389 [ACK] Seq=80 Ack=164 Win=30336 Len=0 TSval=4294916142 TSecr=602275705
+  402	 13.807070	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 401#1] 56562 → 389 [ACK] Seq=80 Ack=164 Win=30336 Len=0 TSval=4294916142 TSecr=602275705
+  403	 13.807071	192.168.10.12	→	192.168.10.3	LDAP	73	unbindRequest(2) 
+  404	 13.807072	192.168.10.12	→	192.168.10.3	TCP	66	56562 → 389 [FIN, ACK] Seq=87 Ack=164 Win=30336 Len=0 TSval=4294916142 TSecr=602275705
+  405	 13.807073	192.168.10.12	→	192.168.10.3	TCP	73	[TCP Retransmission] 56562 → 389 [PSH, ACK] Seq=80 Ack=164 Win=30336 Len=7 TSval=4294916142 TSecr=602275705
+  406	 13.807074	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Retransmission] 56562 → 389 [FIN, ACK] Seq=87 Ack=164 Win=30336 Len=0 TSval=4294916142 TSecr=602275705
+  407	 13.807115	192.168.10.3	→	192.168.10.12	TCP	66	389 → 56562 [ACK] Seq=164 Ack=88 Win=532736 Len=0 TSval=602275705 TSecr=4294916142
+  408	 13.807143	192.168.10.12	→	192.168.10.3	DNS	111	Standard query 0x870f SRV _gc._tcp.Default-First-Site-Name._sites.Testbed1.ca
+  409	 13.807163	192.168.10.3	→	192.168.10.12	TCP	66	[TCP Dup ACK 407#1] 389 → 56562 [ACK] Seq=164 Ack=88 Win=532736 Len=0 TSval=602275705 TSecr=4294916142
+  410	 13.807165	192.168.10.3	→	192.168.10.12	TCP	60	389 → 56562 [RST, ACK] Seq=164 Ack=88 Win=0 Len=0
+  411	 13.807165	192.168.10.3	→	192.168.10.12	TCP	60	389 → 56562 [RST, ACK] Seq=164 Ack=88 Win=0 Len=0
+  412	 13.807191	192.168.10.12	→	192.168.10.3	DNS	111	Standard query 0x870f SRV _gc._tcp.Default-First-Site-Name._sites.Testbed1.ca
+  413	 13.807331	192.168.10.3	→	192.168.10.12	DNS	161	Standard query response 0x870f SRV _gc._tcp.Default-First-Site-Name._sites.Testbed1.ca SRV 0 100 3268 DC.Testbed1.ca A 192.168.10.3
+  414	 13.807333	192.168.10.3	→	192.168.10.12	DNS	161	Standard query response 0x870f SRV _gc._tcp.Default-First-Site-Name._sites.Testbed1.ca SRV 0 100 3268 DC.Testbed1.ca A 192.168.10.3
+  415	 13.807454	192.168.10.12	→	192.168.10.3	DNS	80	Standard query 0x090d SRV _gc._tcp.Testbed1.ca
+  416	 13.807503	192.168.10.12	→	192.168.10.3	DNS	80	Standard query 0x090d SRV _gc._tcp.Testbed1.ca
+  417	 13.807645	192.168.10.3	→	192.168.10.12	DNS	130	Standard query response 0x090d SRV _gc._tcp.Testbed1.ca SRV 0 100 3268 DC.Testbed1.ca A 192.168.10.3
+  418	 13.807647	192.168.10.3	→	192.168.10.12	DNS	130	Standard query response 0x090d SRV _gc._tcp.Testbed1.ca SRV 0 100 3268 DC.Testbed1.ca A 192.168.10.3
+  419	 13.807733	192.168.10.12	→	192.168.10.3	TCP	74	34946 → 3268 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916143 TSecr=0 WS=128
+  420	 13.807781	192.168.10.12	→	192.168.10.3	TCP	74	[TCP Retransmission] 34946 → 3268 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM TSval=4294916143 TSecr=0 WS=128
+  421	 13.807782	192.168.10.3	→	192.168.10.12	TCP	74	3268 → 34946 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275706 TSecr=4294916143
+  422	 13.807831	192.168.10.3	→	192.168.10.12	TCP	74	[TCP Retransmission] 3268 → 34946 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK_PERM TSval=602275706 TSecr=4294916143
+  423	 13.807879	192.168.10.12	→	192.168.10.3	TCP	66	34946 → 3268 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916143 TSecr=602275706
+  424	 13.807880	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 423#1] 34946 → 3268 [ACK] Seq=1 Ack=1 Win=29312 Len=0 TSval=4294916143 TSecr=602275706
+  425	 13.807928	192.168.10.12	→	192.168.10.3	LDAP	326	searchRequest(1) "<ROOT>" baseObject 
+  426	 13.807930	192.168.10.12	→	192.168.10.3	TCP	326	[TCP Retransmission] 34946 → 3268 [PSH, ACK] Seq=1 Ack=1 Win=29312 Len=260 TSval=4294916143 TSecr=602275706
+  427	 13.808066	192.168.10.3	→	192.168.10.12	TCP	1514	3268 → 34946 [ACK] Seq=1 Ack=261 Win=532736 Len=1448 TSval=602275706 TSecr=4294916143 [TCP segment of a reassembled PDU]
+  428	 13.808117	192.168.10.3	→	192.168.10.12	TCP	3135	[TCP Out-Of-Order] 3268 → 34946 [PSH, ACK] Seq=1 Ack=261 Win=532736 Len=3069 TSval=602275706 TSecr=4294916143
+  429	 13.808120	192.168.10.3	→	192.168.10.12	TCP	1687	[TCP Retransmission] 3268 → 34946 [PSH, ACK] Seq=1449 Ack=261 Win=532736 Len=1621 TSval=602275706 TSecr=4294916143 [TCP segment of a reassembled PDU]
+  430	 13.808121	192.168.10.12	→	192.168.10.3	TCP	66	34946 → 3268 [ACK] Seq=261 Ack=3070 Win=35456 Len=0 TSval=4294916143 TSecr=602275706
+  431	 13.808122	192.168.10.12	→	192.168.10.3	TCP	66	[TCP Dup ACK 430#1] 34946 → 3268 [ACK] Seq=261 Ack=3070 Win=35456 Len=0 TSval=4294916143 TSecr=602275706
+  432	 13.811973	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x578e SRV _kerberos._udp.TESTBED1.CA
+  433	 13.812020	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x578e SRV _kerberos._udp.TESTBED1.CA
+  434	 13.812164	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x578e SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  435	 13.812166	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x578e SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  436	 13.812309	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x8699 SRV _kerberos._tcp.TESTBED1.CA
+  437	 13.812357	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x8699 SRV _kerberos._tcp.TESTBED1.CA
+  438	 13.812502	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x8699 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  439	 13.812505	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x8699 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  440	 13.812978	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x98ec A DC.Testbed1.ca
+  441	 13.813026	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x98ec A DC.Testbed1.ca
+  442	 13.813027	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x1559 AAAA DC.Testbed1.ca
+  443	 13.813028	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x1559 AAAA DC.Testbed1.ca
+  444	 13.813187	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x98ec A DC.Testbed1.ca A 192.168.10.3
+  445	 13.813190	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x98ec A DC.Testbed1.ca A 192.168.10.3
+  446	 13.813255	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0x1559 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  447	 13.813256	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0x1559 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  448	 13.813327	192.168.10.12	→	192.168.10.3	KRB5	216	AS-REQ
+  449	 13.813375	192.168.10.12	→	192.168.10.3	KRB5	216	AS-REQ
+  450	 13.813724	192.168.10.3	→	192.168.10.12	KRB5	221	KRB Error: KRB5KDC_ERR_PREAUTH_REQUIRED
+  451	 13.813728	192.168.10.3	→	192.168.10.12	KRB5	221	KRB Error: KRB5KDC_ERR_PREAUTH_REQUIRED
+  452	 13.813840	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0xa434 SRV _kerberos-master._udp.TESTBED1.CA
+  453	 13.813888	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0xa434 SRV _kerberos-master._udp.TESTBED1.CA
+  454	 13.814045	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0xa434 No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  455	 13.814047	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0xa434 No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  456	 13.814237	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x2ed6 SRV _kerberos._udp.TESTBED1.CA
+  457	 13.814284	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x2ed6 SRV _kerberos._udp.TESTBED1.CA
+  458	 13.814428	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x2ed6 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  459	 13.814430	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x2ed6 SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  460	 13.814549	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0xfa97 SRV _kerberos._tcp.TESTBED1.CA
+  461	 13.814597	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0xfa97 SRV _kerberos._tcp.TESTBED1.CA
+  462	 13.814722	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0xfa97 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  463	 13.814724	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0xfa97 SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  464	 13.814893	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xa4f5 A DC.Testbed1.ca
+  465	 13.814941	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xa4f5 A DC.Testbed1.ca
+  466	 13.814942	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xb3ea AAAA DC.Testbed1.ca
+  467	 13.814943	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xb3ea AAAA DC.Testbed1.ca
+  468	 13.815089	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0xa4f5 A DC.Testbed1.ca A 192.168.10.3
+  469	 13.815091	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0xa4f5 A DC.Testbed1.ca A 192.168.10.3
+  470	 13.815122	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xb3ea AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  471	 13.815123	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xb3ea AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  472	 13.815196	192.168.10.12	→	192.168.10.3	KRB5	290	AS-REQ
+  473	 13.815244	192.168.10.12	→	192.168.10.3	KRB5	290	AS-REQ
+  474	 13.816026	192.168.10.3	→	192.168.10.12	KRB5	1452	AS-REP
+  475	 13.816029	192.168.10.3	→	192.168.10.12	KRB5	1452	AS-REP
+  476	 13.816130	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0x95cb SRV _kerberos-master._udp.TESTBED1.CA
+  477	 13.816178	192.168.10.12	→	192.168.10.3	DNS	93	Standard query 0x95cb SRV _kerberos-master._udp.TESTBED1.CA
+  478	 13.816290	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0x95cb No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  479	 13.816473	192.168.10.3	→	192.168.10.12	DNS	154	Standard query response 0x95cb No such name SRV _kerberos-master._udp.TESTBED1.CA SOA dc.testbed1.ca
+  480	 13.817503	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0xfc4f SRV _kerberos._udp.TESTBED1.CA
+  481	 13.817551	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0xfc4f SRV _kerberos._udp.TESTBED1.CA
+  482	 13.817682	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0xfc4f SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  483	 13.817684	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0xfc4f SRV _kerberos._udp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  484	 13.817815	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x51cd SRV _kerberos._tcp.TESTBED1.CA
+  485	 13.817863	192.168.10.12	→	192.168.10.3	DNS	86	Standard query 0x51cd SRV _kerberos._tcp.TESTBED1.CA
+  486	 13.817999	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x51cd SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  487	 13.818000	192.168.10.3	→	192.168.10.12	DNS	136	Standard query response 0x51cd SRV _kerberos._tcp.TESTBED1.CA SRV 0 100 88 DC.Testbed1.ca A 192.168.10.3
+  488	 13.818164	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x6d27 A DC.Testbed1.ca
+  489	 13.818213	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0x6d27 A DC.Testbed1.ca
+  490	 13.818214	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xee10 AAAA DC.Testbed1.ca
+  491	 13.818215	192.168.10.12	→	192.168.10.3	DNS	74	Standard query 0xee10 AAAA DC.Testbed1.ca
+  492	 13.818353	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x6d27 A DC.Testbed1.ca A 192.168.10.3
+  493	 13.818354	192.168.10.3	→	192.168.10.12	DNS	90	Standard query response 0x6d27 A DC.Testbed1.ca A 192.168.10.3
+  494	 13.818385	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xee10 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca
+  495	 13.818386	192.168.10.3	→	192.168.10.12	DNS	121	Standard query response 0xee10 AAAA DC.Testbed1.ca SOA DC.Testbed1.ca

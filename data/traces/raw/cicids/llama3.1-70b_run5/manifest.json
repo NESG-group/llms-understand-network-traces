@@ -1,0 +1,69 @@
+{
+  "model": "llama3.1:70b",
+  "count_model": "llama3.1:70b",
+  "run": 5,
+  "seed": 5,
+  "source": "data/cicids2017/source/Monday-WorkingHours_50000pkts.pcapng",
+  "source_packets": 50000,
+  "window_first_packet": 20412,
+  "window_packets": 8000,
+  "window_pcap": "data/traces/raw/cicids/llama3.1-70b_run5/_work/window.pcapng",
+  "window_csv": "data/traces/raw/cicids/llama3.1-70b_run5/_work/render/general/window.csv",
+  "num_ctx": 131072,
+  "num_predict": 1024,
+  "margin": 0.01,
+  "overhead_max": 217,
+  "budget": 128532,
+  "disable_protocols": [],
+  "prompt_hash": "b87c4ebf21cc",
+  "levels": [
+    {
+      "label": "100",
+      "factor": 1.25,
+      "target_data_tokens": 160665,
+      "packets": 2530,
+      "est_data_tokens": 160600,
+      "est_prompt_tokens": 160817,
+      "est_pct_of_ctx": 122.7,
+      "fits": false,
+      "stem": "Monday-WorkingHours_llama3.1-70b_run5_L100_2530pkts",
+      "file": "data/traces/raw/cicids/llama3.1-70b_run5/Monday-WorkingHours_llama3.1-70b_run5_L100_2530pkts.pcapng"
+    },
+    {
+      "label": "75",
+      "factor": 1.0,
+      "target_data_tokens": 128532,
+      "packets": 2053,
+      "est_data_tokens": 128554,
+      "est_prompt_tokens": 128771,
+      "est_pct_of_ctx": 98.2,
+      "fits": true,
+      "stem": "Monday-WorkingHours_llama3.1-70b_run5_L75_2053pkts",
+      "file": "data/traces/raw/cicids/llama3.1-70b_run5/Monday-WorkingHours_llama3.1-70b_run5_L75_2053pkts.pcapng"
+    },
+    {
+      "label": "50",
+      "factor": 0.75,
+      "target_data_tokens": 96399,
+      "packets": 1571,
+      "est_data_tokens": 96383,
+      "est_prompt_tokens": 96600,
+      "est_pct_of_ctx": 73.7,
+      "fits": true,
+      "stem": "Monday-WorkingHours_llama3.1-70b_run5_L50_1571pkts",
+      "file": "data/traces/raw/cicids/llama3.1-70b_run5/Monday-WorkingHours_llama3.1-70b_run5_L50_1571pkts.pcapng"
+    },
+    {
+      "label": "25",
+      "factor": 0.5,
+      "target_data_tokens": 64266,
+      "packets": 1091,
+      "est_data_tokens": 64202,
+      "est_prompt_tokens": 64419,
+      "est_pct_of_ctx": 49.1,
+      "fits": true,
+      "stem": "Monday-WorkingHours_llama3.1-70b_run5_L25_1091pkts",
+      "file": "data/traces/raw/cicids/llama3.1-70b_run5/Monday-WorkingHours_llama3.1-70b_run5_L25_1091pkts.pcapng"
+    }
+  ]
+}

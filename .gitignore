@@ -220,10 +220,8 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Data
-data/cicids2017/*
-!data/cicids2017/staging/
-data/cicids2017/staging/*/*
-!data/cicids2017/staging/*/manifest.json
+# Original CIC-IDS2017 capture (fetched with scripts/download_cicids2017.sh)
+data/cicids2017/
 
 # Results
 results/reproduced/
