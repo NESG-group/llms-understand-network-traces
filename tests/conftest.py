@@ -4,8 +4,8 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RAW_DIR = REPO_ROOT / "data" / "traces" / "raw"
-CSV_DIR = REPO_ROOT / "data" / "traces" / "processed_csv"
+RAW_DIR = REPO_ROOT / "data" / "traces" / "raw" / "basic"
+CSV_DIR = REPO_ROOT / "data" / "traces" / "processed_csv" / "basic"
 TRACES = (
     "arp-icmp",
     "ip-networktrace2",

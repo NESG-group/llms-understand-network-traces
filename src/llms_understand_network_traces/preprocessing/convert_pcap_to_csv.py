@@ -1,3 +1,17 @@
+"""
+convert_pcap_to_csv.py
+================================================================================
+Converts PCAPNG traces to the CSV views that are fed to the models, using TShark:
+  general   all protocols, one line per packet (tshark -n -T tabs), no header row
+  IP, ARP,  one view per protocol with a selected set of header fields
+  TCP, UDP  (ICMP packets are excluded from the TCP and UDP views)
+It also writes preprocess_meta.json with the TShark version and the views generated.
+
+Usage (from the repository root):
+  uv run python -m llms_understand_network_traces.preprocessing.convert_pcap_to_csv \
+      --input data/traces/raw/basic --output data/traces/processed_csv/basic
+================================================================================
+"""
 import os
 import csv
 import json
@@ -8,8 +22,8 @@ from datetime import datetime
 
 from llms_understand_network_traces.utils.constants import PROTOCOLS
 
-DEFAULT_RAW = "data/traces/raw"
-DEFAULT_OUT = "data/traces/processed_csv"
+DEFAULT_RAW = "data/traces/raw/basic"
+DEFAULT_OUT = "data/traces/processed_csv/basic"
 
 # --- Field definitions --- #
 
@@ -126,53 +140,7 @@ def pcap2csvUDP(filename, base_folder=DEFAULT_OUT):
     return run_tshark(filename, args, output_folder)
 
 
-def pcap2csvWide(filename, base_folder=DEFAULT_OUT):
-    """[Opt-in: only generated with --include-wide]
-    Controlled baseline: ALL frames, union of the fields of the filtered views,
-    same raw-field format and same postprocessing as the filtered views.
-    Isolates row/column selection from format/rendering differences.
-    Cells that do not apply to a frame (e.g. tcp.* in an ARP frame) are empty."""
-    output_folder = os.path.join(base_folder, "wide")
-    # frame.protocols is a temporary column: it is used to blank the tcp.*/udp.* values
-    # of ICMP frames (they come from the quoted header, not from a TCP/UDP packet)
-    # and is removed afterwards.
-    fields = (BASE_FIELDS + ["eth.src", "eth.dst"]
-              + IP_FIELDS + ARP_FIELDS + TCP_FIELDS + UDP_FIELDS + ["frame.protocols"])
-    args = _fields_cmd(filename, fields)
-    csv_file = run_tshark(filename, args, output_folder)
-    _postprocess_icmp_embedded(csv_file)
-    _postprocess_ip_proto(csv_file)
-    _postprocess_tcp_flags(csv_file)
-    return csv_file
-
-
 # --- Postprocessing --- #
-
-def _postprocess_icmp_embedded(csv_file):
-    """Blanks tcp.*/udp.* in ICMP/ICMPv6 frames and drops the temporary frame.protocols column.
-    An ICMP error quotes the header of the packet that caused it, so tshark reports the
-    quoted ports/flags as tcp.*/udp.* fields of the frame. They are not a TCP/UDP packet."""
-    tmp = csv_file + ".tmp"
-    with open(csv_file, newline="") as fin:
-        reader = csv.DictReader(fin)
-        if not reader.fieldnames or "frame.protocols" not in reader.fieldnames:
-            return  # nothing created yet -> no orphan .tmp
-
-        out_fields = [c for c in reader.fieldnames if c != "frame.protocols"]
-        transport_cols = [c for c in out_fields if c.startswith(("tcp.", "udp."))]
-        with open(tmp, "w", newline="") as fout:
-            writer = csv.DictWriter(fout, fieldnames=out_fields, extrasaction="ignore", lineterminator="\n")
-            writer.writeheader()
-            for row in reader:
-                protocols = set((row.get("frame.protocols") or "").split(":"))
-                if protocols & {"icmp", "icmpv6"}:
-                    for col in transport_cols:
-                        row[col] = ""
-                writer.writerow(row)
-
-    shutil.move(tmp, csv_file)
-    print(f"🧹 Quoted tcp/udp fields of ICMP frames blanked in: {csv_file}")
-
 
 def _flags_to_str(value):
     """'0x0012' -> 'SYN|ACK'. Empty input (non-TCP row) -> ''. No flags set -> 'NONE'.
@@ -273,6 +241,7 @@ def _validate_column_integrity(csv_file, output_folder, delimiter=","):
 # --- Reproducibility metadata --- #
 
 def _write_meta(output_folder, types, disable_protocols):
+    """Write preprocess_meta.json with the TShark version and the views generated."""
     try:
         out = subprocess.run(["tshark", "-v"], capture_output=True, text=True).stdout
         version = out.splitlines()[0] if out else "unknown"
@@ -298,6 +267,7 @@ def convert_pcap_to_csv(
     type="general",
     disable_protocols=(),
 ):
+    """Convert every PCAPNG of `pcapng_folder` to the CSV view `type` ('general', 'IP', 'ARP', 'TCP' or 'UDP') in `output_folder`."""
     if not os.path.exists(pcapng_folder):
         print(f"⚠️ Folder not found: {pcapng_folder}")
         return
@@ -311,7 +281,6 @@ def convert_pcap_to_csv(
 
     func_map = {
         "general": pcap2csvGeneral,
-        "wide":    pcap2csvWide,
         "IP":      pcap2csvIP,
         "ARP":     pcap2csvARP,
         "TCP":     pcap2csvTCP,
@@ -339,12 +308,9 @@ if __name__ == "__main__":
     parser.add_argument("--output", default=DEFAULT_OUT, help="Base folder for CSV output subfolders")
     parser.add_argument("--disable-protocol", nargs="*", default=[], metavar="PROTO",
                         help="Dissectors to disable in the GENERAL view only (e.g. cldap)")
-    parser.add_argument("--include-wide", action="store_true",
-                        help="Also generate the 'wide' control view (not generated by default).")
     args = parser.parse_args()
 
-    # The 'wide' view is left out for now (opt-in). The code is kept so it can be enabled later.
-    types = ["general"] + (["wide"] if args.include_wide else []) + ["IP", "ARP", "TCP", "UDP"]
+    types = ["general", "IP", "ARP", "TCP", "UDP"]
     for t in types:
         convert_pcap_to_csv(pcapng_folder=args.input, output_folder=args.output,
                         type=t, disable_protocols=args.disable_protocol)

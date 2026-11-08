@@ -42,9 +42,9 @@ jobs:
           tshark --version | head -1
       - name: Diagnose TShark access
         run: |
-          ls -l data/traces/raw
-          tshark -r data/traces/raw/arp-icmp.pcapng -c 1 || true
-          cp data/traces/raw/arp-icmp.pcapng "$RUNNER_TEMP/probe.pcapng"
+          ls -l data/traces/raw/basic
+          tshark -r data/traces/raw/basic/arp-icmp.pcapng -c 1 || true
+          cp data/traces/raw/basic/arp-icmp.pcapng "$RUNNER_TEMP/probe.pcapng"
           tshark -r "$RUNNER_TEMP/probe.pcapng" -c 1 || true
           sudo aa-status 2>/dev/null | grep -i -E "tshark|wireshark|dumpcap" || echo "no AppArmor profile for tshark"
       - run: uv sync --locked

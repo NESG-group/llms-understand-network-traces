@@ -38,7 +38,7 @@ import argparse
 import ollama
 import httpx
 
-from llms_understand_network_traces.utils.utils import save_json_to_file
+from llms_understand_network_traces.utils.files import save_json_to_file
 
 # ==============================================================================
 # JUDGE CONFIG
@@ -410,6 +410,7 @@ def _non_judged_entry(question, gt_answer, llm_answer, label, reason, meta) -> d
 
 
 def compare_trace(gt_path: str, llm_path: str, judge_model: str) -> dict:
+    """Judge every question of one trace; the GT and LLM files must contain the same questions."""
     with open(gt_path)  as f: gt_data  = json.load(f)
     with open(llm_path) as f: llm_data = json.load(f)
 
@@ -526,6 +527,7 @@ def run_judge_evaluation(
     output_folder: str,
     judge_model:   str,
 ):
+    """Judge every trace present in both the GT and the LLM folder and write one judge file per trace."""
     os.makedirs(output_folder, exist_ok=True)
 
     gt_files  = {f for f in os.listdir(gt_folder)  if f.endswith(".json")}

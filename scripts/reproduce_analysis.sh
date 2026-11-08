@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Regenerates every metric, figure and validation table of the paper from the stored
+# results (no Ollama or TShark needed). Usage: bash scripts/reproduce_analysis.sh [output-dir]
+# The output goes to results/reproduced by default.
 set -Eeuo pipefail
 export MPLBACKEND=Agg
 
@@ -9,10 +12,10 @@ MANUAL=results/manual
 MODELS=(llama3.1:8b llama3.1:70b qwen2.5:7b qwen2.5:72b)
 RUN="uv run python -m llms_understand_network_traces"
 
-for dir in "$BASIC" "$CICIDS" "$MANUAL/basic" "$MANUAL/cicids"; do
+for dir in "$BASIC" "$CICIDS" "$MANUAL/basic"; do
   [ -d "$dir" ] || { echo "missing folder: $dir (run from the repository root)"; exit 1; }
 done
-mkdir -p "$OUT"/{metrics,figures/basic_by_run,figures/basic_mode,figures/basic_manual,figures/cicids_mode,figures/cicids_consistency,validation}
+mkdir -p "$OUT"/{metrics,figures/basic_by_run,figures/basic_mode,figures/basic_manual,figures/cicids_mode,validation}
 
 echo "[1/6] metrics"
 $RUN.analysis.metrics --dataset basic --models-dir "$BASIC" --out-dir "$OUT/metrics" --tag _basic > "$OUT/metrics/log_basic.txt"
@@ -38,13 +41,10 @@ for model in "${MODELS[@]}"; do
 done
 
 echo "[5/6] CIC-IDS2017 figures"
-$RUN.analysis.dotplot_cicids --models-dir "$CICIDS" --output-dir "$OUT/figures/cicids_mode"
-$RUN.analysis.graph_cicids --models-dir "$CICIDS" --output-dir "$OUT/figures/cicids_consistency"
+$RUN.analysis.dotplot_cicids --models-dir "$CICIDS" --output-dir "$OUT/figures/cicids_mode" --levels 25 50 75
 
-echo "[6/6] judge vs. manual annotations"
+echo "[6/6] judge vs. manual annotations (basic scenario)"
 $RUN.comparison.compare_manual --manual-dir "$MANUAL/basic" --judge-dir "$BASIC" --run run1 \
   --out-dir "$OUT/validation/basic" > /dev/null
-$RUN.comparison.compare_manual --manual-dir "$MANUAL/cicids" --judge-dir "$CICIDS" --run run1 \
-  --out-dir "$OUT/validation/cicids" > /dev/null
 
 echo "Done. Everything is in $OUT"

@@ -3,9 +3,9 @@ from pathlib import Path
 
 import pytest
 
-from llms_understand_network_traces.cicids import cicids_context as cc
+from llms_understand_network_traces.cicids import windows as cc
 
-STAGING = Path(__file__).resolve().parents[1] / "data" / "cicids2017" / "staging"
+STAGING = Path(__file__).resolve().parents[1] / "data" / "traces" / "raw" / "cicids"
 MANIFESTS = sorted(STAGING.glob("*/manifest.json"))
 
 

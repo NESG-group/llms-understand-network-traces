@@ -24,7 +24,7 @@ Output:
 
 Usage:
     uv run python -m llms_understand_network_traces.analysis.dotplot_model --models-dir results/basic
-    uv run python -m llms_understand_network_traces.analysis.dotplot_model --output-dir output_graphs/dotplots
+    uv run python -m llms_understand_network_traces.analysis.dotplot_model --output-dir results/reproduced/figures/basic_mode
 """
 
 import os
@@ -201,7 +201,6 @@ def generate_dotplot(traces: list, general_labels: dict, filtered_labels: dict,
 
     fig, ax = plt.subplots(figsize=(max(9, num_blocks * 2.5), NUM_QUESTIONS * 0.55 + 4))
 
-    # Grid
     for i in range(NUM_QUESTIONS + 1):
         ax.axhline(i - 0.5, color='#eeeeee', zorder=1)
     for j in range(num_blocks * 3 + 1):
@@ -228,7 +227,6 @@ def generate_dotplot(traces: list, general_labels: dict, filtered_labels: dict,
                                s=180, facecolors='none',
                                edgecolors='black', linewidths=1.5, zorder=5)
 
-    # Axes
     ax.set_xlim(-0.5, num_blocks * 3 - 0.5)
     ax.set_ylim(NUM_QUESTIONS - 0.5, -0.5)
     ax.set_xticks([i * 3 + 1 for i in range(num_blocks)])
@@ -236,20 +234,17 @@ def generate_dotplot(traces: list, general_labels: dict, filtered_labels: dict,
     ax.set_yticks(range(NUM_QUESTIONS))
     ax.set_yticklabels([f"P{i + 1}" for i in range(NUM_QUESTIONS)], fontsize=9)
 
-    # C/P/I column headers
     for blk_idx in range(num_blocks):
         for j, cat in enumerate(col_cats):
             ax.text(blk_idx * 3 + j, -1.2, cat,
                     ha='center', va='center',
                     fontsize=7, fontweight='bold', color=col_colors[cat])
 
-    # Separators
     for i in range(1, num_blocks):
         ax.axvline(x=i * 3 - 0.5, color='black', linestyle=(0, (2, 4)), linewidth=1)
     for sep in LAYER_SEPARATORS:
         ax.axhline(y=sep - 0.5, color='black', linestyle=(0, (2, 4)), linewidth=1)
 
-    # Layer labels
     for layer_name, (start, end) in LAYER_BOUNDARIES.items():
         mid = (start + end - 1) / 2
         ax.text(-1.5, mid, layer_name, rotation=90,
@@ -292,8 +287,8 @@ if __name__ == "__main__":
     )
     parser.add_argument("--models-dir", default="results/basic",
                         help="Root directory containing one subfolder per model (default: results/basic)")
-    parser.add_argument("--output-dir", default="output_graphs/models",
-                        help="Directory where per-model PNGs will be saved (default: output_graphs/models)")
+    parser.add_argument("--output-dir", default="results/reproduced/figures/basic_mode",
+                        help="Directory where per-model PNGs will be saved (default: results/reproduced/figures/basic_mode)")
     parser.add_argument("--prefix", default="judge_",
                         help="Filename prefix of evaluation JSONs (default: judge_)")
     parser.add_argument("--models", nargs="*", default=None,

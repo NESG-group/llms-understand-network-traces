@@ -3,7 +3,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from llms_understand_network_traces.evaluation import answer_with_llm as gen
+from llms_understand_network_traces.generation import answer_with_llm as gen
 
 
 def test_prompt_places_data_before_question_and_rules() -> None:

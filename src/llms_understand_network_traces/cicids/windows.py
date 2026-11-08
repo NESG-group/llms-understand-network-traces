@@ -1,5 +1,5 @@
 """
-cicids_context.py
+windows.py
 ================================================================================
 For ONE model and ONE run: picks a random contiguous window (seed = run) of a large
 source pcap, computes how many packets fit in each context level (counting tokens on
@@ -26,11 +26,11 @@ Flow (default mode = generate):
 Requirements: a running Ollama, tshark and editcap on the PATH.
 
 Usage:
-    uv run python -m llms_understand_network_traces.cicids.cicids_context \
+    uv run python -m llms_understand_network_traces.cicids.windows \
         --model llama3.1:8b --run 1 \
         --source data/cicids2017/source/Monday-WorkingHours_50000pkts.pcapng
 
-    uv run python -m llms_understand_network_traces.cicids.cicids_context \
+    uv run python -m llms_understand_network_traces.cicids.windows \
         --model llama3.1:8b --run 1 \
         --source data/cicids2017/source/Monday-WorkingHours_50000pkts.pcapng --verify
 """
@@ -50,7 +50,7 @@ from typing import Any
 import ollama
 
 from llms_understand_network_traces.utils import constants
-from llms_understand_network_traces.evaluation import answer_with_llm as gen
+from llms_understand_network_traces.generation import answer_with_llm as gen
 from llms_understand_network_traces.preprocessing import convert_pcap_to_csv as default_preprocess
 
 COUNT_NUM_CTX = 32768
@@ -120,6 +120,7 @@ def prompt_eval(client: ollama.Client, model: str, prompt: str, num_ctx: int) ->
 
 
 def setup_counting(client: ollama.Client, model: str) -> dict[str, Any]:
+    """Measure, with the model's tokenizer, the token cost of the prompt template and of the longest question; these constants budget a window."""
     base = prompt_eval(client, model, "x", COUNT_NUM_CTX)
     nonce_cost = max(prompt_eval(client, model, nonce() + "x", COUNT_NUM_CTX) - base, 0)
     overheads: dict[str, int] = {}
@@ -211,6 +212,7 @@ def generate(
     staging: Path,
     work: Path,
 ) -> None:
+    """Build the window and the nested level pcaps (steps 1-5 of the module docstring) and write them with the manifest to `staging`."""
     print("\n[1/5] Measuring template + question...")
     state = setup_counting(client, count_model)
     count_fn = make_counter(client, count_model, state)
@@ -325,6 +327,7 @@ def verify(
     staging: Path,
     work: Path,
 ) -> None:
+    """Render the real CSV of each pcap in `staging`, recount its tokens and check them against the manifest."""
     manifest_path = staging / "manifest.json"
     if not manifest_path.exists():
         sys.exit(f"{manifest_path} does not exist: run the generate mode first.")
@@ -382,7 +385,7 @@ def main() -> None:
     parser.add_argument("--run", type=int, required=True, help="Run number (it is the window seed)")
     parser.add_argument("--source", required=True, help="Large source pcap (e.g. 50000 packets)")
     parser.add_argument("--staging-dir", default=None,
-                        help="Output folder. Default: data/cicids2017/staging/<model>_run<N>")
+                        help="Output folder. Default: data/traces/raw/cicids/<model>_run<N>")
     parser.add_argument("--num-ctx", type=int, default=None, help="Context to use. Default: the model maximum")
     parser.add_argument("--num-predict", type=int, default=1024, help="Must match the generation value")
     parser.add_argument("--margin", type=float, default=0.01)
@@ -411,7 +414,7 @@ def main() -> None:
     staging = (
         Path(args.staging_dir)
         if args.staging_dir
-        else Path("data/cicids2017/staging") / f"{model_tag(args.model)}_run{args.run}"
+        else Path("data/traces/raw/cicids") / f"{model_tag(args.model)}_run{args.run}"
     )
     work = staging / "_work"
 

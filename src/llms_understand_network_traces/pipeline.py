@@ -29,7 +29,6 @@ from llms_understand_network_traces.utils import constants
 PACKAGE = "llms_understand_network_traces"
 DEFAULT_JUDGE = "llama3.3:70b"
 DEFAULT_MODES = ("general", "filtered")
-ALL_MODES = ("general", "wide", "filtered")
 MAX_GT_ATTEMPTS = 5
 CICIDS_SOURCE = "data/cicids2017/source/Monday-WorkingHours_50000pkts.pcapng"
 STEPS = ("prepare", "gt", "llm", "judge", "dotplot", "all")
@@ -49,15 +48,15 @@ class Dataset:
 DATASETS: dict[str, Dataset] = {
     "basic": Dataset(
         name="basic",
-        gt_dir=Path("data/qa"),
-        csv_dir=Path("data/traces/processed_csv"),
+        gt_dir=Path("data/qa/basic"),
+        csv_dir=Path("data/traces/processed_csv/basic"),
         results_dir=Path("results/basic"),
-        raw_dir=Path("data/traces/raw"),
+        raw_dir=Path("data/traces/raw/basic"),
     ),
     "cicids": Dataset(
         name="cicids",
-        gt_dir=Path("results/ground_truth_cicids2017"),
-        csv_dir=Path("data/cicids2017/processed_csv"),
+        gt_dir=Path("data/qa/cicids"),
+        csv_dir=Path("data/traces/processed_csv/cicids"),
         results_dir=Path("results/cicids"),
         raw_dir=None,
     ),
@@ -71,7 +70,7 @@ def slug(model: str) -> str:
 
 def staging_dir(model: str, run: int) -> Path:
     """Return the staging folder of a CIC-IDS model and run."""
-    return Path("data/cicids2017/staging") / f"{slug(model)}_run{run}"
+    return Path("data/traces/raw/cicids") / f"{slug(model)}_run{run}"
 
 
 def cicids_stems(model: str, run: int) -> list[str]:
@@ -118,7 +117,7 @@ def raw_stems(raw_dir: Path) -> list[str]:
 def step_prepare(model: str, run: int, source: str) -> None:
     """Build the CIC-IDS window and level pcaps, then convert them to CSV."""
     dataset = DATASETS["cicids"]
-    run_module("cicids.cicids_context", ["--model", model, "--run", str(run), "--source", source])
+    run_module("cicids.windows", ["--model", model, "--run", str(run), "--source", source])
     run_module(
         "preprocessing.convert_pcap_to_csv",
         ["--input", str(staging_dir(model, run)), "--output", str(dataset.csv_dir)],
@@ -132,7 +131,7 @@ def step_gt_basic(dataset: Dataset, force: bool) -> None:
     if not force and dataset.gt_dir.is_dir() and not gt_problems(dataset.gt_dir, stems):
         print(f"[gt] ground truth in {dataset.gt_dir} is valid, skipping")
         return
-    run_module("evaluation.answer_with_pyshark", ["--input", str(dataset.raw_dir), "--output", str(dataset.gt_dir)])
+    run_module("generation.answer_with_pyshark", ["--input", str(dataset.raw_dir), "--output", str(dataset.gt_dir)])
     problems = gt_problems(dataset.gt_dir, stems)
     if problems:
         raise SystemExit("generated ground truth has problems:\n  " + "\n  ".join(problems))
@@ -151,7 +150,7 @@ def step_gt_cicids(dataset: Dataset, model: str, run: int, force: bool) -> None:
             target.unlink(missing_ok=True)
             with tempfile.TemporaryDirectory() as tmp:
                 shutil.copy2(staging / f"{stem}.pcapng", tmp)
-                run_module("evaluation.answer_with_pyshark", ["--input", tmp, "--output", str(dataset.gt_dir)])
+                run_module("generation.answer_with_pyshark", ["--input", tmp, "--output", str(dataset.gt_dir)])
             if not gt_problems(dataset.gt_dir, [stem]):
                 print(f"[gt] {stem}: OK (attempt {attempt})")
                 break
@@ -172,9 +171,9 @@ def step_llm(dataset: Dataset, model: str, run: int, mode: str, trace: str | Non
     ]
     if dataset.name == "cicids" and trace is None:
         for stem in cicids_stems(model, run):
-            run_module("evaluation.answer_with_llm", [*base, "--trace", stem])
+            run_module("generation.answer_with_llm", [*base, "--trace", stem])
         return
-    run_module("evaluation.answer_with_llm", [*base, *(["--trace", trace] if trace else [])])
+    run_module("generation.answer_with_llm", [*base, *(["--trace", trace] if trace else [])])
 
 
 def run_folder(dataset: Dataset, model: str, run: int) -> Path:
@@ -210,8 +209,6 @@ def step_dotplot(dataset: Dataset, model: str, run: int, modes: Sequence[str]) -
         "--output", str(base / "dotplot_judge.png"),
         "--method", "judge",
     ]
-    if "wide" in modes:
-        args += ["--wide-folder", str(judge / "wide")]
     run_module("analysis.dotplot", args)
 
 
@@ -226,7 +223,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--first-run", type=int, default=1)
     parser.add_argument("--run", type=int, help="single run number (prepare only)")
     parser.add_argument("--trace", help="restrict the llm step to one trace stem")
-    parser.add_argument("--mode", choices=(*ALL_MODES, "all"), default="all")
+    parser.add_argument("--mode", choices=(*DEFAULT_MODES, "all"), default="all")
     parser.add_argument("--source", default=CICIDS_SOURCE, help="large CIC-IDS pcap (prepare)")
     parser.add_argument("--temperature", type=float, default=0)
     parser.add_argument("--num-ctx", type=int, default=None)

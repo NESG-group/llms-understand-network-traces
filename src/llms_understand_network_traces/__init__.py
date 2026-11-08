@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from llms-understand-network-traces!")
+"""Reproducible benchmark for evaluating LLMs on question answering over network traces."""

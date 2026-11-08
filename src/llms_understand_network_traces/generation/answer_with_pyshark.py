@@ -1,3 +1,16 @@
+"""
+answer_with_pyshark.py
+================================================================================
+Reference answers (ground truth) for the 19 questions of utils/constants.py,
+computed from each PCAPNG with PyShark. There is one function per question; the
+"Convention" comment above each one states how ambiguous cases are resolved.
+Each trace produces <trace>_answers.json in the output folder.
+
+Usage (from the repository root):
+  uv run python -m llms_understand_network_traces.generation.answer_with_pyshark \
+      --input data/traces/raw/basic --output data/qa/basic
+================================================================================
+"""
 import os
 
 import pyshark
@@ -6,21 +19,10 @@ from collections import Counter
 from tqdm import tqdm
 
 from llms_understand_network_traces.utils import constants
-from llms_understand_network_traces.utils.utils import save_json_to_file
+from llms_understand_network_traces.utils.files import save_json_to_file
 
 # ==============================================================================
-# CONFIG
-# ==============================================================================
-
-# [GT-FIX, OPTIONAL] ARP questions 1 and 2 do not say which layer "MAC address"
-# refers to (ARP header vs Ethernet header). If True, the GT lists BOTH
-# interpretations and the judge accepts a candidate that fully matches either
-# one (see rule 7 in the judge rubric). If False, only the ARP-header version
-# is used (original behaviour).
-ARP_ACCEPT_BOTH_LAYERS = False
-
-# ==============================================================================
-# HELPERS  [GT-FIX]
+# HELPERS
 # ==============================================================================
 
 # RFC 1918 private ranges. Python's ip.is_private is much broader (it also
@@ -189,11 +191,9 @@ def _classify_ipv4(ip_obj):
 
 
 def listIPv4ByRange(network_trace, type_range):
-    # cap captures ip packets and counts occurrences of private/public IPs
     cap = pyshark.FileCapture(network_trace, display_filter="ip")
     src_counts = Counter()
     dst_counts = Counter()
-    # For each packet, check if the source and destination IPs are private or public based on the type_range argument
     for p in cap:
         for addr, counter in [(p.ip.src, src_counts), (p.ip.dst, dst_counts)]:
             try:
@@ -304,7 +304,6 @@ def tcp_sessions_with_reset(pcap_file):
 # "TCP: List the destination ports where a TCP connection attempt was explicitly refused with a RST packet.
 # Report as a simple list of ports."
 # Convention: "refused" = a SYN answered with a RST for a connection that never received a SYN-ACK.
-# [GT-FIX]
 # Convention: the reported port is the server (destination) port of the refused SYN.
 def tcp_refused_with_rst(pcap_file):
     cap = pyshark.FileCapture(pcap_file, display_filter="tcp")
@@ -351,13 +350,13 @@ def _track_handshakes(pcap_file):
             key     = (src, dst, sport, dport)
             rev_key = (dst, src, dport, sport)
 
-            if _is_syn(flags):          # SYN
+            if _is_syn(flags):
                 if key not in completed and key not in states:
                     states[key] = "SYN_SENT"
-            elif _is_synack(flags):     # SYN-ACK
+            elif _is_synack(flags):
                 if states.get(rev_key) == "SYN_SENT":
                     states[rev_key] = "SYN_ACK_RECEIVED"
-            elif _is_final_ack(flags):  # ACK
+            elif _is_final_ack(flags):
                 if states.get(key) == "SYN_ACK_RECEIVED":
                     completed.add(key)
                     del states[key]
@@ -520,24 +519,22 @@ def udp_no_response_ports(pcap_file):
 # ==============================================================================
 
 def pyshark_answers(
-    pcapng_folder="data/traces/raw",
-    answers_folder="data/qa",
+    pcapng_folder="data/traces/raw/basic",
+    answers_folder="data/qa/basic",
 ):
+    """Answer the 19 questions for every PCAPNG of `pcapng_folder` and write <trace>_answers.json to `answers_folder`."""
     pcapng_path = os.path.abspath(pcapng_folder)
     out_path    = os.path.abspath(answers_folder)
     os.makedirs(out_path, exist_ok=True)
 
     question_function_map = {
-        # ARP
         constants.ARP_QUESTIONS[0]: listARPMacAddresses,
         constants.ARP_QUESTIONS[1]: listARPFlows,
         constants.ARP_QUESTIONS[2]: identifyCompletedARPExchanges,
-        # IPv4
         constants.IP_QUESTIONS[0]: listIPv4Addresses,
         constants.IP_QUESTIONS[1]: listIPv4Protocols,
         constants.IP_QUESTIONS[2]: lambda p: listIPv4ByRange(p, "private"),
         constants.IP_QUESTIONS[3]: lambda p: listIPv4ByRange(p, "public"),
-        # TCP
         constants.TCP_QUESTIONS[0]: common_tcp_ports,
         constants.TCP_QUESTIONS[1]: tcp_well_known_ports,
         constants.TCP_QUESTIONS[2]: tcp_sessions_with_fin,
@@ -547,7 +544,6 @@ def pyshark_answers(
         constants.TCP_QUESTIONS[6]: tcp_multiple_syn_sources,
         constants.TCP_QUESTIONS[7]: tcp_failed_handshakes,
         constants.TCP_QUESTIONS[8]: tcp_repeated_syn_no_response,
-        # UDP
         constants.UDP_QUESTIONS[0]: common_udp_ports,
         constants.UDP_QUESTIONS[1]: udp_well_known_ports,
         constants.UDP_QUESTIONS[2]: udp_no_response_ports,
@@ -585,8 +581,8 @@ def pyshark_answers(
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Generate ground-truth answers from PCAPNG files using pyshark.")
-    parser.add_argument("--input",  default="data/traces/raw", help="Folder with .pcapng input files")
-    parser.add_argument("--output", default="data/qa",          help="Folder to save the answers JSON files")
+    parser.add_argument("--input",  default="data/traces/raw/basic", help="Folder with .pcapng input files")
+    parser.add_argument("--output", default="data/qa/basic",    help="Folder to save the answers JSON files")
     args = parser.parse_args()
 
     pyshark_answers(pcapng_folder=args.input, answers_folder=args.output)

@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Runs the basic scenario end to end for every answering model: reference answers,
+# model answers, judging and dotplots. Needs Ollama; see the README.
+# Override with the environment variables RUNS, JUDGE and MODELS (space-separated).
 set -Eeuo pipefail
 
 RUNS="${RUNS:-5}"

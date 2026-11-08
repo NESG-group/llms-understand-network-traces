@@ -6,7 +6,6 @@ Dotplot visualization for LLM answer evaluation.
 Reads judge evaluation results and plots one row per question and one block per
 trace, comparing the views:
   - general  : filled circle   (color = trace)
-  - wide     : hollow diamond  (color = trace)           [optional]
   - filtered : hollow black ring
 
 Columns inside each trace block:
@@ -62,7 +61,7 @@ COL_COLORS = {"C": "#2ca02c", "P": "#ff7f0e", "I": "#d62728", "X": "#7f7f7f"}
 BLOCK_W    = len(COLS)
 
 TRACE_COLORS = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
-LABEL_KEY = None   # None = claves del juez (final_label / label)
+LABEL_KEY = None   # None = judge keys (final_label / label)
 
 def _norm(text: str) -> str:
     return re.sub(r'\s+', ' ', text.strip())
@@ -153,7 +152,7 @@ def labels_for_trace(eval_folder: str, trace_stem: str, prefix: str = "judge_") 
 
 def generate_dotplot(
     traces:         list,
-    labels_by_view: dict,   # {"general": {trace: [labels]}, "wide": {...}, "filtered": {...}}
+    labels_by_view: dict,   # {"general": {trace: [labels]}, "filtered": {...}}
     method_label:   str,
     output_path:    str,
 ):
@@ -163,7 +162,6 @@ def generate_dotplot(
         figsize=(max(9, num_blocks * BLOCK_W * 0.85), NUM_QUESTIONS * 0.55 + 4)
     )
 
-    # Grid
     for i in range(NUM_QUESTIONS + 1):
         ax.axhline(i - 0.5, color='#eeeeee', zorder=1)
     for j in range(num_blocks * BLOCK_W + 1):
@@ -180,15 +178,6 @@ def generate_dotplot(
                 continue
             ax.scatter(cell_x(blk_idx, cat), q_idx, s=60, color=color, marker='o', zorder=4)
 
-    # Wide — hollow diamonds (color = trace)
-    for blk_idx, trace in enumerate(traces):
-        color = TRACE_COLORS[blk_idx % len(TRACE_COLORS)]
-        for q_idx, cat in enumerate(labels_by_view.get("wide", {}).get(trace, [])):
-            if cat is None:
-                continue
-            ax.scatter(cell_x(blk_idx, cat), q_idx, s=130, facecolors='none',
-                       edgecolors=color, linewidths=1.5, marker='D', zorder=5)
-
     # Filtered — large hollow black rings
     for blk_idx, trace in enumerate(traces):
         for q_idx, cat in enumerate(labels_by_view.get("filtered", {}).get(trace, [])):
@@ -197,7 +186,6 @@ def generate_dotplot(
             ax.scatter(cell_x(blk_idx, cat), q_idx, s=240, facecolors='none',
                        edgecolors='black', linewidths=1.5, marker='o', zorder=6)
 
-    # Axes
     ax.set_xlim(-0.5, num_blocks * BLOCK_W - 0.5)
     ax.set_ylim(NUM_QUESTIONS - 0.5, -0.5)
     ax.set_xticks([i * BLOCK_W + (BLOCK_W - 1) / 2 for i in range(num_blocks)])
@@ -213,7 +201,6 @@ def generate_dotplot(
     ax.set_yticks(range(NUM_QUESTIONS))
     ax.set_yticklabels([f"P{i+1}" for i in range(NUM_QUESTIONS)], fontsize=9)
 
-    # Column headers
     for blk_idx in range(num_blocks):
         for j, cat in enumerate(COLS):
             ax.text(blk_idx * BLOCK_W + j, -1.2, COL_NAMES.get(cat, cat),
@@ -242,10 +229,6 @@ def generate_dotplot(
     if "general" in labels_by_view:
         legend_elements.append(Line2D([0], [0], marker='o', color='w', markerfacecolor='gray',
                                       markersize=8, label='General (color = trace)'))
-    if "wide" in labels_by_view:
-        legend_elements.append(Line2D([0], [0], marker='D', color='w', markerfacecolor='none',
-                                      markeredgecolor='gray', markeredgewidth=1.5,
-                                      markersize=9, label='Wide (color = trace)'))
     if "filtered" in labels_by_view:
         legend_elements.append(Line2D([0], [0], marker='o', color='w', markerfacecolor='none',
                                       markeredgecolor='black', markeredgewidth=1.5,
@@ -275,11 +258,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate dotplot from judge evaluation results.")
     parser.add_argument("--general-folder",  required=True, help="Folder with judge results for the general view")
     parser.add_argument("--filtered-folder", required=True, help="Folder with judge results for the filtered view")
-    parser.add_argument("--wide-folder",     default=None,  help="Folder with judge results for the wide view (optional)")
     parser.add_argument("--output",          required=True, help="Output path for the dotplot PNG")
     parser.add_argument("--method",          default="LLM-Judge", help="Method label for the plot title")
     parser.add_argument("--prefix",          default="judge_", help="Filename prefix of evaluation JSONs")
-    parser.add_argument("--label-key", default=None, help="Clave con la etiqueta (p. ej. manual_label)")
+    parser.add_argument("--label-key", default=None, help="Key holding the label (e.g. manual_label)")
     args = parser.parse_args()
 
     LABEL_KEY = args.label_key
@@ -300,8 +282,6 @@ if __name__ == "__main__":
     print(f"Questions: {NUM_QUESTIONS} ({list(LAYER_BOUNDARIES.keys())})")
 
     folders = {"general": args.general_folder, "filtered": args.filtered_folder}
-    if args.wide_folder:
-        folders["wide"] = args.wide_folder
 
     labels_by_view = {
         view: {t: labels_for_trace(folder, t, args.prefix) for t in traces}

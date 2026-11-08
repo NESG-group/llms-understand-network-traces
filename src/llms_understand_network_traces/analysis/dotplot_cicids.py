@@ -26,9 +26,10 @@ Reading caveats:
 
 Usage (from the repository root):
   uv run python -m llms_understand_network_traces.analysis.dotplot_cicids
+  uv run python -m llms_understand_network_traces.analysis.dotplot_cicids --levels 25 50 75   # figure of the paper
   uv run python -m llms_understand_network_traces.analysis.dotplot_cicids --runs 1 2 3 4 5 --tie-break IPC
   uv run python -m llms_understand_network_traces.analysis.dotplot_cicids \
-          --models llama3.1:70b qwen2.5:72b --output-dir output_graphs/cicids_mode
+          --models llama3.1:70b qwen2.5:72b --output-dir results/reproduced/figures/cicids_mode
 ================================================================================
 """
 import argparse
@@ -102,10 +103,12 @@ def vote(labels_per_run, prio):
     return out, ties
 
 
-def build(models_dir, model, runs, prio):
+def build(models_dir, model, runs, prio, levels=None):
     """Return blocks (level order), general{block: labels}, filtered{...}, tie summary."""
     gen, fil, blocks, ties, nruns = {}, {}, [], {}, {}
     for lvl, pct in PCT.items():
+        if levels and lvl not in levels:
+            continue
         per_mode, pk = {}, set()
         for mode in ("general", "filtered"):
             lst = []
@@ -177,9 +180,9 @@ def generate_dotplot(blocks, general_labels, filtered_labels, method_label, outp
         sp.set_visible(False)
 
     ax.legend(handles=[
-        Line2D([0], [0], marker="o", color="w", markerfacecolor="gray", markersize=8, label="General (color = context level)"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor="gray", markersize=8, label="Default (color = input size)"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor="none", markeredgecolor="black",
-               markeredgewidth=1.5, markersize=12, label="Filtered (layer-specific CSV)")],
+               markeredgewidth=1.5, markersize=12, label="Filtered")],
         loc="lower center", bbox_to_anchor=(0.5, 1.12), ncol=2, fontsize=10, frameon=True,
         title=f"Evaluation method: {method_label}", title_fontsize=10)
     plt.subplots_adjust(left=0.18, bottom=0.22, right=0.97, top=0.82)
@@ -192,10 +195,13 @@ def generate_dotplot(blocks, general_labels, filtered_labels, method_label, outp
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--models-dir", default="results/cicids")
-    ap.add_argument("--output-dir", default="output_graphs/cicids_mode")
+    ap.add_argument("--output-dir", default="results/reproduced/figures/cicids_mode")
     ap.add_argument("--runs", type=int, nargs="*", default=None)
     ap.add_argument("--models", nargs="*", default=MODELS)
     ap.add_argument("--constants", default="llms_understand_network_traces.utils.constants")
+    ap.add_argument("--levels", type=int, nargs="*", choices=sorted(PCT), default=None,
+                    help="Levels to draw (default: all). The figure of the paper uses 25 50 75, "
+                         "i.e. 50, 75 and 100 %% of the budget, without the trimmed 125 %% level")
     ap.add_argument("--tie-break", choices=("CPI", "IPC"), default="CPI",
                     help="CPI (default, as in dotplot_model.py): on a tie the best label wins; "
                          "IPC: the worst wins")
@@ -208,14 +214,15 @@ def main():
 
     for model in a.models:
         print("=" * 60 + f"\n{model}\n" + "=" * 60)
-        blocks, gen, fil, ties = build(a.models_dir, model, runs, prio)
+        blocks, gen, fil, ties = build(a.models_dir, model, runs, prio, a.levels)
         if not blocks:
             print("  [SKIP] no judgements\n")
             continue
         for (mode, lvl), t in sorted(ties.items()):
             print(f"  ties in the mode — {mode:<8} L{lvl:<3}: {t}/{NUM_QUESTIONS}")
         slug = re.sub(r"[^\w\-.]", "_", model)
-        generate_dotplot(blocks, gen, fil, f"LLM-Judge | majority vote over runs {runs} | {model} | tie-break {a.tie_break}",
+        tie_note = "" if a.tie_break == "CPI" else f" | tie-break {a.tie_break}"
+        generate_dotplot(blocks, gen, fil, f"LLM-Judge | modal label over runs {runs} | {model}{tie_note}",
                          os.path.join(a.output_dir, slug, f"dotplot_cicids_{slug}.png"))
         print()
 

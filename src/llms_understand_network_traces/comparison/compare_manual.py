@@ -1,18 +1,18 @@
 """
 compare_manual.py
 ================================================================================
-Compares your manual labels (C/P/I) with those of the LLM judge and measures the
+Compares the manual labels (C/P/I) with those of the LLM judge and measures the
 agreement. It only reads files: it does not modify anything.
 
 Input:
   --manual-dir  folder with the manually labelled JSON files (the ones produced by
-                preprocesses_manual.py and filled in with manual_label), with the
+                preprocess_manual.py and filled in with manual_label), with the
                 structure <model>/<view>/judge_<trace>_answers.json
   --judge-dir   folder with the original judge JSON files, with the structure
                 <model>/<run>/comparison/judge/<view>/judge_<trace>_answers.json
   --run         judge run to compare (default run1)
 
-What it computes (only with the questions you already labelled):
+What it computes (only with the questions that already have a manual label):
   A. exact agreement with its 95 % Wilson interval, Cohen's kappa and weighted kappa
      (linear weights: C > P > I are ordinal), and the C vs not-C kappa. Lines marked
      "per question" give 95 % bootstrap intervals resampling whole questions (trace +
@@ -23,12 +23,12 @@ What it computes (only with the questions you already labelled):
      many are judge tie-breaks
   D. the same numbers by: tie-break or unanimous, empty or non-empty reference, layer,
      model and view; and D2: tie-break rate by model, view and layer
-  E. sensitivity: without the files you saw with the judge at hand, per view, and with
+  E. sensitivity: without the files the annotator saw with the judge verdict at hand, per view, and with
      other tie-break rules (the laxest one, or no tie-breaks)
-  F. consistency of the conclusions: %C and %I per model and view according to you and
-     to the judge, model ranking and filtering effect
+  F. consistency of the conclusions: %C and %I per model and view according to the annotator
+     and to the judge, model ranking and filtering effect
 
-CIC-IDS2017 samples (preprocesses_manual.py --sample): questions with manual_label =
+CIC-IDS2017 samples (preprocess_manual.py --sample): questions with manual_label =
 "SKIP" are not labelled and are ignored; the run of each file is read from its name
 (_runN_), so the same directory can mix runs; and, for the bootstrap, answers of
 different models to the same window and question are grouped (the model name is removed
@@ -82,6 +82,7 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
 
 
 def kappa(pairs: Pairs, weighted: bool = False) -> float:
+    """Cohen's kappa of (manual, judge) label pairs, linearly weighted if `weighted`; NaN if there are no pairs."""
     n = len(pairs)
     if n == 0:
         return NAN
@@ -173,6 +174,7 @@ def layer_of(i: int, n_arp: int, n_ip: int) -> str:
 def load(
     manual_dir: str, judge_dir: str, run: str, seen: list[str], n_arp: int, n_ip: int
 ) -> tuple[list[dict[str, Any]], int, int, int]:
+    """Read the manual sheets and their judge files; return the matched rows and the counts of unlabelled, judge-error and missing cases."""
     rows: list[dict[str, Any]] = []
     pending = errors = missing = 0
     pattern = os.path.join(manual_dir, "**", "judge_*_answers.json")
@@ -250,8 +252,9 @@ def main() -> None:
     parser.add_argument("--run", default="run1")
     parser.add_argument("--seen", default=None, help="file with path fragments of the files seen with the judge")
     parser.add_argument("--layers", default="3,4", help="number of ARP and IP questions (default 3,4; the rest TCP/UDP)")
-    parser.add_argument("--out-dir", default=None,
-                        help="folder for the report (agreement_manual_vs_judge.txt) and the disagreements CSV")
+    parser.add_argument("--out-dir", default="results/reproduced/validation",
+                        help="folder for the report (agreement_manual_vs_judge.txt) and the disagreements CSV "
+                             "(default: results/reproduced/validation)")
     parser.add_argument("--out-csv", default=None, help="path of the disagreements CSV (default: inside --out-dir)")
     args = parser.parse_args()
 
@@ -260,9 +263,7 @@ def main() -> None:
         os.makedirs(args.out_dir, exist_ok=True)
         report = open(os.path.join(args.out_dir, "agreement_manual_vs_judge.txt"), "w", encoding="utf-8")
         sys.stdout = Tee(sys.__stdout__, report)
-    out_csv = args.out_csv or (
-        os.path.join(args.out_dir, "judge_disagreements.csv") if args.out_dir else "validation/judge_disagreements.csv"
-    )
+    out_csv = args.out_csv or os.path.join(args.out_dir, "judge_disagreements.csv")
 
     seen: list[str] = []
     if args.seen and os.path.exists(args.seen):
@@ -274,9 +275,9 @@ def main() -> None:
 
     rows, pending, errors, missing = load(args.manual_dir, args.judge_dir, args.run, seen, n_arp, n_ip)
     if not rows:
-        raise SystemExit("No labelled and matched question. Did you fill in manual_label? Are the paths right?")
+        raise SystemExit("No labelled and matched question. Is manual_label filled in? Are the paths right?")
 
-    print(f"Compared pairs: {len(rows)}  |  not labelled by you: {pending}  |  judge E/N or unmatched: {errors}"
+    print(f"Compared pairs: {len(rows)}  |  not labelled: {pending}  |  judge E/N or unmatched: {errors}"
           f"  |  files without judgement: {missing}\n")
 
     print("A. Global")
@@ -284,13 +285,13 @@ def main() -> None:
     binary = [("C" if r["manual"] == "C" else "I", "C" if r["judge"] == "C" else "I") for r in rows]
     print(f"  {'C vs not-C (binary)':<34} kappa {f2(kappa(binary))}")
 
-    print("\nB. Confusion matrix (rows: your label; columns: judge)")
+    print("\nB. Confusion matrix (rows: manual label; columns: judge)")
     confusion = Counter((r["manual"], r["judge"]) for r in rows)
-    print("        " + "".join(f"{'judge ' + label:>9}" for label in LABELS))
+    print("           " + "".join(f"{'judge ' + label:>9}" for label in LABELS))
     for m in LABELS:
-        print(f"  you {m}  " + "".join(f"{confusion[(m, j)]:>9}" for j in LABELS))
-    print("   Per label (coverage = row: if you say X, so does the judge; "
-          "precision = column: if the judge says X, so do you)")
+        print(f"  manual {m}  " + "".join(f"{confusion[(m, j)]:>9}" for j in LABELS))
+    print("   Per label (coverage = row: if the annotator says X, so does the judge; "
+          "precision = column: if the judge says X, so does the annotator)")
     for label in LABELS:
         yours = sum(confusion[(label, j)] for j in LABELS)
         judges = sum(confusion[(m, label)] for m in LABELS)
@@ -303,7 +304,7 @@ def main() -> None:
     laxer = sum(IDX[r["judge"]] < IDX[r["manual"]] for r in rows)
     disagreements = [r for r in rows if r["manual"] != r["judge"]]
     print(f"\nC. Disagreements: {stricter + laxer} ({(stricter + laxer) / len(rows):.1%})  "
-          f"judge stricter than you {stricter}  |  judge laxer than you {laxer}")
+          f"judge stricter than the annotator {stricter}  |  judge laxer than the annotator {laxer}")
     if stricter + laxer:
         print(f"   Sign test (exact binomial, indicative: answers are not independent): "
               f"p = {sign_test_p(stricter, laxer):.2g}")
@@ -312,16 +313,16 @@ def main() -> None:
               f"({ties_dis / len(disagreements):.1%}); with both passes unanimous: {len(disagreements) - ties_dis}")
         by_kind = Counter((r["manual"], r["judge"], "tie-break" if r["tie"] else "unanimous") for r in disagreements)
         for (m, j, kind), n in sorted(by_kind.items(), key=lambda kv: (-kv[1], kv[0])):
-            print(f"     you {m} -> judge {j} ({kind}): {n}")
+            print(f"     manual {m} -> judge {j} ({kind}): {n}")
     judge_c = [r for r in rows if r["judge"] == "C"]
     manual_c = [r for r in rows if r["manual"] == "C"]
     if judge_c:
         agree = sum(r["manual"] == "C" for r in judge_c)
-        print(f"   Of the judge's {len(judge_c)} C, {agree} are also C for you ({agree / len(judge_c):.1%})"
-              f"  <- the judge accepts an answer that you do not")
+        print(f"   Of the judge's {len(judge_c)} C, {agree} are also C for the annotator ({agree / len(judge_c):.1%})"
+              f"  <- the judge accepts an answer that the annotator does not")
     if manual_c:
         agree = sum(r["judge"] == "C" for r in manual_c)
-        print(f"   Of your {len(manual_c)} C, the judge gives C to {agree} ({agree / len(manual_c):.1%})")
+        print(f"   Of the annotator's {len(manual_c)} C, the judge gives C to {agree} ({agree / len(manual_c):.1%})")
 
     print("\nD. By case type")
     line("judge tie-break", [r for r in rows if r["tie"]])
@@ -347,7 +348,7 @@ def main() -> None:
     ties = [r for r in rows if r["tie"]]
     if ties:
         matches = sum(r["manual"] in r["votes"].split("/") for r in ties)
-        print(f"  In the {len(ties)} tie-breaks, your label matches one of the two passes in {matches}")
+        print(f"  In the {len(ties)} tie-breaks, the manual label matches one of the two passes in {matches}")
 
     print("\nE. Sensitivity")
     line("without the files seen with the judge", [r for r in rows if not r["seen"]], boot=True)
@@ -357,20 +358,20 @@ def main() -> None:
     line("no tie-breaks (unanimous only)", [r for r in rows if not r["tie"]], boot=True)
 
     print("\nF. Would the judge reach the same conclusions? (% of answers with each label)")
-    print(f"  {'':<34}{'your %C':>9}{'judge %C':>9}{'your %I':>9}{'judge %I':>9}")
+    print(f"  {'':<34}{'manual %C':>10}{'judge %C':>10}{'manual %I':>10}{'judge %I':>10}")
     models = sorted({r["model"] for r in rows})
     for model in models:
         for mode in ("general", "filtered"):
             subset = [r for r in rows if r["model"] == model and r["mode"] == mode]
             if subset:
-                print(f"  {model + ' ' + mode:<34}{pct(subset, 'manual', 'C'):>9.1%}{pct(subset, 'judge', 'C'):>9.1%}"
-                      f"{pct(subset, 'manual', 'I'):>9.1%}{pct(subset, 'judge', 'I'):>9.1%}")
+                print(f"  {model + ' ' + mode:<34}{pct(subset, 'manual', 'C'):>10.1%}{pct(subset, 'judge', 'C'):>10.1%}"
+                      f"{pct(subset, 'manual', 'I'):>10.1%}{pct(subset, 'judge', 'I'):>10.1%}")
 
     def rank(who: str) -> list[str]:
         return sorted(models, key=lambda m: -pct([r for r in rows if r["model"] == m], who, "C"))
 
-    print(f"  Model order by %C, according to you:   {' > '.join(rank('manual'))}")
-    print(f"                    according to the judge: {' > '.join(rank('judge'))}  "
+    print(f"  Model order by %C, according to the annotator: {' > '.join(rank('manual'))}")
+    print(f"                     according to the judge:     {' > '.join(rank('judge'))}  "
           f"({'same order' if rank('manual') == rank('judge') else 'different order'})")
     print("  Filtering effect on %C (filtered - general):")
     for model in models:
@@ -379,14 +380,14 @@ def main() -> None:
         if general and filtered:
             dm = pct(filtered, "manual", "C") - pct(general, "manual", "C")
             dj = pct(filtered, "judge", "C") - pct(general, "judge", "C")
-            print(f"    {model:<30} you {dm:+7.1%}   judge {dj:+7.1%}")
+            print(f"    {model:<30} manual {dm:+7.1%}   judge {dj:+7.1%}")
 
     if disagreements:
         os.makedirs(os.path.dirname(out_csv) or ".", exist_ok=True)
         with open(out_csv, "w", newline="", encoding="utf-8-sig") as handle:
             writer = csv.writer(handle)
-            writer.writerow(["model", "view", "trace", "question_n", "your_label", "judge", "judge_votes",
-                             "tie_break", "seen", "your_note", "question"])
+            writer.writerow(["model", "view", "trace", "question_n", "manual_label", "judge", "judge_votes",
+                             "tie_break", "seen", "manual_note", "question"])
             for r in sorted(disagreements, key=lambda r: (r["model"], r["mode"], r["trace"], r["qn"])):
                 writer.writerow([r["model"], r["mode"], r["trace"], r["qn"], r["manual"], r["judge"], r["votes"],
                                  int(r["tie"]), int(r["seen"]), r["note"], r["question"][:90]])

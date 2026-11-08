@@ -1,5 +1,5 @@
 """
-preprocesses_manual.py
+preprocess_manual.py
 ================================================================================
 Creates reduced copies of the judge JSON files for the manual validation.
 
@@ -11,7 +11,7 @@ judge votes and reasoning). The header and the summary are kept as they are.
 
 Options:
   --blind    also drops the judge label (final_label) and, at file level, the summary
-             and judge_model, so you can label without seeing the verdict. The original
+             and judge_model, so the annotator can label without seeing the verdict. The original
              judge JSON files remain the key.
   --manual   adds the empty fields "manual_label" and "notes" to each question.
   --compact  condenses answers with repeated lines (loops): keeps the unique lines with a
@@ -36,10 +36,10 @@ The originals are not touched. Output: <out>/<model>/<view>/<file>.json
 
 Usage (from the repository root):
   # one full run (e.g. the basic traces)
-  uv run python -m llms_understand_network_traces.comparison.preprocesses_manual \
+  uv run python -m llms_understand_network_traces.comparison.preprocess_manual \
       --models-dir results/basic --run run1 --out <output> --blind --manual --compact
   # CIC-IDS2017 sample: 4 questions per model and level (3 with content + 1 empty), one random run per cell
-  uv run python -m llms_understand_network_traces.comparison.preprocesses_manual \
+  uv run python -m llms_understand_network_traces.comparison.preprocess_manual \
       --models-dir results/basic --runs 1 2 3 4 5 --sample 3 --sample-empty 1 \
       --out <output> --blind --manual --compact
 ================================================================================
@@ -74,6 +74,7 @@ def compact_answer(text: str) -> tuple[str, bool]:
 
 
 def reduce_question(entry: dict[str, Any], blind: bool, manual: bool, compact: bool) -> dict[str, Any]:
+    """Reduce one judged question for annotation: `blind` hides the judge label, `manual` adds the field to fill in, `compact` collapses repeated lines of the answer."""
     out: dict[str, Any] = {}
     for key, value in entry.items():
         if key == "final_label":
@@ -174,7 +175,7 @@ def main() -> None:
         pattern = os.path.join(args.models_dir, "*", run, "comparison", "judge", "*", "judge_*_answers.json")
         files += sorted(glob.glob(pattern))
     if not files:
-        raise SystemExit(f"No files found with the pattern:\n  {pattern}\nAre you in the repository root?")
+        raise SystemExit(f"No files found with the pattern:\n  {pattern}\nIs the working directory the repository root?")
 
     plan: list[tuple[str, set[str] | None]] = []
     manifest: list[dict[str, Any]] = []

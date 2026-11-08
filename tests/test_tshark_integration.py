@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from llms_understand_network_traces.evaluation import answer_with_pyshark
+from llms_understand_network_traces.generation import answer_with_pyshark
 from llms_understand_network_traces.preprocessing import convert_pcap_to_csv as conv
 from llms_understand_network_traces.utils import constants
 

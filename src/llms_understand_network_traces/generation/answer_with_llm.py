@@ -1,3 +1,20 @@
+"""
+answer_with_llm.py
+================================================================================
+Asks an Ollama model the 19 questions of utils/constants.py about each trace and
+stores the answers with their token counts and latency.
+
+The prompt is zero-shot: role and task, the trace as CSV, one question, and
+guardrails (use only the trace, answer None if nothing matches, no preamble).
+Two views are answered: "general" (one CSV with all protocols, all questions) and
+"filtered" (each question gets only the CSV of its protocol). After several consecutive
+failures the remaining questions of that trace (of that layer, in the filtered view) are
+skipped and stored as ERROR answers.
+
+Output: <results-dir>/<model>/<run>/llm_answers/<view>/<trace>_answers.json
+Normally run through pipeline.py (step "llm").
+================================================================================
+"""
 import os
 import time
 import hashlib
@@ -9,7 +26,7 @@ import ollama
 
 
 from llms_understand_network_traces.utils import constants
-from llms_understand_network_traces.utils.utils import save_json_to_file
+from llms_understand_network_traces.utils.files import save_json_to_file
 
 # ==============================================================================
 # PROMPT
@@ -98,6 +115,7 @@ def truncation_suspected(tokens_input: int, num_ctx: int) -> bool | None:
 # ==============================================================================
 
 def _error_result(msg, latency, question_tokens, context_limit, num_ctx, num_predict, attempts=0):
+    """Result for a question that could not be answered: an ERROR answer with all token counts set to -1."""
     return {
         "answer":                msg if msg.startswith("ERROR") else f"ERROR: {msg}",
         "latency_s":             latency,
@@ -182,8 +200,8 @@ def ask_question(
     trunc = truncation_suspected(tokens_input, num_ctx)
     margin_violated = (tokens_input + num_predict > num_ctx) if tokens_input != -1 else None
 
-    print(f"    → respondió en {latency}s" + (f" (intento {attempt})" if attempt > 1 else ""))
-    print(f"    → respuesta: '{response.response[:100]}'")
+    print(f"    → answered in {latency}s" + (f" (attempt {attempt})" if attempt > 1 else ""))
+    print(f"    → answer: '{response.response[:100]}'")
     if trunc:
         print(f"    ⚠️  tokens_input ({tokens_input}) ≈ num_ctx/2 ({num_ctx // 2}): prompt probably TRUNCATED")
     if margin_violated:
@@ -251,6 +269,7 @@ LAYER_QUESTIONS = {
 # ==============================================================================
 
 def _aggregate_metrics(results: dict, context_limit, num_ctx, num_predict) -> dict:
+    """Totals of one trace: latency, tokens, answered and skipped questions, and truncation counts."""
     def valid(key):
         return [r[key] for r in results.values() if r[key] != -1]
 
@@ -278,6 +297,7 @@ def _aggregate_metrics(results: dict, context_limit, num_ctx, num_predict) -> di
 
 
 def _output_header(trace_stem, model_name, view, temperature, num_ctx, num_predict):
+    """Metadata stored at the top of every answers file."""
     return {
         "Filename":       f"{trace_stem}.pcapng",
         "Model":          model_name,
@@ -291,7 +311,7 @@ def _output_header(trace_stem, model_name, view, temperature, num_ctx, num_predi
     }
 
 # ==============================================================================
-# FULL-TRACE VIEWS (general, wide) — all questions, one CSV per trace
+# GENERAL VIEW — all questions, one CSV per trace
 # ==============================================================================
 
 def run_full_view(view: str, model_name: str, csv_folder: str, output_folder: str,
@@ -299,10 +319,8 @@ def run_full_view(view: str, model_name: str, csv_folder: str, output_folder: st
                   trace_filter: str = None, temperature: float = 0, timeout: int = 600,
                   retries: int = 1, max_failures: int = 3):
     """
-    Answers ALL_QUESTIONS using the CSV of the given view ("general" or "wide")
-    for each trace.
+    Answers ALL_QUESTIONS using the CSV of the given view ("general") for each trace.
     The general view has no header row, so csv_rows counts every non-blank line.
-    For the "wide" view the header is assumed to be present only if it is not "general".
     """
     view_folder = os.path.join(csv_folder, view)
     if not os.path.exists(view_folder):
@@ -321,7 +339,7 @@ def run_full_view(view: str, model_name: str, csv_folder: str, output_folder: st
     os.makedirs(out_dir, exist_ok=True)
 
     view_description = VIEW_DESCRIPTIONS.get(view)
-    has_header = (view != "general")   # general: no header row; adjust if your wide CSVs differ
+    has_header = (view != "general")   # only the general view has no header row
 
     print(f"\n[{view}] Measuring context limit and question overhead for {model_name}...")
     context_limit = get_model_context_limit(model_name)
@@ -553,8 +571,8 @@ if __name__ == "__main__":
     parser.add_argument("--run",         default="run1", help="Run identifier (default: run1)")
     parser.add_argument("--results-dir", default="results/basic", help="Root folder for the model outputs (default: results/basic)")
     parser.add_argument("--trace",       default=None, help="Run only this trace stem (e.g. Monday-WorkingHours_300pkts). Default: all traces.")
-    parser.add_argument("--csv-folder",  default="data/traces/processed_csv", help="Base folder with per-view CSV subfolders")
-    parser.add_argument("--mode",        default="all", choices=["general", "wide", "filtered", "all"], help="Which view(s) to run (default: all = general + filtered; 'wide' only when requested)")
+    parser.add_argument("--csv-folder",  default="data/traces/processed_csv/basic", help="Base folder with per-view CSV subfolders")
+    parser.add_argument("--mode",        default="all", choices=["general", "filtered", "all"], help="Which view(s) to run (default: all = general + filtered)")
     parser.add_argument("--temperature", type=float, default=0, help="Sampling temperature (default: 0)")
     parser.add_argument("--timeout",     type=int, default=600, help="Timeout in seconds of the first attempt of each question; retries use 2x, 3x... (default: 600)")
     parser.add_argument("--retries",     type=int, default=1, help="Retries per question after a timeout or a transient server/connection error (default: 1)")
@@ -585,9 +603,6 @@ if __name__ == "__main__":
 
     if args.mode in ("general", "all"):
         run_full_view("general", **common)
-
-    if args.mode == "wide":   # the wide view is not part of "all" for now
-        run_full_view("wide", **common)
 
     if args.mode in ("filtered", "all"):
         run_filtered(**common)

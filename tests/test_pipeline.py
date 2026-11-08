@@ -34,7 +34,7 @@ def test_gt_problems_detects_question_mismatch(tmp_path: Path) -> None:
 
 def test_slug_and_staging_dir() -> None:
     assert pipeline.slug("llama3.1:8b") == "llama3.1-8b"
-    assert pipeline.staging_dir("qwen2.5:7b", 3) == Path("data/cicids2017/staging/qwen2.5-7b_run3")
+    assert pipeline.staging_dir("qwen2.5:7b", 3) == Path("data/traces/raw/cicids/qwen2.5-7b_run3")
 
 
 def test_cicids_stems_sorted_by_packets(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -67,7 +67,7 @@ def test_llm_step_builds_commands(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(pipeline, "run_module", lambda module, args: calls.append((module, list(args))))
     pipeline.main(["llm", "--dataset", "basic", "--model", "m:1b", "--first-run", "2", "--runs", "2"])
     assert [c[1][c[1].index("--run") + 1] for c in calls] == ["run2", "run3"]
-    assert all(c[0] == "evaluation.answer_with_llm" for c in calls)
+    assert all(c[0] == "generation.answer_with_llm" for c in calls)
     assert "results/basic" in calls[0][1]
 
 
@@ -76,4 +76,4 @@ def test_judge_step_covers_both_views(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(pipeline, "run_module", lambda module, args: calls.append(list(args)))
     pipeline.main(["judge", "--dataset", "basic", "--model", "m:1b"])
     assert len(calls) == 2
-    assert calls[0][calls[0].index("--gt-folder") + 1] == "data/qa"
+    assert calls[0][calls[0].index("--gt-folder") + 1] == "data/qa/basic"

@@ -35,7 +35,3 @@ def test_protocol_table() -> None:
     assert constants.PROTOCOLS["6"] == "TCP"
     assert constants.PROTOCOLS["17"] == "UDP"
 
-
-def test_csv_folders_cover_all_views() -> None:
-    assert {"general", "arp", "ip", "tcp", "udp"} <= set(constants.CSV_FOLDERS)
-    assert constants.PROCESSED_CSV_BASE == "data/traces/processed_csv"

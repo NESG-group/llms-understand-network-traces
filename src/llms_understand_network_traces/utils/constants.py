@@ -1,3 +1,5 @@
+"""Shared constants: IANA protocol names, the 19 questions grouped by layer, and the CSV view folders."""
+
 PROTOCOLS = {
     "0": "HOPOPT",
     "1": "ICMP",
@@ -146,11 +148,6 @@ PROTOCOLS = {
     "254": "Experimentation and testing",
     "255": "Reserved",
 }
-
-
-PROCESSED_CSV_BASE = "data/traces/processed_csv"
-
-CSV_FOLDERS = ["general", "wide", "arp", "ip", "tcp", "udp"]
 
 
 ARP_QUESTIONS = [

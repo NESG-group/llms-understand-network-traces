@@ -1,5 +1,5 @@
 """
-cicids_status.py
+status.py
 ================================================================================
 Read-only status of every CIC-IDS2017 model and run: how many files exist for
 each stage and when the last one was touched.
@@ -12,9 +12,9 @@ each stage and when the last one was touched.
 A run is finished for a model when it shows 4/4, 8/8, 8/8 and 1/1.
 
 Usage (from the repository root):
-  uv run python -m llms_understand_network_traces.cicids.cicids_status 2
-  uv run python -m llms_understand_network_traces.cicids.cicids_status 1 2
-  uv run python -m llms_understand_network_traces.cicids.cicids_status
+  uv run python -m llms_understand_network_traces.cicids.status 2
+  uv run python -m llms_understand_network_traces.cicids.status 1 2
+  uv run python -m llms_understand_network_traces.cicids.status
 ================================================================================
 """
 import json
@@ -36,7 +36,7 @@ def main() -> None:
     print(f"{'model':<13}{'run':>5}  {'GT':>5}  {'LLM':>5}  {'judge':>5}  {'dotplot':>7}  last modified")
     for run in runs:
         for model in MODELS:
-            man = f"data/cicids2017/staging/{model.replace(':', '-')}_run{run}/manifest.json"
+            man = f"data/traces/raw/cicids/{model.replace(':', '-')}_run{run}/manifest.json"
             if not os.path.exists(man):
                 if explicit:
                     print(f"{model:<13}{run:>5}  not prepared ({man} does not exist)")
@@ -44,7 +44,7 @@ def main() -> None:
             with open(man) as handle:
                 stems = [level["stem"] for level in json.load(handle)["levels"]]
             base = f"results/cicids/{model}/run{run}"
-            gt = [f"results/ground_truth_cicids2017/{s}_answers.json" for s in stems]
+            gt = [f"data/qa/cicids/{s}_answers.json" for s in stems]
             llm = [f"{base}/llm_answers/{m}/{s}_answers.json" for s in stems for m in ("general", "filtered")]
             jd = [f"{base}/comparison/judge/{m}/judge_{s}_answers.json" for s in stems for m in ("general", "filtered")]
             dp = [f"{base}/dotplot_judge.png"]

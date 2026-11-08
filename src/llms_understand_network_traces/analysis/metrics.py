@@ -1,17 +1,15 @@
 """
 metrics.py
 ================================================================================
-Unified metrics of the judge labels (read-only), for the basic traces and for
-CIC-IDS2017, with a single command line. It replaces cicids_aggregate_rounds.py and
-covers the essentials of metrics_per_model.py (on purpose it does NOT include the kappa
-between views, the confidence of the mode or the consistency across traces).
-It does NOT include the agreement of the judge with the manual labels: that remains in
-compare_manual.py.
+Metrics of the judge labels (read-only), for the basic traces and for CIC-IDS2017, with
+a single command line. It does NOT include the agreement of the judge with the manual
+labels: that is in compare_manual.py.
 
 What it computes (everything is printed as Markdown tables, ready to paste, and as CSV):
   1. Correctness: %C, %P and %I per model, view and group, with mean ± sd across runs.
        - basic : one group ("all traces").
-       - cicids: two groups, L25-L75 (the levels that fit) and L100 (125 %, trimmed in general).
+       - cicids: one group per level (L25, L50, L75: the levels that fit, 50, 75 and 100 % of
+         the budget), their aggregate L25-L75 and L100 (125 %, trimmed in general).
   2. By layer (ARP, IP, TCP/UDP): %C per model, view and group.
   3. By reference type: layer absent / empty reference with layer present / with content.
   4. Filtering effect: difference in %C, %P and %I (filtered - general), per-question
@@ -111,6 +109,7 @@ def load_layout(module_name):
 
 
 def load_record(jf, lf, qs):
+    """Read a judge file, and its LLM answers file if present, into one record; None if the judge file cannot be read."""
     try:
         with open(jf, encoding="utf-8") as fh:
             jd = json.load(fh)
@@ -154,6 +153,7 @@ def load_record(jf, lf, qs):
 
 
 def load_all(models_dir, models, runs, dataset, qs):
+    """Load every judge file of the chosen models and runs, keyed by (model, run, view, unit)."""
     recs = {}
     for m in models:
         for rdir in sorted(glob.glob(f"{models_dir}/{m}/run*")):
@@ -231,6 +231,7 @@ def vote(label_lists, prio):
 
 
 def make_pairs(recs, m, gunits, pairing, prio):
+    """Pair the general and filtered label of each question: per run and level when pairing is 'runs', per trace over the modal labels when it is 'mode'."""
     pairs = []
     if pairing == "runs":
         for (mm, r, v, u), f in recs.items():
@@ -267,7 +268,8 @@ def trans(pairs):
                 p=sign_test(imp, wor), d=d)
 
 
-def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_label):
+def build_report(dataset, models, recs, layers, groups, pairing, prio, runs_label):
+    """Build the Markdown report (sections 0-7) and the tables that are also written as CSV."""
     out, csv_pairs = [], []
     out.append(f"# Metrics — dataset: {dataset}\n\nRuns: {runs_label}. Pairing: {pairing}. "
                f"Tie-break for modal labels: {'/'.join(sorted(prio, key=prio.get))}.\n")
@@ -409,11 +411,12 @@ def build_report(dataset, models, recs, qs, layers, groups, pairing, prio, runs_
                    + md_table(["Model", "View", "Runs", "Questions", "% unanimous", "% ≥80 % agree"], rows) + "\n")
     else:
         out.append("## 7. Stability across runs\n\nNot computed for cicids: each round is a different window of the capture. "
-                   "See the sd across rounds in table 1 and `dotplot_cicids_rounds.py` for per-question consistency.\n")
+                   "See the sd across rounds in table 1; `analysis/dotplot_cicids.py` draws the modal label of each question per level.\n")
     return "\n".join(out), csv_pairs
 
 
 def write_csvs(recs, csv_pairs, prefix):
+    """Write the CSV tables produced by build_report."""
     with open(prefix + "_perfile.csv", "w", newline="", encoding="utf-8") as g:
         w = csv.writer(g)
         w.writerow(["model", "run", "view", "unit", "packets", "C", "P", "I", "n_valid", "tokens_first", "prompts_truncated",
@@ -457,7 +460,7 @@ def main():
                     help="how to pair general and filtered: auto = mode for basic, runs for cicids")
     ap.add_argument("--tie-break", choices=("CPI", "IPC"), default="CPI",
                     help="mode ties: CPI = the best label wins (as in dotplot_model.py); IPC = the worst")
-    ap.add_argument("--out-dir", default="results/summary")
+    ap.add_argument("--out-dir", default="results/reproduced/metrics")
     ap.add_argument("--tag", default="", help="suffix for the output files (e.g. _basic_t0)")
     ap.add_argument("--no-files", action="store_true", help="only print, do not write files")
     a = ap.parse_args()
@@ -471,10 +474,13 @@ def main():
     if not recs:
         raise SystemExit(f"No judgements in {a.models_dir} for dataset '{a.dataset}' (wrong dataset or --models-dir?).")
     models = [m for m in models if any(k[0] == m for k in recs)]
-    groups = [("L25–L75", {25, 50, 75}), ("L100 (125 %)", {100})] if a.dataset == "cicids" else [("all traces", None)]
+    if a.dataset == "cicids":
+        groups = [("L25", {25}), ("L50", {50}), ("L75", {75}), ("L25–L75", {25, 50, 75}), ("L100 (125 %)", {100})]
+    else:
+        groups = [("all traces", None)]
     pairing = a.pairing if a.pairing != "auto" else ("runs" if a.dataset == "cicids" else "mode")
     runs_label = a.runs or sorted({k[1] for k in recs})
-    text, csv_pairs = build_report(a.dataset, models, recs, qs, layers, groups, pairing, PRIO[a.tie_break], runs_label)
+    text, csv_pairs = build_report(a.dataset, models, recs, layers, groups, pairing, PRIO[a.tie_break], runs_label)
     print(text)
     if not a.no_files:
         os.makedirs(a.out_dir, exist_ok=True)
